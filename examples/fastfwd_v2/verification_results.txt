@@ -1,0 +1,9 @@
+﻿seed=1 : PASS: FastFwdV2 sent=17110 got=17110 cycles=10038 throughput=1.705 pkt/cyc bkpr=26.6%
+seed=7 : PASS: FastFwdV2 sent=17137 got=17137 cycles=10038 throughput=1.707 pkt/cyc bkpr=27.9%
+seed=13 : PASS: FastFwdV2 sent=16955 got=16955 cycles=10035 throughput=1.690 pkt/cyc bkpr=27.7%
+seed=42 : PASS: FastFwdV2 sent=17059 got=17059 cycles=10035 throughput=1.700 pkt/cyc bkpr=26.5%
+seed=123 : PASS: FastFwdV2 sent=17185 got=17185 cycles=10038 throughput=1.712 pkt/cyc bkpr=26.7%
+seed=256 : PASS: FastFwdV2 sent=16960 got=16960 cycles=10038 throughput=1.690 pkt/cyc bkpr=27.2%
+seed=777 : PASS: FastFwdV2 sent=17168 got=17168 cycles=10036 throughput=1.711 pkt/cyc bkpr=26.5%
+seed=999 : PASS: FastFwdV2 sent=16984 got=16984 cycles=10039 throughput=1.692 pkt/cyc bkpr=27.8%
+seed=2024 : PASS: FastFwdV2 sent=17016 got=17016 cycles=10046 throughput=1.694 pkt/cyc bkpr=27.8%
