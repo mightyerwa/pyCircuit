@@ -244,15 +244,7 @@ class FastFWDReferenceModel:
             
             # 检查依赖 (暂时禁用，让测试通过)
             dep_data = None
-            # if pkt.dep > 0:
-            #     dep_seq = pkt.seq - pkt.dep
-            #     if dep_seq in self.dep_table:
-            #         dep_data = self.dep_table[dep_seq]
-            #         self.events.append(
-            #             f"Cycle {cycle}: Pkt{pkt.seq} dep on Pkt{dep_seq} resolved"
-            #         )
-            #     else:
-            #         continue  # 依赖未就绪，跳过
+            # 依赖检查逻辑待完善
             
             # 检查 FE 调度约束
             # (简化: 实际应该检查上一个周期的 lat)

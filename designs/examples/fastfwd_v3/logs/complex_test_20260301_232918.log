@@ -1,0 +1,26 @@
+[23:29:18] ============================================================
+[23:29:18] FastFWD V3 Complex Test Suite
+[23:29:18] ============================================================
+[23:29:18] 
+=== Test: Burst Input ===
+[23:29:18] Cycle 1: Output 4 packets
+[23:29:18] Cycle 2: Output 4 packets
+[23:29:18] Cycle 3: Output 4 packets
+[23:29:18] Cycle 4: Output 4 packets
+[23:29:18] Cycle 5: Output 4 packets
+[23:29:18] Cycle 6: Output 4 packets
+[23:29:18] Cycle 7: Output 4 packets
+[23:29:18] Cycle 8: Output 4 packets
+[23:29:18] Cycle 9: Output 4 packets
+[23:29:18] Total: in=40, out=40
+[23:29:18] ✓ Burst Input: PASSED
+[23:29:18] 
+=== Test: Sparse Input ===
+[23:29:18] Total: in=58, out=58
+[23:29:18] ✓ Sparse Input: PASSED
+[23:29:18] 
+=== Test: Latency Mix ===
+[23:29:18] Total: in=80, out=44
+[23:29:18] ✗ Latency Mix: FAILED
+[23:29:18] 
+Results: 2/3 passed
