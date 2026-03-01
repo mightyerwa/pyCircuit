@@ -1,0 +1,12 @@
+从入口四个lane随机并行输入0~4个报文，四个lane随机选择其中的0~4个lane进行输入，每个lane有三个输入接口，输入端口命名为lane{0~3}_pkt_in_data 128bit、lane{0~3}_pkt_in_vld1bi和lane{0~3}_pkt_in_ctrl 5bit，其中valid为数据有效信号，代表该周期数据有效；data为128bit报文数据；ctrl的[4:2]为dependency依赖关系，0表示无依赖，1~7则表示与前面的1~7个报文存在依赖关系，[1:0]表示lantency信号，0表示转发延时为1，3表示转发延时为4，以此类推。
+输出同样也有四个lane，每一个lane有两个端口，分别为lane{0~3}_pkt_out_vld表示报文是否有效；lane{0~3}_pkt_out_data表示已经处理好的报文输出；输入端口可以随机任意个lane有输入，但是输出端口必须从lane0_pkt_out_data开始输出，每个cycle可以输出0~4个，按照warp的形式，比如第一个cycle输出lane0_out和lane1_out，那么第二个cycle输出lane2_out、lane3_out、lane0_out，第三个cycle可以不输出，也可以输出lane1_out，就这样，把处理好的数据顺序输出。可以这么说，lane0_out只会输出报文序为0、4、8，12这些的、lane1_out只会输出1、5、9、13这些。
+同时存在一个反压信号pkt_in_bkpr，信号为高的当前拍，所有四个lane的input valid不会拉高，信号为低，则按照pkt_in_vld来判断每一个lane是否会有数据输入；
+输入的pkt的顺序按照两个逻辑来定，同一个cycle，按照lane0~lane3的顺序，不同cycle，前一个cycle的报文属于更前面的报文；比如，第一个cycle输入了lane2和lane3，那么可以编号为0和1，第二个cycle输入了lane0，lane1和lane3，继续往后编号为2，3，4，前面提到的依赖关系，就是按照输入报文顺序产生的依赖。输出的报文序也是按照这个排列的。
+FE模块可以例化0~32个，但是这个是有面积损耗的，我推荐你使用4个；
+FE模块输入是5个数据，两个输出，可以参考example的FE输入输出，其中data vld和data对应了从lane input输出的原始数据、lat则是对应了lane input ctrl的低2bit数据，如果ctrl的4:2bit不为0，则需要拉高dp_vld信号，同时输入dp_data，这个dp_data不是lane input的data，而是经过FE处理过后的data数据，最终在vld拉高的当拍输出数据，这个FE你可以当作一个黑盒，但是你需要写一个类似的verilog文件，方便后续验证功能正确性。FE模块你需要注意，同一个cycle只能输出一个有效数据，如果cycle1输入一个lat=2的data，那么在cycle2一定不能输入lat=1的数据，不然输出会不稳定。如果在cycle1上升沿采样了lat=2（3 cycle）的data，那么在cycle4的上升沿肯定会将fe output data的vld拉高，这是FE的行为。
+最后，和你确认几点
+1.	每个lane每个cycle只会输入/输出一个数据
+2.	input data可以从任意的input lane输出，
+3.	同一cycle数据，按照lane0~lane3排序，lane0最小，如果lane的vld为低，则不参与排序，这个排序主要用于后续的output以及依赖求解
+4.	Output lane是严格保序的，必须从lane0到lane3的顺序输出，并且输出也必须按照报文的顺序输出，可以warp around，一个cycle最多四个。每个cycle可以输出0~4个
+5.	所有lane input和lane output以及pkbr信号均需要寄存器输入输出，不能直接输入输出
