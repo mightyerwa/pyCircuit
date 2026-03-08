@@ -386,7 +386,7 @@ output_scheduler.__pycircuit_name__ = "output_scheduler"
 # 整合所有子模块
 # ============================================================================
 @module
-def fastfwd_v3_3(m: Circuit) -> None:
+def fastfwd_v3(m: Circuit) -> None:
     """FastFWD V3.3 - 模块化设计"""
     
     clk = m.clock("clk")
@@ -585,10 +585,10 @@ def fastfwd_v3_3(m: Circuit) -> None:
     m.output("pkt_in_bkpr", bkpr)
 
 
-fastfwd_v3_3.__pycircuit_name__ = "fastfwd_v3_3"
+fastfwd_v3.__pycircuit_name__ = "fastfwd_v3"
 
 
 if __name__ == "__main__":
     from pycircuit import compile
-    circuit = compile(fastfwd_v3_3, name="fastfwd_v3_3")
+    circuit = compile(fastfwd_v3, name="fastfwd_v3")
     print(circuit.emit_mlir())

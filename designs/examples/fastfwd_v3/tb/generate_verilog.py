@@ -7,7 +7,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "rtl"))
 
-from fastfwd_v3_3 import fastfwd_v3_3, N_LANES, N_FE, DATA_WIDTH, CTRL_WIDTH, SEQ_WIDTH, MAX_DEP, ROB_DEPTH
+from fastfwd_v3 import fastfwd_v3, N_LANES, N_FE, DATA_WIDTH, CTRL_WIDTH, SEQ_WIDTH, MAX_DEP, ROB_DEPTH
 from pycircuit import compile
 
 
@@ -15,13 +15,13 @@ def generate_verilog():
     """生成Verilog代码"""
     
     # 编译电路
-    circuit = compile(fastfwd_v3_3, name="fastfwd_v3_3")
+    circuit = compile(fastfwd_v3, name="fastfwd_v3")
     
     # 获取MLIR
     mlir = circuit.emit_mlir()
     
     # 保存MLIR
-    mlir_path = Path(__file__).parent.parent / "mlir" / "fastfwd_v3_3.mlir"
+    mlir_path = Path(__file__).parent.parent / "mlir" / "fastfwd_v3.mlir"
     mlir_path.parent.mkdir(exist_ok=True)
     mlir_path.write_text(mlir)
     print(f"MLIR saved to: {mlir_path}")
@@ -29,7 +29,7 @@ def generate_verilog():
     # 手动生成Verilog (因为pycc不可用)
     verilog = emit_verilog_manual()
     
-    verilog_path = Path(__file__).parent.parent / "verilog" / "fastfwd_v3_3.v"
+    verilog_path = Path(__file__).parent.parent / "verilog" / "fastfwd_v3.v"
     verilog_path.parent.mkdir(exist_ok=True)
     verilog_path.write_text(verilog)
     print(f"Verilog saved to: {verilog_path}")

@@ -1,0 +1,11 @@
+{
+  "fuse_comb_enabled": true,
+  "logic_depth_limit": 32,
+  "max_logic_depth": 4,
+  "mem_bits": 0,
+  "mem_count": 0,
+  "reg_bits": 3597,
+  "reg_count": 72,
+  "tns": 0,
+  "wns": 28
+}

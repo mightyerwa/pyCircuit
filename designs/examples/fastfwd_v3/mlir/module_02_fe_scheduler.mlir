@@ -1,5 +1,5 @@
-module attributes {pyc.top = @fe_scheduler, pyc.frontend.contract = "pycircuit"} {
-func.func @fe_scheduler(%clk: !pyc.clock, %rst: !pyc.reset, %in0_vld: i1, %in1_vld: i1, %in2_vld: i1, %in3_vld: i1, %in0_data: i128, %in1_data: i128, %in2_data: i128, %in3_data: i128, %in0_ctrl: i5, %in1_ctrl: i5, %in2_ctrl: i5, %in3_ctrl: i5, %in0_seq: i16, %in1_seq: i16, %in2_seq: i16, %in3_seq: i16) -> (i1, i128, i2, i1, i128, i2, i1, i128, i2, i1, i128, i2) attributes {arg_names = ["clk", "rst", "in0_vld", "in1_vld", "in2_vld", "in3_vld", "in0_data", "in1_data", "in2_data", "in3_data", "in0_ctrl", "in1_ctrl", "in2_ctrl", "in3_ctrl", "in0_seq", "in1_seq", "in2_seq", "in3_seq"], result_names = ["fe0_vld", "fe0_data", "fe0_lat", "fe1_vld", "fe1_data", "fe1_lat", "fe2_vld", "fe2_data", "fe2_lat", "fe3_vld", "fe3_data", "fe3_lat"], pyc.base = "fe_scheduler", pyc.params = "{}", pyc.kind = "module", pyc.inline = "false"} {
+module attributes {pyc.top = @fe_scheduler_v3, pyc.frontend.contract = "pycircuit"} {
+func.func @fe_scheduler_v3(%clk: !pyc.clock, %rst: !pyc.reset, %in0_vld: i1, %in1_vld: i1, %in2_vld: i1, %in3_vld: i1, %in0_data: i128, %in1_data: i128, %in2_data: i128, %in3_data: i128, %in0_ctrl: i5, %in1_ctrl: i5, %in2_ctrl: i5, %in3_ctrl: i5, %in0_seq: i16, %in1_seq: i16, %in2_seq: i16, %in3_seq: i16) -> (i1, i128, i2, i1, i128, i2, i1, i128, i2, i1, i128, i2) attributes {arg_names = ["clk", "rst", "in0_vld", "in1_vld", "in2_vld", "in3_vld", "in0_data", "in1_data", "in2_data", "in3_data", "in0_ctrl", "in1_ctrl", "in2_ctrl", "in3_ctrl", "in0_seq", "in1_seq", "in2_seq", "in3_seq"], result_names = ["fe0_vld", "fe0_data", "fe0_lat", "fe1_vld", "fe1_data", "fe1_lat", "fe2_vld", "fe2_data", "fe2_lat", "fe3_vld", "fe3_data", "fe3_lat"], pyc.base = "fe_scheduler_v3", pyc.params = "{}", pyc.kind = "module", pyc.inline = "false"} {
   %v1 = pyc.wire {pyc.name = "fe0_busy__next"} : i1
   %v2 = pyc.constant 1 : i1
   %v3 = pyc.constant 0 : i1
@@ -40,219 +40,289 @@ func.func @fe_scheduler(%clk: !pyc.clock, %rst: !pyc.reset, %in0_vld: i1, %in1_v
   %v38 = pyc.constant 0 : i3
   %v39 = pyc.reg %clk, %rst, %v37, %v36, %v38 : i3
   %v40 = pyc.alias %v39 {pyc.name = "fe3_timer"} : i3
-  %v41 = pyc.wire {pyc.name = "fe0_seq__next"} : i16
+  %v41 = pyc.wire {pyc.name = "fe0_last_finish__next"} : i4
   %v42 = pyc.constant 1 : i1
-  %v43 = pyc.constant 0 : i16
-  %v44 = pyc.reg %clk, %rst, %v42, %v41, %v43 : i16
-  %v45 = pyc.alias %v44 {pyc.name = "fe0_seq"} : i16
-  %v46 = pyc.wire {pyc.name = "fe1_seq__next"} : i16
+  %v43 = pyc.constant 0 : i4
+  %v44 = pyc.reg %clk, %rst, %v42, %v41, %v43 : i4
+  %v45 = pyc.alias %v44 {pyc.name = "fe0_last_finish"} : i4
+  %v46 = pyc.wire {pyc.name = "fe1_last_finish__next"} : i4
   %v47 = pyc.constant 1 : i1
-  %v48 = pyc.constant 0 : i16
-  %v49 = pyc.reg %clk, %rst, %v47, %v46, %v48 : i16
-  %v50 = pyc.alias %v49 {pyc.name = "fe1_seq"} : i16
-  %v51 = pyc.wire {pyc.name = "fe2_seq__next"} : i16
+  %v48 = pyc.constant 0 : i4
+  %v49 = pyc.reg %clk, %rst, %v47, %v46, %v48 : i4
+  %v50 = pyc.alias %v49 {pyc.name = "fe1_last_finish"} : i4
+  %v51 = pyc.wire {pyc.name = "fe2_last_finish__next"} : i4
   %v52 = pyc.constant 1 : i1
-  %v53 = pyc.constant 0 : i16
-  %v54 = pyc.reg %clk, %rst, %v52, %v51, %v53 : i16
-  %v55 = pyc.alias %v54 {pyc.name = "fe2_seq"} : i16
-  %v56 = pyc.wire {pyc.name = "fe3_seq__next"} : i16
+  %v53 = pyc.constant 0 : i4
+  %v54 = pyc.reg %clk, %rst, %v52, %v51, %v53 : i4
+  %v55 = pyc.alias %v54 {pyc.name = "fe2_last_finish"} : i4
+  %v56 = pyc.wire {pyc.name = "fe3_last_finish__next"} : i4
   %v57 = pyc.constant 1 : i1
-  %v58 = pyc.constant 0 : i16
-  %v59 = pyc.reg %clk, %rst, %v57, %v56, %v58 : i16
-  %v60 = pyc.alias %v59 {pyc.name = "fe3_seq"} : i16
-  %v61 = pyc.wire {pyc.name = "last_lat__next"} : i2
+  %v58 = pyc.constant 0 : i4
+  %v59 = pyc.reg %clk, %rst, %v57, %v56, %v58 : i4
+  %v60 = pyc.alias %v59 {pyc.name = "fe3_last_finish"} : i4
+  %v61 = pyc.wire {pyc.name = "fe0_out_vld__next"} : i1
   %v62 = pyc.constant 1 : i1
-  %v63 = pyc.constant 0 : i2
-  %v64 = pyc.reg %clk, %rst, %v62, %v61, %v63 : i2
-  %v65 = pyc.alias %v64 {pyc.name = "last_lat"} : i2
-  %v66 = pyc.alias %v65 {pyc.name = "last_lat__module_02_fe_scheduler__L51"} : i2
-  %v67 = pyc.wire {pyc.name = "fe0_out_vld__next"} : i1
-  %v68 = pyc.constant 1 : i1
-  %v69 = pyc.constant 0 : i1
-  %v70 = pyc.reg %clk, %rst, %v68, %v67, %v69 : i1
-  %v71 = pyc.alias %v70 {pyc.name = "fe0_out_vld"} : i1
-  %v72 = pyc.wire {pyc.name = "fe1_out_vld__next"} : i1
-  %v73 = pyc.constant 1 : i1
-  %v74 = pyc.constant 0 : i1
-  %v75 = pyc.reg %clk, %rst, %v73, %v72, %v74 : i1
-  %v76 = pyc.alias %v75 {pyc.name = "fe1_out_vld"} : i1
-  %v77 = pyc.wire {pyc.name = "fe2_out_vld__next"} : i1
-  %v78 = pyc.constant 1 : i1
-  %v79 = pyc.constant 0 : i1
-  %v80 = pyc.reg %clk, %rst, %v78, %v77, %v79 : i1
-  %v81 = pyc.alias %v80 {pyc.name = "fe2_out_vld"} : i1
-  %v82 = pyc.wire {pyc.name = "fe3_out_vld__next"} : i1
-  %v83 = pyc.constant 1 : i1
-  %v84 = pyc.constant 0 : i1
-  %v85 = pyc.reg %clk, %rst, %v83, %v82, %v84 : i1
-  %v86 = pyc.alias %v85 {pyc.name = "fe3_out_vld"} : i1
-  %v87 = pyc.wire {pyc.name = "fe0_out_data__next"} : i128
-  %v88 = pyc.constant 1 : i1
-  %v89 = pyc.constant 0 : i128
-  %v90 = pyc.reg %clk, %rst, %v88, %v87, %v89 : i128
-  %v91 = pyc.alias %v90 {pyc.name = "fe0_out_data"} : i128
-  %v92 = pyc.wire {pyc.name = "fe1_out_data__next"} : i128
-  %v93 = pyc.constant 1 : i1
-  %v94 = pyc.constant 0 : i128
-  %v95 = pyc.reg %clk, %rst, %v93, %v92, %v94 : i128
-  %v96 = pyc.alias %v95 {pyc.name = "fe1_out_data"} : i128
-  %v97 = pyc.wire {pyc.name = "fe2_out_data__next"} : i128
-  %v98 = pyc.constant 1 : i1
-  %v99 = pyc.constant 0 : i128
-  %v100 = pyc.reg %clk, %rst, %v98, %v97, %v99 : i128
-  %v101 = pyc.alias %v100 {pyc.name = "fe2_out_data"} : i128
-  %v102 = pyc.wire {pyc.name = "fe3_out_data__next"} : i128
-  %v103 = pyc.constant 1 : i1
-  %v104 = pyc.constant 0 : i128
-  %v105 = pyc.reg %clk, %rst, %v103, %v102, %v104 : i128
-  %v106 = pyc.alias %v105 {pyc.name = "fe3_out_data"} : i128
-  %v107 = pyc.wire {pyc.name = "fe0_out_lat__next"} : i2
-  %v108 = pyc.constant 1 : i1
-  %v109 = pyc.constant 0 : i2
-  %v110 = pyc.reg %clk, %rst, %v108, %v107, %v109 : i2
-  %v111 = pyc.alias %v110 {pyc.name = "fe0_out_lat"} : i2
-  %v112 = pyc.wire {pyc.name = "fe1_out_lat__next"} : i2
-  %v113 = pyc.constant 1 : i1
-  %v114 = pyc.constant 0 : i2
-  %v115 = pyc.reg %clk, %rst, %v113, %v112, %v114 : i2
-  %v116 = pyc.alias %v115 {pyc.name = "fe1_out_lat"} : i2
-  %v117 = pyc.wire {pyc.name = "fe2_out_lat__next"} : i2
-  %v118 = pyc.constant 1 : i1
-  %v119 = pyc.constant 0 : i2
-  %v120 = pyc.reg %clk, %rst, %v118, %v117, %v119 : i2
-  %v121 = pyc.alias %v120 {pyc.name = "fe2_out_lat"} : i2
-  %v122 = pyc.wire {pyc.name = "fe3_out_lat__next"} : i2
-  %v123 = pyc.constant 1 : i1
-  %v124 = pyc.constant 0 : i2
-  %v125 = pyc.reg %clk, %rst, %v123, %v122, %v124 : i2
-  %v126 = pyc.alias %v125 {pyc.name = "fe3_out_lat"} : i2
-  %v127 = pyc.constant 3 : i5
-  %v128 = pyc.and %in0_ctrl, %v127 : i5
-  %v129 = pyc.alias %v128 {pyc.name = "lat__module_02_fe_scheduler__L61"} : i5
+  %v63 = pyc.constant 0 : i1
+  %v64 = pyc.reg %clk, %rst, %v62, %v61, %v63 : i1
+  %v65 = pyc.alias %v64 {pyc.name = "fe0_out_vld"} : i1
+  %v66 = pyc.wire {pyc.name = "fe1_out_vld__next"} : i1
+  %v67 = pyc.constant 1 : i1
+  %v68 = pyc.constant 0 : i1
+  %v69 = pyc.reg %clk, %rst, %v67, %v66, %v68 : i1
+  %v70 = pyc.alias %v69 {pyc.name = "fe1_out_vld"} : i1
+  %v71 = pyc.wire {pyc.name = "fe2_out_vld__next"} : i1
+  %v72 = pyc.constant 1 : i1
+  %v73 = pyc.constant 0 : i1
+  %v74 = pyc.reg %clk, %rst, %v72, %v71, %v73 : i1
+  %v75 = pyc.alias %v74 {pyc.name = "fe2_out_vld"} : i1
+  %v76 = pyc.wire {pyc.name = "fe3_out_vld__next"} : i1
+  %v77 = pyc.constant 1 : i1
+  %v78 = pyc.constant 0 : i1
+  %v79 = pyc.reg %clk, %rst, %v77, %v76, %v78 : i1
+  %v80 = pyc.alias %v79 {pyc.name = "fe3_out_vld"} : i1
+  %v81 = pyc.wire {pyc.name = "fe0_out_data__next"} : i128
+  %v82 = pyc.constant 1 : i1
+  %v83 = pyc.constant 0 : i128
+  %v84 = pyc.reg %clk, %rst, %v82, %v81, %v83 : i128
+  %v85 = pyc.alias %v84 {pyc.name = "fe0_out_data"} : i128
+  %v86 = pyc.wire {pyc.name = "fe1_out_data__next"} : i128
+  %v87 = pyc.constant 1 : i1
+  %v88 = pyc.constant 0 : i128
+  %v89 = pyc.reg %clk, %rst, %v87, %v86, %v88 : i128
+  %v90 = pyc.alias %v89 {pyc.name = "fe1_out_data"} : i128
+  %v91 = pyc.wire {pyc.name = "fe2_out_data__next"} : i128
+  %v92 = pyc.constant 1 : i1
+  %v93 = pyc.constant 0 : i128
+  %v94 = pyc.reg %clk, %rst, %v92, %v91, %v93 : i128
+  %v95 = pyc.alias %v94 {pyc.name = "fe2_out_data"} : i128
+  %v96 = pyc.wire {pyc.name = "fe3_out_data__next"} : i128
+  %v97 = pyc.constant 1 : i1
+  %v98 = pyc.constant 0 : i128
+  %v99 = pyc.reg %clk, %rst, %v97, %v96, %v98 : i128
+  %v100 = pyc.alias %v99 {pyc.name = "fe3_out_data"} : i128
+  %v101 = pyc.wire {pyc.name = "fe0_out_lat__next"} : i2
+  %v102 = pyc.constant 1 : i1
+  %v103 = pyc.constant 0 : i2
+  %v104 = pyc.reg %clk, %rst, %v102, %v101, %v103 : i2
+  %v105 = pyc.alias %v104 {pyc.name = "fe0_out_lat"} : i2
+  %v106 = pyc.wire {pyc.name = "fe1_out_lat__next"} : i2
+  %v107 = pyc.constant 1 : i1
+  %v108 = pyc.constant 0 : i2
+  %v109 = pyc.reg %clk, %rst, %v107, %v106, %v108 : i2
+  %v110 = pyc.alias %v109 {pyc.name = "fe1_out_lat"} : i2
+  %v111 = pyc.wire {pyc.name = "fe2_out_lat__next"} : i2
+  %v112 = pyc.constant 1 : i1
+  %v113 = pyc.constant 0 : i2
+  %v114 = pyc.reg %clk, %rst, %v112, %v111, %v113 : i2
+  %v115 = pyc.alias %v114 {pyc.name = "fe2_out_lat"} : i2
+  %v116 = pyc.wire {pyc.name = "fe3_out_lat__next"} : i2
+  %v117 = pyc.constant 1 : i1
+  %v118 = pyc.constant 0 : i2
+  %v119 = pyc.reg %clk, %rst, %v117, %v116, %v118 : i2
+  %v120 = pyc.alias %v119 {pyc.name = "fe3_out_lat"} : i2
+  %v121 = pyc.wire {pyc.name = "cycle_cnt__next"} : i16
+  %v122 = pyc.constant 1 : i1
+  %v123 = pyc.constant 0 : i16
+  %v124 = pyc.reg %clk, %rst, %v122, %v121, %v123 : i16
+  %v125 = pyc.alias %v124 {pyc.name = "cycle_cnt"} : i16
+  %v126 = pyc.alias %v125 {pyc.name = "cycle_cnt__module_02_fe_scheduler_v3__L57"} : i16
+  %v127 = pyc.constant 1 : i16
+  %v128 = pyc.add %v126, %v127 : i16
+  pyc.assign %v121, %v128 : i16
+  %v129 = pyc.alias %v126 {pyc.name = "current_cycle__module_02_fe_scheduler_v3__L60"} : i16
   %v130 = pyc.constant 3 : i5
-  %v131 = pyc.and %in1_ctrl, %v130 : i5
-  %v132 = pyc.alias %v131 {pyc.name = "lat__module_02_fe_scheduler__L61"} : i5
-  %v133 = pyc.constant 3 : i5
-  %v134 = pyc.and %in2_ctrl, %v133 : i5
-  %v135 = pyc.alias %v134 {pyc.name = "lat__module_02_fe_scheduler__L61"} : i5
-  %v136 = pyc.constant 3 : i5
-  %v137 = pyc.and %in3_ctrl, %v136 : i5
-  %v138 = pyc.alias %v137 {pyc.name = "lat__module_02_fe_scheduler__L61"} : i5
-  %v139 = pyc.not %v5 : i1
-  %v140 = pyc.and %v139, %in0_vld : i1
-  %v141 = pyc.alias %v140 {pyc.name = "can_start__module_02_fe_scheduler__L68"} : i1
-  pyc.assign %v67, %v141 : i1
-  pyc.assign %v87, %in0_data : i128
-  %v142 = pyc.trunc %v129 : i5 -> i2
-  pyc.assign %v107, %v142 : i2
-  %v143 = pyc.constant 0 : i3
-  %v144 = pyc.ult %v143, %v25 : i3
-  %v145 = pyc.and %v5, %v144 : i1
-  %v146 = pyc.or %v141, %v145 : i1
-  %v147 = pyc.alias %v146 {pyc.name = "new_busy__module_02_fe_scheduler__L76"} : i1
-  pyc.assign %v1, %v147 : i1
-  %v148 = pyc.constant 1 : i3
-  %v149 = pyc.zext %v148 : i3 -> i5
-  %v150 = pyc.add %v129, %v149 : i5
-  %v151 = pyc.constant 1 : i3
-  %v152 = pyc.sub %v25, %v151 : i3
-  %v153 = pyc.zext %v152 : i3 -> i5
-  %v154 = pyc.mux %v141, %v150, %v153 : i5
-  %v155 = pyc.alias %v154 {pyc.name = "new_timer__module_02_fe_scheduler__L80"} : i5
-  %v156 = pyc.trunc %v155 : i5 -> i3
-  pyc.assign %v21, %v156 : i3
-  %v157 = pyc.mux %v141, %in0_seq, %v45 : i16
-  pyc.assign %v41, %v157 : i16
-  %v158 = pyc.not %v10 : i1
-  %v159 = pyc.and %v158, %in1_vld : i1
-  %v160 = pyc.alias %v159 {pyc.name = "can_start__module_02_fe_scheduler__L68"} : i1
-  pyc.assign %v72, %v160 : i1
-  pyc.assign %v92, %in1_data : i128
-  %v161 = pyc.trunc %v132 : i5 -> i2
-  pyc.assign %v112, %v161 : i2
+  %v131 = pyc.and %in0_ctrl, %v130 : i5
+  %v132 = pyc.alias %v131 {pyc.name = "lat__module_02_fe_scheduler_v3__L63"} : i5
+  %v133 = pyc.zext %v132 : i5 -> i16
+  %v134 = pyc.add %v129, %v133 : i16
+  %v135 = pyc.constant 1 : i4
+  %v136 = pyc.zext %v135 : i4 -> i16
+  %v137 = pyc.add %v134, %v136 : i16
+  %v138 = pyc.alias %v137 {pyc.name = "finish_cycle__module_02_fe_scheduler_v3__L64"} : i16
+  %v139 = pyc.zext %v45 : i4 -> i16
+  %v140 = pyc.ult %v139, %v138 : i16
+  %v141 = pyc.alias %v140 {pyc.name = "constraint_ok__module_02_fe_scheduler_v3__L68"} : i1
+  %v142 = pyc.not %v5 : i1
+  %v143 = pyc.and %v142, %in0_vld : i1
+  %v144 = pyc.and %v143, %v141 : i1
+  %v145 = pyc.alias %v144 {pyc.name = "can_schedule__module_02_fe_scheduler_v3__L69"} : i1
+  pyc.assign %v61, %v145 : i1
+  %v146 = pyc.constant 0 : i128
+  %v147 = pyc.mux %v145, %in0_data, %v146 : i128
+  pyc.assign %v81, %v147 : i128
+  %v148 = pyc.constant 0 : i2
+  %v149 = pyc.zext %v148 : i2 -> i5
+  %v150 = pyc.mux %v145, %v132, %v149 : i5
+  %v151 = pyc.trunc %v150 : i5 -> i2
+  pyc.assign %v101, %v151 : i2
+  %v152 = pyc.constant 1 : i3
+  %v153 = pyc.ult %v152, %v25 : i3
+  %v154 = pyc.and %v5, %v153 : i1
+  %v155 = pyc.or %v145, %v154 : i1
+  %v156 = pyc.alias %v155 {pyc.name = "new_busy__module_02_fe_scheduler_v3__L76"} : i1
+  pyc.assign %v1, %v156 : i1
+  %v157 = pyc.constant 1 : i3
+  %v158 = pyc.zext %v157 : i3 -> i5
+  %v159 = pyc.add %v132, %v158 : i5
+  %v160 = pyc.constant 1 : i3
+  %v161 = pyc.sub %v25, %v160 : i3
   %v162 = pyc.constant 0 : i3
-  %v163 = pyc.ult %v162, %v30 : i3
-  %v164 = pyc.and %v10, %v163 : i1
-  %v165 = pyc.or %v160, %v164 : i1
-  %v166 = pyc.alias %v165 {pyc.name = "new_busy__module_02_fe_scheduler__L76"} : i1
-  pyc.assign %v6, %v166 : i1
-  %v167 = pyc.constant 1 : i3
-  %v168 = pyc.zext %v167 : i3 -> i5
-  %v169 = pyc.add %v132, %v168 : i5
-  %v170 = pyc.constant 1 : i3
-  %v171 = pyc.sub %v30, %v170 : i3
-  %v172 = pyc.zext %v171 : i3 -> i5
-  %v173 = pyc.mux %v160, %v169, %v172 : i5
-  %v174 = pyc.alias %v173 {pyc.name = "new_timer__module_02_fe_scheduler__L80"} : i5
-  %v175 = pyc.trunc %v174 : i5 -> i3
-  pyc.assign %v26, %v175 : i3
-  %v176 = pyc.mux %v160, %in1_seq, %v50 : i16
-  pyc.assign %v46, %v176 : i16
-  %v177 = pyc.not %v15 : i1
-  %v178 = pyc.and %v177, %in2_vld : i1
-  %v179 = pyc.alias %v178 {pyc.name = "can_start__module_02_fe_scheduler__L68"} : i1
-  pyc.assign %v77, %v179 : i1
-  pyc.assign %v97, %in2_data : i128
-  %v180 = pyc.trunc %v135 : i5 -> i2
-  pyc.assign %v117, %v180 : i2
-  %v181 = pyc.constant 0 : i3
-  %v182 = pyc.ult %v181, %v35 : i3
-  %v183 = pyc.and %v15, %v182 : i1
-  %v184 = pyc.or %v179, %v183 : i1
-  %v185 = pyc.alias %v184 {pyc.name = "new_busy__module_02_fe_scheduler__L76"} : i1
-  pyc.assign %v11, %v185 : i1
-  %v186 = pyc.constant 1 : i3
-  %v187 = pyc.zext %v186 : i3 -> i5
-  %v188 = pyc.add %v135, %v187 : i5
-  %v189 = pyc.constant 1 : i3
-  %v190 = pyc.sub %v35, %v189 : i3
-  %v191 = pyc.zext %v190 : i3 -> i5
-  %v192 = pyc.mux %v179, %v188, %v191 : i5
-  %v193 = pyc.alias %v192 {pyc.name = "new_timer__module_02_fe_scheduler__L80"} : i5
-  %v194 = pyc.trunc %v193 : i5 -> i3
-  pyc.assign %v31, %v194 : i3
-  %v195 = pyc.mux %v179, %in2_seq, %v55 : i16
-  pyc.assign %v51, %v195 : i16
-  %v196 = pyc.not %v20 : i1
-  %v197 = pyc.and %v196, %in3_vld : i1
-  %v198 = pyc.alias %v197 {pyc.name = "can_start__module_02_fe_scheduler__L68"} : i1
-  pyc.assign %v82, %v198 : i1
-  pyc.assign %v102, %in3_data : i128
-  %v199 = pyc.trunc %v138 : i5 -> i2
-  pyc.assign %v122, %v199 : i2
-  %v200 = pyc.constant 0 : i3
-  %v201 = pyc.ult %v200, %v40 : i3
-  %v202 = pyc.and %v20, %v201 : i1
-  %v203 = pyc.or %v198, %v202 : i1
-  %v204 = pyc.alias %v203 {pyc.name = "new_busy__module_02_fe_scheduler__L76"} : i1
-  pyc.assign %v16, %v204 : i1
-  %v205 = pyc.constant 1 : i3
+  %v163 = pyc.mux %v5, %v161, %v162 : i3
+  %v164 = pyc.zext %v163 : i3 -> i5
+  %v165 = pyc.mux %v145, %v159, %v164 : i5
+  %v166 = pyc.alias %v165 {pyc.name = "new_timer__module_02_fe_scheduler_v3__L79"} : i5
+  %v167 = pyc.trunc %v166 : i5 -> i3
+  pyc.assign %v21, %v167 : i3
+  %v168 = pyc.zext %v45 : i4 -> i16
+  %v169 = pyc.mux %v145, %v138, %v168 : i16
+  %v170 = pyc.alias %v169 {pyc.name = "new_last_finish__module_02_fe_scheduler_v3__L84"} : i16
+  %v171 = pyc.trunc %v170 : i16 -> i4
+  pyc.assign %v41, %v171 : i4
+  %v172 = pyc.constant 3 : i5
+  %v173 = pyc.and %in1_ctrl, %v172 : i5
+  %v174 = pyc.alias %v173 {pyc.name = "lat__module_02_fe_scheduler_v3__L63"} : i5
+  %v175 = pyc.zext %v174 : i5 -> i16
+  %v176 = pyc.add %v129, %v175 : i16
+  %v177 = pyc.constant 1 : i4
+  %v178 = pyc.zext %v177 : i4 -> i16
+  %v179 = pyc.add %v176, %v178 : i16
+  %v180 = pyc.alias %v179 {pyc.name = "finish_cycle__module_02_fe_scheduler_v3__L64"} : i16
+  %v181 = pyc.zext %v50 : i4 -> i16
+  %v182 = pyc.ult %v181, %v180 : i16
+  %v183 = pyc.alias %v182 {pyc.name = "constraint_ok__module_02_fe_scheduler_v3__L68"} : i1
+  %v184 = pyc.not %v10 : i1
+  %v185 = pyc.and %v184, %in1_vld : i1
+  %v186 = pyc.and %v185, %v183 : i1
+  %v187 = pyc.alias %v186 {pyc.name = "can_schedule__module_02_fe_scheduler_v3__L69"} : i1
+  pyc.assign %v66, %v187 : i1
+  %v188 = pyc.constant 0 : i128
+  %v189 = pyc.mux %v187, %in1_data, %v188 : i128
+  pyc.assign %v86, %v189 : i128
+  %v190 = pyc.constant 0 : i2
+  %v191 = pyc.zext %v190 : i2 -> i5
+  %v192 = pyc.mux %v187, %v174, %v191 : i5
+  %v193 = pyc.trunc %v192 : i5 -> i2
+  pyc.assign %v106, %v193 : i2
+  %v194 = pyc.constant 1 : i3
+  %v195 = pyc.ult %v194, %v30 : i3
+  %v196 = pyc.and %v10, %v195 : i1
+  %v197 = pyc.or %v187, %v196 : i1
+  %v198 = pyc.alias %v197 {pyc.name = "new_busy__module_02_fe_scheduler_v3__L76"} : i1
+  pyc.assign %v6, %v198 : i1
+  %v199 = pyc.constant 1 : i3
+  %v200 = pyc.zext %v199 : i3 -> i5
+  %v201 = pyc.add %v174, %v200 : i5
+  %v202 = pyc.constant 1 : i3
+  %v203 = pyc.sub %v30, %v202 : i3
+  %v204 = pyc.constant 0 : i3
+  %v205 = pyc.mux %v10, %v203, %v204 : i3
   %v206 = pyc.zext %v205 : i3 -> i5
-  %v207 = pyc.add %v138, %v206 : i5
-  %v208 = pyc.constant 1 : i3
-  %v209 = pyc.sub %v40, %v208 : i3
-  %v210 = pyc.zext %v209 : i3 -> i5
-  %v211 = pyc.mux %v198, %v207, %v210 : i5
-  %v212 = pyc.alias %v211 {pyc.name = "new_timer__module_02_fe_scheduler__L80"} : i5
-  %v213 = pyc.trunc %v212 : i5 -> i3
-  pyc.assign %v36, %v213 : i3
-  %v214 = pyc.mux %v198, %in3_seq, %v60 : i16
-  pyc.assign %v56, %v214 : i16
-  %v215 = pyc.or %in0_vld, %in1_vld : i1
-  %v216 = pyc.or %v215, %in2_vld : i1
-  %v217 = pyc.or %v216, %in3_vld : i1
-  %v218 = pyc.alias %v217 {pyc.name = "any_vld__module_02_fe_scheduler__L87"} : i1
-  %v219 = pyc.zext %v66 : i2 -> i5
-  %v220 = pyc.mux %in3_vld, %v138, %v219 : i5
-  %v221 = pyc.mux %in2_vld, %v135, %v220 : i5
-  %v222 = pyc.mux %in1_vld, %v132, %v221 : i5
-  %v223 = pyc.mux %in0_vld, %v129, %v222 : i5
-  %v224 = pyc.alias %v223 {pyc.name = "new_last_lat__module_02_fe_scheduler__L88"} : i5
-  %v225 = pyc.zext %v66 : i2 -> i5
-  %v226 = pyc.mux %v218, %v224, %v225 : i5
-  %v227 = pyc.trunc %v226 : i5 -> i2
-  pyc.assign %v61, %v227 : i2
-  func.return %v71, %v91, %v111, %v76, %v96, %v116, %v81, %v101, %v121, %v86, %v106, %v126 : i1, i128, i2, i1, i128, i2, i1, i128, i2, i1, i128, i2
+  %v207 = pyc.mux %v187, %v201, %v206 : i5
+  %v208 = pyc.alias %v207 {pyc.name = "new_timer__module_02_fe_scheduler_v3__L79"} : i5
+  %v209 = pyc.trunc %v208 : i5 -> i3
+  pyc.assign %v26, %v209 : i3
+  %v210 = pyc.zext %v50 : i4 -> i16
+  %v211 = pyc.mux %v187, %v180, %v210 : i16
+  %v212 = pyc.alias %v211 {pyc.name = "new_last_finish__module_02_fe_scheduler_v3__L84"} : i16
+  %v213 = pyc.trunc %v212 : i16 -> i4
+  pyc.assign %v46, %v213 : i4
+  %v214 = pyc.constant 3 : i5
+  %v215 = pyc.and %in2_ctrl, %v214 : i5
+  %v216 = pyc.alias %v215 {pyc.name = "lat__module_02_fe_scheduler_v3__L63"} : i5
+  %v217 = pyc.zext %v216 : i5 -> i16
+  %v218 = pyc.add %v129, %v217 : i16
+  %v219 = pyc.constant 1 : i4
+  %v220 = pyc.zext %v219 : i4 -> i16
+  %v221 = pyc.add %v218, %v220 : i16
+  %v222 = pyc.alias %v221 {pyc.name = "finish_cycle__module_02_fe_scheduler_v3__L64"} : i16
+  %v223 = pyc.zext %v55 : i4 -> i16
+  %v224 = pyc.ult %v223, %v222 : i16
+  %v225 = pyc.alias %v224 {pyc.name = "constraint_ok__module_02_fe_scheduler_v3__L68"} : i1
+  %v226 = pyc.not %v15 : i1
+  %v227 = pyc.and %v226, %in2_vld : i1
+  %v228 = pyc.and %v227, %v225 : i1
+  %v229 = pyc.alias %v228 {pyc.name = "can_schedule__module_02_fe_scheduler_v3__L69"} : i1
+  pyc.assign %v71, %v229 : i1
+  %v230 = pyc.constant 0 : i128
+  %v231 = pyc.mux %v229, %in2_data, %v230 : i128
+  pyc.assign %v91, %v231 : i128
+  %v232 = pyc.constant 0 : i2
+  %v233 = pyc.zext %v232 : i2 -> i5
+  %v234 = pyc.mux %v229, %v216, %v233 : i5
+  %v235 = pyc.trunc %v234 : i5 -> i2
+  pyc.assign %v111, %v235 : i2
+  %v236 = pyc.constant 1 : i3
+  %v237 = pyc.ult %v236, %v35 : i3
+  %v238 = pyc.and %v15, %v237 : i1
+  %v239 = pyc.or %v229, %v238 : i1
+  %v240 = pyc.alias %v239 {pyc.name = "new_busy__module_02_fe_scheduler_v3__L76"} : i1
+  pyc.assign %v11, %v240 : i1
+  %v241 = pyc.constant 1 : i3
+  %v242 = pyc.zext %v241 : i3 -> i5
+  %v243 = pyc.add %v216, %v242 : i5
+  %v244 = pyc.constant 1 : i3
+  %v245 = pyc.sub %v35, %v244 : i3
+  %v246 = pyc.constant 0 : i3
+  %v247 = pyc.mux %v15, %v245, %v246 : i3
+  %v248 = pyc.zext %v247 : i3 -> i5
+  %v249 = pyc.mux %v229, %v243, %v248 : i5
+  %v250 = pyc.alias %v249 {pyc.name = "new_timer__module_02_fe_scheduler_v3__L79"} : i5
+  %v251 = pyc.trunc %v250 : i5 -> i3
+  pyc.assign %v31, %v251 : i3
+  %v252 = pyc.zext %v55 : i4 -> i16
+  %v253 = pyc.mux %v229, %v222, %v252 : i16
+  %v254 = pyc.alias %v253 {pyc.name = "new_last_finish__module_02_fe_scheduler_v3__L84"} : i16
+  %v255 = pyc.trunc %v254 : i16 -> i4
+  pyc.assign %v51, %v255 : i4
+  %v256 = pyc.constant 3 : i5
+  %v257 = pyc.and %in3_ctrl, %v256 : i5
+  %v258 = pyc.alias %v257 {pyc.name = "lat__module_02_fe_scheduler_v3__L63"} : i5
+  %v259 = pyc.zext %v258 : i5 -> i16
+  %v260 = pyc.add %v129, %v259 : i16
+  %v261 = pyc.constant 1 : i4
+  %v262 = pyc.zext %v261 : i4 -> i16
+  %v263 = pyc.add %v260, %v262 : i16
+  %v264 = pyc.alias %v263 {pyc.name = "finish_cycle__module_02_fe_scheduler_v3__L64"} : i16
+  %v265 = pyc.zext %v60 : i4 -> i16
+  %v266 = pyc.ult %v265, %v264 : i16
+  %v267 = pyc.alias %v266 {pyc.name = "constraint_ok__module_02_fe_scheduler_v3__L68"} : i1
+  %v268 = pyc.not %v20 : i1
+  %v269 = pyc.and %v268, %in3_vld : i1
+  %v270 = pyc.and %v269, %v267 : i1
+  %v271 = pyc.alias %v270 {pyc.name = "can_schedule__module_02_fe_scheduler_v3__L69"} : i1
+  pyc.assign %v76, %v271 : i1
+  %v272 = pyc.constant 0 : i128
+  %v273 = pyc.mux %v271, %in3_data, %v272 : i128
+  pyc.assign %v96, %v273 : i128
+  %v274 = pyc.constant 0 : i2
+  %v275 = pyc.zext %v274 : i2 -> i5
+  %v276 = pyc.mux %v271, %v258, %v275 : i5
+  %v277 = pyc.trunc %v276 : i5 -> i2
+  pyc.assign %v116, %v277 : i2
+  %v278 = pyc.constant 1 : i3
+  %v279 = pyc.ult %v278, %v40 : i3
+  %v280 = pyc.and %v20, %v279 : i1
+  %v281 = pyc.or %v271, %v280 : i1
+  %v282 = pyc.alias %v281 {pyc.name = "new_busy__module_02_fe_scheduler_v3__L76"} : i1
+  pyc.assign %v16, %v282 : i1
+  %v283 = pyc.constant 1 : i3
+  %v284 = pyc.zext %v283 : i3 -> i5
+  %v285 = pyc.add %v258, %v284 : i5
+  %v286 = pyc.constant 1 : i3
+  %v287 = pyc.sub %v40, %v286 : i3
+  %v288 = pyc.constant 0 : i3
+  %v289 = pyc.mux %v20, %v287, %v288 : i3
+  %v290 = pyc.zext %v289 : i3 -> i5
+  %v291 = pyc.mux %v271, %v285, %v290 : i5
+  %v292 = pyc.alias %v291 {pyc.name = "new_timer__module_02_fe_scheduler_v3__L79"} : i5
+  %v293 = pyc.trunc %v292 : i5 -> i3
+  pyc.assign %v36, %v293 : i3
+  %v294 = pyc.zext %v60 : i4 -> i16
+  %v295 = pyc.mux %v271, %v264, %v294 : i16
+  %v296 = pyc.alias %v295 {pyc.name = "new_last_finish__module_02_fe_scheduler_v3__L84"} : i16
+  %v297 = pyc.trunc %v296 : i16 -> i4
+  pyc.assign %v56, %v297 : i4
+  func.return %v65, %v85, %v105, %v70, %v90, %v110, %v75, %v95, %v115, %v80, %v100, %v120 : i1, i128, i2, i1, i128, i2, i1, i128, i2, i1, i128, i2
 }
 
 }

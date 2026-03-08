@@ -77,26 +77,86 @@ FastFWD 是一个高性能报文转发加速器，处理 4 路并行输入报文
 
 ```
 fastfwd_v3/
-├── rtl/
-│   ├── fastfwd_v2.py      # V2 基础版
-│   ├── fastfwd_v2_1.py    # V2 完善版
-│   └── fastfwd_v3.py      # V3 完整实现
-├── tb/
-│   ├── tb_v2.py           # V2 测试
-│   └── comprehensive_test.py  # 全面测试
-├── verilog/
-│   └── fe.v               # FE 模块
-└── docs/
-    └── SPEC.md            # 详细规格
+├── rtl/                          # RTL 源码 (pyCircuit)
+│   ├── fastfwd_v3.py            # 顶层模块
+│   ├── module_01_input_collector.py
+│   ├── module_02_fe_scheduler.py
+│   ├── module_03_dependency_resolver.py
+│   ├── module_04_rob.py
+│   ├── module_05_output_scheduler.py
+│   └── module_06_backpressure.py
+├── tb/                           # 测试平台
+│   ├── test_fastfwd_v3.py       # 功能测试
+│   ├── test_timing.py           # 时序验证
+│   ├── test_complete.py         # 完整测试
+│   ├── comprehensive_test.py    # 综合测试
+│   ├── complex_test.py          # 复杂场景测试
+│   ├── auto_test.py             # 自动测试
+│   └── generate_verilog.py      # Verilog生成
+├── mlir/                         # MLIR 中间表示
+│   ├── fastfwd_v3.mlir
+│   └── module_*.mlir
+├── verilog/                      # 生成 Verilog
+│   └── fastfwd_v3.v
+├── docs/                         # 文档
+│   ├── SPEC.md
+│   ├── TIMING_DIAGRAMS.md
+│   └── PYCIRCUIT_TUTORIAL.md
+├── logs/                         # 测试日志
+│   └── tests/
+├── archive/                      # 归档旧版本
+│   ├── mlir/
+│   ├── verilog/
+│   └── (旧版本RTL)
+├── README.md                     # 本文件
+├── fastfwd_spec.txt             # 规格说明
+└── DEVELOPMENT_LOG.md           # 开发日志
 ```
 
 ---
 
-## 6. 版本历史
+## 6. 快速开始
 
-- V2.0: 基础透传版本
-- V2.1: 完善 FIFO 和输出调度
-- V3.0: 完整实现 (FE、依赖、ROB)
+### 运行测试
+```bash
+cd /path/to/pyCircuit
+export PYTHONPATH=/path/to/pyCircuit/compiler/frontend:$PYTHONPATH
+
+# 功能测试
+python3 designs/examples/fastfwd_v3/tb/test_fastfwd_v3.py
+
+# 时序验证
+python3 designs/examples/fastfwd_v3/tb/test_timing.py
+
+# 完整测试
+python3 designs/examples/fastfwd_v3/tb/test_complete.py
+```
+
+### 生成 Verilog
+```bash
+python3 designs/examples/fastfwd_v3/tb/generate_verilog.py
+```
+
+---
+
+## 7. 时序说明
+
+正确的流水线时序：
+- **Cycle 0**: 输入数据进入 FIFO
+- **Cycle 1**: FE 开始处理
+- **Cycle 2**: FE 完成 (lat=0)，进入 ROB
+- **Cycle 3**: ROB 输出到 Output
+
+最少 3-4 cycles 才有输出。
+
+---
+
+## 8. 版本历史
+
+- V3.3: 模块化设计，6个独立子模块，时序修正
+- V3.2: 多 FE 支持，优先级编码器
+- V3.1: 完整依赖解析
+- V3.0: 集成版本，完整模块整合
 
 ---
 

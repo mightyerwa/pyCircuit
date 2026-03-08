@@ -11,7 +11,7 @@ from typing import List, Tuple, Optional
 # 添加RTL路径
 sys.path.insert(0, str(Path(__file__).parent.parent / "rtl"))
 
-from fastfwd_v3_3 import fastfwd_v3_3
+from fastfwd_v3 import fastfwd_v3
 from pycircuit import compile
 
 
