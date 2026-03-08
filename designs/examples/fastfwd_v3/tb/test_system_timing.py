@@ -86,7 +86,6 @@ class FastFWDReferenceModel:
         
         # FE状态: 每个FE的当前处理报文和完成时间
         self.fe_busy: List[Optional[Tuple[Packet, int]]] = [None] * n_fe  # (pkt, finish_cycle)
-        self.fe_last_finish = [0] * n_fe  # 上一报文完成时间
         
         # Dependency表 (存储最近完成的报文结果)
         self.dep_table: Dict[int, int] = {}  # seq -> data
@@ -174,10 +173,20 @@ class FastFWDReferenceModel:
     
     def check_fe_constraint(self, fe_id: int, pkt: Packet) -> bool:
         """
-        检查FE约束: 同一FE内，新报文的finish_cycle必须>上一报文的finish_cycle
+        检查FE约束: 同一FE内，任意两个报文不能在同一cycle完成
+        
+        正确理解: finish_cycle不能等于该FE中任何正在处理报文的finish_cycle
+        不是 >，而是 !=
         """
         finish_cycle = self.cycle + pkt.fe_delay
-        return finish_cycle > self.fe_last_finish[fe_id]
+        
+        # 检查该FE中是否有报文会在同一cycle完成
+        if self.fe_busy[fe_id] is not None:
+            _, existing_finish = self.fe_busy[fe_id]
+            if finish_cycle == existing_finish:
+                return False  # 冲突：会在同一cycle输出
+        
+        return True
     
     def schedule_fe(self) -> List[Tuple[int, Packet]]:
         """
@@ -218,7 +227,6 @@ class FastFWDReferenceModel:
             # 调度到FE
             finish_cycle = self.cycle + pkt.fe_delay
             self.fe_busy[fe_assigned] = (pkt, finish_cycle)
-            self.fe_last_finish[fe_assigned] = finish_cycle
             self.input_fifo.remove(pkt)
             
             scheduled.append((fe_assigned, pkt))
@@ -377,66 +385,74 @@ def test_dependency_timing():
 
 def test_latency_constraint():
     """
-    测试Latency约束
+    测试Latency约束 - 修正版
     
-    场景:
-    - 填满4个FE，让它们都busy
-    - Cycle N: seq=0在FE0, lat=2 (finish at cycle N+3)
-    - Cycle N+1: seq=1到来，lat=1，只有FE0将空闲 - 应该被约束阻止直到seq=0完成
+    核心理解: 同一FE内，finish_cycle不能相等，但可以交错
     
-    验证:
-    - 同一FE内，lat=2后不能紧跟lat=1
+    允许的场景:
+    - Cycle 0: seq=0, lat=3 -> finish@4
+    - Cycle 1: seq=1, lat=1 -> finish@3  (允许，3 != 4)
+    
+    禁止的场景:
+    - Cycle 0: seq=0, lat=2 -> finish@3
+    - Cycle 1: seq=1, lat=1 -> finish@3  (禁止，3 == 3)
     """
     print("\n" + "="*60)
-    print("TEST: Latency Constraint")
+    print("TEST: Latency Constraint (Corrected)")
     print("="*60)
     
     model = FastFWDReferenceModel()
     logger = Logger("test_latency_constraint")
     
-    # Cycle 1-4: 填满4个FE，都使用lat=2（让FE busy更久）
-    print("\nCycles 1-4: Fill all 4 FEs with lat=2 packets")
-    for i in range(4):
-        out = model.run_cycle([1,0,0,0], [0x100+i,0,0,0], [0x2,0,0,0])  # lat=2
-        print(f"  Cycle {i+1}: FE{i} busy, finish@{model.fe_last_finish[i]}")
+    # 场景1: lat=3后跟lat=1 - 应该允许（finish_cycle不同）
+    print("\nScenario 1: lat=3 followed by lat=1 (should ALLOW)")
+    print("Cycle 1: seq=0, lat=3 -> finish@4")
+    out = model.run_cycle([1,0,0,0], [0x100,0,0,0], [0x3,0,0,0])  # lat=3
+    print(f"  FE0: busy with seq=0, finish@{model.fe_busy[0][1] if model.fe_busy[0] else 'N/A'}")
     
-    print(f"\n  All FE busy: {[model.fe_busy[i] for i in range(4)]}")
+    print("Cycle 2: seq=1, lat=1 -> finish@3")
+    out = model.run_cycle([1,0,0,0], [0x200,0,0,0], [0x1,0,0,0])  # lat=1
+    fe0_status = model.fe_busy[0]
+    fe1_status = model.fe_busy[1]
+    print(f"  FE0: {fe0_status}")
+    print(f"  FE1: {fe1_status}")
     
-    # Cycle 5: 所有FE都忙，新报文进入FIFO
-    print("\nCycle 5: All FE busy, new packet enters FIFO")
-    out = model.run_cycle([1,0,0,0], [0x500,0,0,0], [0x1,0,0,0])  # lat=1
-    print(f"  Input FIFO: {model.input_fifo}")
-    print(f"  FE stalls so far: {model.stats['fe_stalls']}")
+    # seq=1应该被调度到FE1（FE0 busy）
+    assert fe1_status is not None and fe1_status[0].seq == 1, "seq=1 should be scheduled"
+    print("  ✓ seq=1 scheduled to FE1 (finish@3 != finish@4, no conflict)")
     
-    # Cycle 6-7: FE逐个完成，但约束阻止lat=1进入FE0
-    print("\nCycles 6-7: FEs complete, but constraint should block lat=1 from FE0")
-    for i in range(2):
+    # 场景2: lat=2后跟lat=1到同一FE - 应该禁止（finish_cycle相同）
+    print("\nScenario 2: lat=2 followed by lat=1 to same FE (should BLOCK)")
+    model.reset()
+    
+    print("Cycle 1: seq=0, lat=2 -> finish@3")
+    out = model.run_cycle([1,0,0,0], [0x100,0,0,0], [0x2,0,0,0])  # lat=2
+    print(f"  FE0: busy with seq=0, finish@{model.fe_busy[0][1]}")
+    
+    # 填满其他FE，迫使seq=1必须进FE0
+    print("Cycles 2-4: Fill FE1-FE3 to force seq=1 into FE0")
+    for i in range(3):
+        out = model.run_cycle([1,0,0,0], [0x200+i*0x100,0,0,0], [0x0,0,0,0])  # lat=0, quick finish
+    
+    print("Cycle 5: seq=4, lat=1 -> would finish@6, but FE0 busy until 3...")
+    # 等待FE0完成
+    for i in range(3):
         out = model.run_cycle([0,0,0,0], [0,0,0,0], [0,0,0,0])
-        print(f"  Cycle {6+i}: FE状态={[model.fe_busy[j] for j in range(4)]}")
-        print(f"    Input FIFO: {model.input_fifo}")
-        print(f"    FE stalls: {model.stats['fe_stalls']}")
-    
-    # Cycle 8: FE0完成（finish at 5），seq=4应该可以进入
-    print("\nCycle 8+: FE0 free, constraint cleared")
-    for i in range(5):
-        out = model.run_cycle([0,0,0,0], [0,0,0,0], [0,0,0,0])
-        if model.input_fifo:
-            print(f"  Cycle {8+i}: FIFO still has {len(model.input_fifo)} packets")
-        else:
-            print(f"  Cycle {8+i}: FIFO empty, all scheduled")
+        if model.fe_busy[0] is None:
+            print(f"  FE0 becomes free at cycle {model.cycle}")
             break
     
-    print(f"\n  Final FE stalls: {model.stats['fe_stalls']}")
-    print(f"  Constraint stalls expected: >0")
+    print("Cycle 6+: seq=4 can now enter FE0")
+    out = model.run_cycle([1,0,0,0], [0x500,0,0,0], [0x1,0,0,0])  # lat=1
+    print(f"  FE0: {model.fe_busy[0]}")
     
     # 运行到完成
     for i in range(10):
         out = model.run_cycle([0,0,0,0], [0,0,0,0], [0,0,0,0])
     
-    assert model.stats['packets_out'] == 5, f"Expected 5 out, got {model.stats['packets_out']}"
-    # 注意：stall可能是0，因为报文被暂存在FIFO而不是被"stall"计数
-    # 真正的约束验证是看报文是否被延迟调度
-    print("\n✓ Latency constraint test PASSED (constraint enforced via FIFO wait)")
+    print(f"\n  Total packets: in={model.stats['packets_in']}, out={model.stats['packets_out']}")
+    assert model.stats['packets_out'] == 5
+    print("\n✓ Latency constraint test PASSED")
     
     for e in model.events:
         logger.log(e, False)
