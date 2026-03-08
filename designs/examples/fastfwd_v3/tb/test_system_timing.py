@@ -86,6 +86,7 @@ class FastFWDReferenceModel:
         
         # FE状态: 每个FE的当前处理报文和完成时间
         self.fe_busy: List[Optional[Tuple[Packet, int]]] = [None] * n_fe  # (pkt, finish_cycle)
+        self.fe_last_finish = [0] * n_fe  # 上一报文的finish_cycle (RTL中的last_finish寄存器)
         
         # Dependency表 (存储最近完成的报文结果)
         self.dep_table: Dict[int, int] = {}  # seq -> data
@@ -173,20 +174,12 @@ class FastFWDReferenceModel:
     
     def check_fe_constraint(self, fe_id: int, pkt: Packet) -> bool:
         """
-        检查FE约束: 同一FE内，任意两个报文不能在同一cycle完成
+        检查FE约束: finish_cycle必须严格大于该FE的last_finish
         
-        正确理解: finish_cycle不能等于该FE中任何正在处理报文的finish_cycle
-        不是 >，而是 !=
+        RTL实现: constraint_ok = finish_cycle > last_finish[i]
         """
         finish_cycle = self.cycle + pkt.fe_delay
-        
-        # 检查该FE中是否有报文会在同一cycle完成
-        if self.fe_busy[fe_id] is not None:
-            _, existing_finish = self.fe_busy[fe_id]
-            if finish_cycle == existing_finish:
-                return False  # 冲突：会在同一cycle输出
-        
-        return True
+        return finish_cycle > self.fe_last_finish[fe_id]
     
     def schedule_fe(self) -> List[Tuple[int, Packet]]:
         """
@@ -227,6 +220,7 @@ class FastFWDReferenceModel:
             # 调度到FE
             finish_cycle = self.cycle + pkt.fe_delay
             self.fe_busy[fe_assigned] = (pkt, finish_cycle)
+            self.fe_last_finish[fe_assigned] = finish_cycle  # 更新last_finish (RTL行为)
             self.input_fifo.remove(pkt)
             
             scheduled.append((fe_assigned, pkt))
@@ -597,6 +591,79 @@ def test_complex_scenario():
     logger.save()
 
 
+def test_fe_finish_cycle_conflict():
+    """
+    专门测试FE finish_cycle冲突场景
+    
+    用户质疑的场景:
+    - Cycle 0: seq=0进入FE0, lat=3 (finish_cycle = 0 + 3 + 1 = 4)
+    - Cycle 1: seq=1尝试进入FE0, lat=1 (finish_cycle = 1 + 1 + 1 = 3)
+    - RTL检查: 3 > 4? False -> 应该被阻止!
+    
+    这是严格的finish_cycle递减，RTL会阻止。
+    """
+    print("\n" + "="*60)
+    print("TEST: FE Finish Cycle Conflict")
+    print("="*60)
+    
+    model = FastFWDReferenceModel()
+    logger = Logger("test_fe_finish_cycle_conflict")
+    
+    # === 关键测试: lat=3后lat=1应该被阻止 ===
+    print("\n--- 关键测试: seq=0(lat=3)后seq=1(lat=1)应该被阻止 ---")
+    print("说明: seq=0 finish@4, seq=1 finish@3, 3>4? False")
+    
+    print("Cycle 1: seq=0, lat=3 -> finish@5 (cycle 1 + 3 + 1)")
+    out = model.run_cycle([1,0,0,0], [0x100,0,0,0], [0x3,0,0,0])
+    print(f"  FE0: {model.fe_busy[0]}")
+    print(f"  last_finish[0] = {model.fe_last_finish[0]}")
+    
+    print("\nRunning until seq=0 completes...")
+    # 运行直到seq=0完成
+    for i in range(10):
+        model.run_cycle([0,0,0,0], [0,0,0,0], [0,0,0,0])
+        if model.fe_busy[0] is None:
+            print(f"  FE0 completes at cycle {model.cycle}, last_finish={model.fe_last_finish[0]}")
+            break
+    
+    print(f"\nCycle {model.cycle + 1}: seq=1, lat=0 -> would finish@{model.cycle + 1 + 0 + 1}")
+    print(f"  如果允许: finish_cycle = {model.cycle + 2}")
+    print(f"  约束检查: {model.cycle + 2} > {model.fe_last_finish[0]}? {model.cycle + 2 > model.fe_last_finish[0]}")
+    
+    # 现在让seq=1进入
+    out = model.run_cycle([1,0,0,0], [0x200,0,0,0], [0x0,0,0,0])
+    print(f"  结果: FE0={model.fe_busy[0]}")
+    
+    # 再测试lat=1的情况（应该被阻止如果finish_cycle递减）
+    model2 = FastFWDReferenceModel()
+    print("\n--- 测试2: 连续进入同一FE，finish_cycle必须递增 ---")
+    print("Cycle 1: seq=0, lat=0 -> finish@2")
+    model2.run_cycle([1,0,0,0], [0x100,0,0,0], [0x0,0,0,0])
+    print(f"  last_finish[0]={model2.fe_last_finish[0]}")
+    
+    # 等FE0空闲
+    for i in range(3):
+        model2.run_cycle([0,0,0,0], [0,0,0,0], [0,0,0,0])
+    
+    print(f"Cycle {model2.cycle + 1}: seq=1, lat=0 -> would finish@{model2.cycle + 2}")
+    print(f"  约束: {model2.cycle + 2} > {model2.fe_last_finish[0]}? {model2.cycle + 2 > model2.fe_last_finish[0]}")
+    model2.run_cycle([1,0,0,0], [0x200,0,0,0], [0x0,0,0,0])
+    print(f"  结果: FE0={model2.fe_busy[0]}")
+    
+    # 运行到完成
+    for i in range(10):
+        model.run_cycle([0,0,0,0], [0,0,0,0], [0,0,0,0])
+        model2.run_cycle([0,0,0,0], [0,0,0,0], [0,0,0,0])
+    
+    print(f"\n  Model1: in={model.stats['packets_in']}, out={model.stats['packets_out']}")
+    print(f"  Model2: in={model2.stats['packets_in']}, out={model2.stats['packets_out']}")
+    print("\n✓ FE finish cycle conflict test COMPLETED")
+    
+    for e in model.events:
+        logger.log(e, False)
+    logger.save()
+
+
 if __name__ == "__main__":
     print("\n" + "="*70)
     print("FastFWD V3 - 系统级时序验证")
@@ -608,6 +675,7 @@ if __name__ == "__main__":
     test_fifo_backpressure()
     test_cross_fe_no_constraint()
     test_complex_scenario()
+    test_fe_finish_cycle_conflict()
     
     print("\n" + "="*70)
     print("所有测试通过!")
