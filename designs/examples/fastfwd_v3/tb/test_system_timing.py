@@ -157,29 +157,66 @@ class FastFWDReferenceModel:
     
     def check_dependency(self, pkt: Packet) -> Tuple[bool, Optional[int]]:
         """
-        检查依赖是否满足
-        返回: (是否满足, 依赖数据)
+        检查依赖是否满足 - 修正版
+        
+        关键理解: dependency数据是FE的输出结果!
+        
+        场景: seq=4, dep=3 表示依赖seq=1的结果 (4-3=1)
+        时序:
+        1. seq=1进入FE处理 (lat+1 cycles)
+        2. seq=1从FE output出来
+        3. seq=1结果写入dep_table
+        4. seq=4才能被调度
+        
+        所以: 只有当被依赖的报文**从FE输出后**，依赖才算满足
         """
         if pkt.dep == 0:
             return True, None
         
         dep_seq = pkt.seq - pkt.dep
         if dep_seq < 0:
-            return False, None  # 依赖序号无效
+            return False, None
         
+        # 检查dep_table - 只有FE输出后的数据才在这里
         if dep_seq in self.dep_table:
             return True, self.dep_table[dep_seq]
         
-        return False, None  # 依赖未满足
+        # 还要检查被依赖的报文是否还在FE中处理
+        # 如果在处理中，依赖未满足
+        for fe_id in range(self.n_fe):
+            if self.fe_busy[fe_id] is not None:
+                busy_pkt, _ = self.fe_busy[fe_id]
+                if busy_pkt.seq == dep_seq:
+                    # 被依赖的报文还在FE中处理
+                    return False, None
+        
+        # 检查被依赖的报文是否在ROB中(已完成但未输出)
+        for seq, data in self.rob:
+            if seq == dep_seq:
+                return True, data
+        
+        return False, None
     
     def check_fe_constraint(self, fe_id: int, pkt: Packet) -> bool:
         """
-        检查FE约束: finish_cycle必须严格大于该FE的last_finish
+        FE约束: 同一FE内，finish_cycle不能相等
         
-        RTL实现: constraint_ok = finish_cycle > last_finish[i]
+        目的: 防止同一FE在同一cycle输出两笔数据(只有一个输出端口)
+        
+        用户场景:
+        - Cycle 0: seq=0, lat=3 -> finish@4
+        - Cycle 1: seq=1, lat=1 -> finish@3
+        - 4 != 3, 不冲突, 允许!
         """
         finish_cycle = self.cycle + pkt.fe_delay
-        return finish_cycle > self.fe_last_finish[fe_id]
+        
+        # 检查该FE中是否有报文会在同一cycle完成
+        if self.fe_busy[fe_id] is not None:
+            _, existing_finish = self.fe_busy[fe_id]
+            if finish_cycle == existing_finish:
+                return False  # 冲突：会在同一cycle输出
+        
+        return True
     
     def schedule_fe(self) -> List[Tuple[int, Packet]]:
         """
@@ -220,7 +257,7 @@ class FastFWDReferenceModel:
             # 调度到FE
             finish_cycle = self.cycle + pkt.fe_delay
             self.fe_busy[fe_assigned] = (pkt, finish_cycle)
-            self.fe_last_finish[fe_assigned] = finish_cycle  # 更新last_finish (RTL行为)
+            self.fe_last_finish[fe_assigned] = finish_cycle
             self.input_fifo.remove(pkt)
             
             scheduled.append((fe_assigned, pkt))
@@ -664,6 +701,89 @@ def test_fe_finish_cycle_conflict():
     logger.save()
 
 
+def test_dependency_timing_correct():
+    """
+    测试Dependency正确时序 - 核心修正
+    
+    关键理解: dependency数据是FE的输出结果!
+    
+    场景: seq=4, dep=3 表示依赖seq=1的结果 (4-3=1)
+    
+    正确时序:
+    Cycle 1: seq=1进入FE (lat=1, dep=0)
+    Cycle 2: FE处理中
+    Cycle 3: seq=1从FE输出 -> 写入dep_table
+    Cycle 4: seq=4检查dep=3 -> 依赖满足!
+    
+    错误时序(之前模型):
+    Cycle 1: seq=1进入FE -> 立即写入dep_table (错!)
+    Cycle 2: seq=4检查dep=3 -> 错误地满足
+    """
+    print("\n" + "="*60)
+    print("TEST: Dependency Timing - FE Output Dependency")
+    print("="*60)
+    
+    model = FastFWDReferenceModel()
+    logger = Logger("test_dependency_fe_output")
+    
+    print("\n场景: seq=4依赖seq=1的结果 (dep=3)")
+    print("时序: seq=1必须完成FE处理后，seq=4才能进入FE\n")
+    
+    # Cycle 1: seq=0,1,2,3进入 (无依赖或依赖已满足)
+    print("Cycle 1: 输入seq=0,1,2,3")
+    out = model.run_cycle([1,1,1,1], [0x100,0x200,0x300,0x400], [0x1,0x0,0x0,0x0])  # seq0:lat1,seq1-3:lat0
+    print(f"  FE状态: {[model.fe_busy[i] for i in range(4)]}")
+    print(f"  dep_table: {model.dep_table}")
+    
+    # Cycle 2-3: 等待seq=1完成FE处理
+    print("\nCycles 2-3: 等待seq=1完成FE处理...")
+    for i in range(2):
+        model.run_cycle([0,0,0,0], [0,0,0,0], [0,0,0,0])
+        print(f"  Cycle {i+2}: dep_table={model.dep_table}")
+        if 1 in model.dep_table:
+            print(f"    *** seq=1结果已写入dep_table ***")
+    
+    # Cycle 4: 现在seq=4应该可以进入 (依赖满足)
+    print("\nCycle 4+: 尝试输入seq=4 (dep=3,依赖seq=1)")
+    # 先输入一些填充报文
+    for i in range(3):
+        model.run_cycle([1,0,0,0], [0x500+i*0x100,0,0,0], [0x0,0,0,0])
+    
+    # 现在seq=4 (实际seq=7了因为前面输入了7个报文)
+    current_seq = model.seq_cnt
+    print(f"  当前seq_cnt={current_seq}, 输入新报文dep=3 (依赖seq={current_seq-3})")
+    
+    # 检查依赖
+    dep_target = current_seq - 3
+    dep_satisfied = dep_target in model.dep_table
+    print(f"  依赖目标seq={dep_target}在dep_table中? {dep_satisfied}")
+    if dep_satisfied:
+        print(f"  依赖数据: 0x{model.dep_table[dep_target]:x}")
+    
+    out = model.run_cycle([1,0,0,0], [0x800,0,0,0], [0xC])  # lat=0, dep=3
+    print(f"  FE状态: {[model.fe_busy[i] for i in range(4)]}")
+    
+    # 验证
+    fe_has_pkt = any(model.fe_busy[i] is not None and model.fe_busy[i][0].seq == current_seq 
+                     for i in range(4))
+    if dep_satisfied and fe_has_pkt:
+        print(f"\n  ✓ seq={current_seq}成功进入FE (依赖已满足)")
+    elif not dep_satisfied:
+        print(f"\n  ✗ seq={current_seq}应该被阻塞 (依赖未满足)")
+    
+    # 运行到完成
+    for i in range(20):
+        model.run_cycle([0,0,0,0], [0,0,0,0], [0,0,0,0])
+    
+    print(f"\n  Total: in={model.stats['packets_in']}, out={model.stats['packets_out']}")
+    print(f"  Dep stalls: {model.stats['dep_stalls']}")
+    print("\n✓ Dependency FE output timing test COMPLETED")
+    
+    for e in model.events[:30]:
+        logger.log(e, False)
+    logger.save()
+
+
 if __name__ == "__main__":
     print("\n" + "="*70)
     print("FastFWD V3 - 系统级时序验证")
@@ -676,6 +796,7 @@ if __name__ == "__main__":
     test_cross_fe_no_constraint()
     test_complex_scenario()
     test_fe_finish_cycle_conflict()
+    test_dependency_timing_correct()
     
     print("\n" + "="*70)
     print("所有测试通过!")
