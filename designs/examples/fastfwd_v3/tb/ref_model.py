@@ -198,7 +198,7 @@ class FastFWDRefModel:
         self.cycle += 1
         return outputs
     
-    def run_test(self, inputs: List[List[Optional[Packet]]]) -> List[List[Optional[Packet]]]]:
+    def run_test(self, inputs: List[List[Optional[Packet]]]) -> List[List[Optional[Packet]]]:
         """
         Run a complete test
         
