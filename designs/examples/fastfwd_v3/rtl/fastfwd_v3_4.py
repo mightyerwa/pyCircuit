@@ -112,7 +112,7 @@ def fastfwd_v3_4(m: Circuit) -> None:
         lat = ic_ctrl[i].out() & u(CTRL_WIDTH, 0x3)
         dep = (ic_ctrl[i].out() >> u(CTRL_WIDTH, 2)) & u(CTRL_WIDTH, 0x7)
         finish_cycle = current_cycle[0:6] + u(6, 2) + lat
-        constraint_ok = finish_cycle > fe_last_finish[i].out()
+        constraint_ok = finish_cycle != fe_last_finish[i].out()
         can_schedule = (~fe_busy[i].out()) & ic_vld[i].out() & constraint_ok
         
         # 依赖查找

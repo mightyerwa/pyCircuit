@@ -490,975 +490,979 @@ func.func @fastfwd_v3_4(%clk: !pyc.clock, %rst: !pyc.reset, %lane0_pkt_in_vld: i
   %v461 = pyc.zext %v453 : i5 -> i6
   %v462 = pyc.add %v460, %v461 : i6
   %v463 = pyc.alias %v462 {pyc.name = "finish_cycle__fastfwd_v3_4__L114"} : i6
-  %v464 = pyc.ult %v188, %v463 : i6
-  %v465 = pyc.alias %v464 {pyc.name = "constraint_ok__fastfwd_v3_4__L115"} : i1
-  %v466 = pyc.not %v148 : i1
-  %v467 = pyc.and %v466, %lane0_pkt_in_vld : i1
-  %v468 = pyc.and %v467, %v465 : i1
-  %v469 = pyc.alias %v468 {pyc.name = "can_schedule__fastfwd_v3_4__L116"} : i1
-  %v470 = pyc.zext %v457 : i5 -> i16
-  %v471 = pyc.sub %v29, %v470 : i16
-  %v472 = pyc.alias %v471 {pyc.name = "target_seq__fastfwd_v3_4__L119"} : i16
-  %v473 = pyc.eq %v308, %v472 : i16
-  %v474 = pyc.and %v228, %v473 : i1
-  %v475 = pyc.alias %v474 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v476 = pyc.constant 0 : i1
-  %v477 = pyc.or %v475, %v476 : i1
-  %v478 = pyc.alias %v477 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v479 = pyc.not %v475 : i1
-  %v480 = pyc.constant 0 : i128
-  %v481 = pyc.mux %v479, %v480, %v268 : i128
-  %v482 = pyc.alias %v481 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v483 = pyc.eq %v313, %v472 : i16
-  %v484 = pyc.and %v233, %v483 : i1
-  %v485 = pyc.alias %v484 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v486 = pyc.or %v478, %v485 : i1
-  %v487 = pyc.alias %v486 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v488 = pyc.not %v485 : i1
-  %v489 = pyc.mux %v488, %v482, %v273 : i128
-  %v490 = pyc.alias %v489 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v491 = pyc.eq %v318, %v472 : i16
-  %v492 = pyc.and %v238, %v491 : i1
-  %v493 = pyc.alias %v492 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v494 = pyc.or %v487, %v493 : i1
-  %v495 = pyc.alias %v494 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v496 = pyc.not %v493 : i1
-  %v497 = pyc.mux %v496, %v490, %v278 : i128
-  %v498 = pyc.alias %v497 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v499 = pyc.eq %v323, %v472 : i16
-  %v500 = pyc.and %v243, %v499 : i1
-  %v501 = pyc.alias %v500 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v502 = pyc.or %v495, %v501 : i1
-  %v503 = pyc.alias %v502 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v504 = pyc.not %v501 : i1
-  %v505 = pyc.mux %v504, %v498, %v283 : i128
-  %v506 = pyc.alias %v505 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v507 = pyc.eq %v328, %v472 : i16
-  %v508 = pyc.and %v248, %v507 : i1
-  %v509 = pyc.alias %v508 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v510 = pyc.or %v503, %v509 : i1
-  %v511 = pyc.alias %v510 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v512 = pyc.not %v509 : i1
-  %v513 = pyc.mux %v512, %v506, %v288 : i128
-  %v514 = pyc.alias %v513 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v515 = pyc.eq %v333, %v472 : i16
-  %v516 = pyc.and %v253, %v515 : i1
-  %v517 = pyc.alias %v516 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v518 = pyc.or %v511, %v517 : i1
-  %v519 = pyc.alias %v518 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v520 = pyc.not %v517 : i1
-  %v521 = pyc.mux %v520, %v514, %v293 : i128
-  %v522 = pyc.alias %v521 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v523 = pyc.eq %v338, %v472 : i16
-  %v524 = pyc.and %v258, %v523 : i1
-  %v525 = pyc.alias %v524 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v526 = pyc.or %v519, %v525 : i1
-  %v527 = pyc.alias %v526 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v528 = pyc.not %v525 : i1
-  %v529 = pyc.mux %v528, %v522, %v298 : i128
-  %v530 = pyc.alias %v529 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v531 = pyc.eq %v343, %v472 : i16
-  %v532 = pyc.and %v263, %v531 : i1
-  %v533 = pyc.alias %v532 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v534 = pyc.or %v527, %v533 : i1
-  %v535 = pyc.alias %v534 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v536 = pyc.not %v533 : i1
-  %v537 = pyc.mux %v536, %v530, %v303 : i128
-  %v538 = pyc.alias %v537 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v539 = pyc.constant 0 : i3
-  %v540 = pyc.zext %v539 : i3 -> i5
-  %v541 = pyc.eq %v457, %v540 : i5
-  %v542 = pyc.not %v541 : i1
-  %v543 = pyc.alias %v542 {pyc.name = "has_dep__fastfwd_v3_4__L127"} : i1
-  %v544 = pyc.and %v543, %v535 : i1
-  %v545 = pyc.alias %v544 {pyc.name = "dep_ready__fastfwd_v3_4__L128"} : i1
-  %v546 = pyc.not %v543 : i1
-  %v547 = pyc.or %v546, %v545 : i1
-  %v548 = pyc.and %v469, %v547 : i1
-  %v549 = pyc.alias %v548 {pyc.name = "can_schedule__fastfwd_v3_4__L129"} : i1
-  %v550 = pyc.constant 1 : i3
-  %v551 = pyc.ult %v550, %v168 : i3
-  %v552 = pyc.and %v148, %v551 : i1
-  %v553 = pyc.or %v549, %v552 : i1
-  pyc.assign %v144, %v553 : i1
-  %v554 = pyc.constant 1 : i3
-  %v555 = pyc.zext %v554 : i3 -> i5
-  %v556 = pyc.add %v453, %v555 : i5
-  %v557 = pyc.constant 1 : i3
-  %v558 = pyc.sub %v168, %v557 : i3
-  %v559 = pyc.constant 0 : i3
-  %v560 = pyc.mux %v148, %v558, %v559 : i3
-  %v561 = pyc.zext %v560 : i3 -> i5
-  %v562 = pyc.mux %v549, %v556, %v561 : i5
-  %v563 = pyc.alias %v562 {pyc.name = "new_timer__fastfwd_v3_4__L133"} : i5
-  %v564 = pyc.trunc %v563 : i5 -> i3
-  pyc.assign %v164, %v564 : i3
-  %v565 = pyc.mux %v549, %v463, %v188 : i6
-  pyc.assign %v184, %v565 : i6
-  %v566 = pyc.mux %v549, %v29, %v208 : i16
-  pyc.assign %v204, %v566 : i16
-  pyc.assign %v44, %v549 : i1
-  %v567 = pyc.constant 0 : i128
-  %v568 = pyc.mux %v549, %lane0_pkt_in_data, %v567 : i128
-  pyc.assign %v64, %v568 : i128
-  %v569 = pyc.constant 0 : i2
-  %v570 = pyc.zext %v569 : i2 -> i5
-  %v571 = pyc.mux %v549, %v453, %v570 : i5
-  %v572 = pyc.trunc %v571 : i5 -> i2
-  pyc.assign %v84, %v572 : i2
-  %v573 = pyc.and %v543, %v549 : i1
-  pyc.assign %v104, %v573 : i1
-  %v574 = pyc.and %v543, %v549 : i1
-  %v575 = pyc.constant 0 : i128
-  %v576 = pyc.mux %v574, %v538, %v575 : i128
-  pyc.assign %v124, %v576 : i128
-  %v577 = pyc.constant 3 : i5
-  %v578 = pyc.and %lane1_pkt_in_ctrl, %v577 : i5
-  %v579 = pyc.alias %v578 {pyc.name = "lat__fastfwd_v3_4__L112"} : i5
-  %v580 = pyc.lshri %lane1_pkt_in_ctrl {amount = 2} : i5
-  %v581 = pyc.constant 7 : i5
-  %v582 = pyc.and %v580, %v581 : i5
-  %v583 = pyc.alias %v582 {pyc.name = "dep__fastfwd_v3_4__L113"} : i5
-  %v584 = pyc.extract %v21 {lsb = 0} : i16 -> i6
-  %v585 = pyc.constant 2 : i6
-  %v586 = pyc.add %v584, %v585 : i6
-  %v587 = pyc.zext %v579 : i5 -> i6
-  %v588 = pyc.add %v586, %v587 : i6
-  %v589 = pyc.alias %v588 {pyc.name = "finish_cycle__fastfwd_v3_4__L114"} : i6
-  %v590 = pyc.ult %v193, %v589 : i6
-  %v591 = pyc.alias %v590 {pyc.name = "constraint_ok__fastfwd_v3_4__L115"} : i1
-  %v592 = pyc.not %v153 : i1
-  %v593 = pyc.and %v592, %lane1_pkt_in_vld : i1
-  %v594 = pyc.and %v593, %v591 : i1
-  %v595 = pyc.alias %v594 {pyc.name = "can_schedule__fastfwd_v3_4__L116"} : i1
-  %v596 = pyc.zext %v583 : i5 -> i16
-  %v597 = pyc.sub %v31, %v596 : i16
-  %v598 = pyc.alias %v597 {pyc.name = "target_seq__fastfwd_v3_4__L119"} : i16
-  %v599 = pyc.eq %v308, %v598 : i16
-  %v600 = pyc.and %v228, %v599 : i1
-  %v601 = pyc.alias %v600 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v602 = pyc.constant 0 : i1
-  %v603 = pyc.or %v601, %v602 : i1
-  %v604 = pyc.alias %v603 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v605 = pyc.not %v601 : i1
-  %v606 = pyc.constant 0 : i128
-  %v607 = pyc.mux %v605, %v606, %v268 : i128
-  %v608 = pyc.alias %v607 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v609 = pyc.eq %v313, %v598 : i16
-  %v610 = pyc.and %v233, %v609 : i1
-  %v611 = pyc.alias %v610 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v612 = pyc.or %v604, %v611 : i1
-  %v613 = pyc.alias %v612 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v614 = pyc.not %v611 : i1
-  %v615 = pyc.mux %v614, %v608, %v273 : i128
-  %v616 = pyc.alias %v615 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v617 = pyc.eq %v318, %v598 : i16
-  %v618 = pyc.and %v238, %v617 : i1
-  %v619 = pyc.alias %v618 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v620 = pyc.or %v613, %v619 : i1
-  %v621 = pyc.alias %v620 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v622 = pyc.not %v619 : i1
-  %v623 = pyc.mux %v622, %v616, %v278 : i128
-  %v624 = pyc.alias %v623 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v625 = pyc.eq %v323, %v598 : i16
-  %v626 = pyc.and %v243, %v625 : i1
-  %v627 = pyc.alias %v626 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v628 = pyc.or %v621, %v627 : i1
-  %v629 = pyc.alias %v628 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v630 = pyc.not %v627 : i1
-  %v631 = pyc.mux %v630, %v624, %v283 : i128
-  %v632 = pyc.alias %v631 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v633 = pyc.eq %v328, %v598 : i16
-  %v634 = pyc.and %v248, %v633 : i1
-  %v635 = pyc.alias %v634 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v636 = pyc.or %v629, %v635 : i1
-  %v637 = pyc.alias %v636 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v638 = pyc.not %v635 : i1
-  %v639 = pyc.mux %v638, %v632, %v288 : i128
-  %v640 = pyc.alias %v639 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v641 = pyc.eq %v333, %v598 : i16
-  %v642 = pyc.and %v253, %v641 : i1
-  %v643 = pyc.alias %v642 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v644 = pyc.or %v637, %v643 : i1
-  %v645 = pyc.alias %v644 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v646 = pyc.not %v643 : i1
-  %v647 = pyc.mux %v646, %v640, %v293 : i128
-  %v648 = pyc.alias %v647 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v649 = pyc.eq %v338, %v598 : i16
-  %v650 = pyc.and %v258, %v649 : i1
-  %v651 = pyc.alias %v650 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v652 = pyc.or %v645, %v651 : i1
-  %v653 = pyc.alias %v652 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v654 = pyc.not %v651 : i1
-  %v655 = pyc.mux %v654, %v648, %v298 : i128
-  %v656 = pyc.alias %v655 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v657 = pyc.eq %v343, %v598 : i16
-  %v658 = pyc.and %v263, %v657 : i1
-  %v659 = pyc.alias %v658 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v660 = pyc.or %v653, %v659 : i1
-  %v661 = pyc.alias %v660 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v662 = pyc.not %v659 : i1
-  %v663 = pyc.mux %v662, %v656, %v303 : i128
-  %v664 = pyc.alias %v663 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v665 = pyc.constant 0 : i3
-  %v666 = pyc.zext %v665 : i3 -> i5
-  %v667 = pyc.eq %v583, %v666 : i5
-  %v668 = pyc.not %v667 : i1
-  %v669 = pyc.alias %v668 {pyc.name = "has_dep__fastfwd_v3_4__L127"} : i1
-  %v670 = pyc.and %v669, %v661 : i1
-  %v671 = pyc.alias %v670 {pyc.name = "dep_ready__fastfwd_v3_4__L128"} : i1
-  %v672 = pyc.not %v669 : i1
-  %v673 = pyc.or %v672, %v671 : i1
-  %v674 = pyc.and %v595, %v673 : i1
-  %v675 = pyc.alias %v674 {pyc.name = "can_schedule__fastfwd_v3_4__L129"} : i1
-  %v676 = pyc.constant 1 : i3
-  %v677 = pyc.ult %v676, %v173 : i3
-  %v678 = pyc.and %v153, %v677 : i1
-  %v679 = pyc.or %v675, %v678 : i1
-  pyc.assign %v149, %v679 : i1
-  %v680 = pyc.constant 1 : i3
-  %v681 = pyc.zext %v680 : i3 -> i5
-  %v682 = pyc.add %v579, %v681 : i5
-  %v683 = pyc.constant 1 : i3
-  %v684 = pyc.sub %v173, %v683 : i3
-  %v685 = pyc.constant 0 : i3
-  %v686 = pyc.mux %v153, %v684, %v685 : i3
-  %v687 = pyc.zext %v686 : i3 -> i5
-  %v688 = pyc.mux %v675, %v682, %v687 : i5
-  %v689 = pyc.alias %v688 {pyc.name = "new_timer__fastfwd_v3_4__L133"} : i5
-  %v690 = pyc.trunc %v689 : i5 -> i3
-  pyc.assign %v169, %v690 : i3
-  %v691 = pyc.mux %v675, %v589, %v193 : i6
-  pyc.assign %v189, %v691 : i6
-  %v692 = pyc.mux %v675, %v31, %v213 : i16
-  pyc.assign %v209, %v692 : i16
-  pyc.assign %v49, %v675 : i1
-  %v693 = pyc.constant 0 : i128
-  %v694 = pyc.mux %v675, %lane1_pkt_in_data, %v693 : i128
-  pyc.assign %v69, %v694 : i128
-  %v695 = pyc.constant 0 : i2
-  %v696 = pyc.zext %v695 : i2 -> i5
-  %v697 = pyc.mux %v675, %v579, %v696 : i5
-  %v698 = pyc.trunc %v697 : i5 -> i2
-  pyc.assign %v89, %v698 : i2
-  %v699 = pyc.and %v669, %v675 : i1
-  pyc.assign %v109, %v699 : i1
-  %v700 = pyc.and %v669, %v675 : i1
-  %v701 = pyc.constant 0 : i128
-  %v702 = pyc.mux %v700, %v664, %v701 : i128
-  pyc.assign %v129, %v702 : i128
-  %v703 = pyc.constant 3 : i5
-  %v704 = pyc.and %lane2_pkt_in_ctrl, %v703 : i5
-  %v705 = pyc.alias %v704 {pyc.name = "lat__fastfwd_v3_4__L112"} : i5
-  %v706 = pyc.lshri %lane2_pkt_in_ctrl {amount = 2} : i5
-  %v707 = pyc.constant 7 : i5
-  %v708 = pyc.and %v706, %v707 : i5
-  %v709 = pyc.alias %v708 {pyc.name = "dep__fastfwd_v3_4__L113"} : i5
-  %v710 = pyc.extract %v21 {lsb = 0} : i16 -> i6
-  %v711 = pyc.constant 2 : i6
-  %v712 = pyc.add %v710, %v711 : i6
-  %v713 = pyc.zext %v705 : i5 -> i6
+  %v464 = pyc.eq %v463, %v188 : i6
+  %v465 = pyc.not %v464 : i1
+  %v466 = pyc.alias %v465 {pyc.name = "constraint_ok__fastfwd_v3_4__L115"} : i1
+  %v467 = pyc.not %v148 : i1
+  %v468 = pyc.and %v467, %lane0_pkt_in_vld : i1
+  %v469 = pyc.and %v468, %v466 : i1
+  %v470 = pyc.alias %v469 {pyc.name = "can_schedule__fastfwd_v3_4__L116"} : i1
+  %v471 = pyc.zext %v457 : i5 -> i16
+  %v472 = pyc.sub %v29, %v471 : i16
+  %v473 = pyc.alias %v472 {pyc.name = "target_seq__fastfwd_v3_4__L119"} : i16
+  %v474 = pyc.eq %v308, %v473 : i16
+  %v475 = pyc.and %v228, %v474 : i1
+  %v476 = pyc.alias %v475 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v477 = pyc.constant 0 : i1
+  %v478 = pyc.or %v476, %v477 : i1
+  %v479 = pyc.alias %v478 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v480 = pyc.not %v476 : i1
+  %v481 = pyc.constant 0 : i128
+  %v482 = pyc.mux %v480, %v481, %v268 : i128
+  %v483 = pyc.alias %v482 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v484 = pyc.eq %v313, %v473 : i16
+  %v485 = pyc.and %v233, %v484 : i1
+  %v486 = pyc.alias %v485 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v487 = pyc.or %v479, %v486 : i1
+  %v488 = pyc.alias %v487 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v489 = pyc.not %v486 : i1
+  %v490 = pyc.mux %v489, %v483, %v273 : i128
+  %v491 = pyc.alias %v490 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v492 = pyc.eq %v318, %v473 : i16
+  %v493 = pyc.and %v238, %v492 : i1
+  %v494 = pyc.alias %v493 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v495 = pyc.or %v488, %v494 : i1
+  %v496 = pyc.alias %v495 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v497 = pyc.not %v494 : i1
+  %v498 = pyc.mux %v497, %v491, %v278 : i128
+  %v499 = pyc.alias %v498 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v500 = pyc.eq %v323, %v473 : i16
+  %v501 = pyc.and %v243, %v500 : i1
+  %v502 = pyc.alias %v501 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v503 = pyc.or %v496, %v502 : i1
+  %v504 = pyc.alias %v503 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v505 = pyc.not %v502 : i1
+  %v506 = pyc.mux %v505, %v499, %v283 : i128
+  %v507 = pyc.alias %v506 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v508 = pyc.eq %v328, %v473 : i16
+  %v509 = pyc.and %v248, %v508 : i1
+  %v510 = pyc.alias %v509 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v511 = pyc.or %v504, %v510 : i1
+  %v512 = pyc.alias %v511 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v513 = pyc.not %v510 : i1
+  %v514 = pyc.mux %v513, %v507, %v288 : i128
+  %v515 = pyc.alias %v514 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v516 = pyc.eq %v333, %v473 : i16
+  %v517 = pyc.and %v253, %v516 : i1
+  %v518 = pyc.alias %v517 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v519 = pyc.or %v512, %v518 : i1
+  %v520 = pyc.alias %v519 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v521 = pyc.not %v518 : i1
+  %v522 = pyc.mux %v521, %v515, %v293 : i128
+  %v523 = pyc.alias %v522 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v524 = pyc.eq %v338, %v473 : i16
+  %v525 = pyc.and %v258, %v524 : i1
+  %v526 = pyc.alias %v525 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v527 = pyc.or %v520, %v526 : i1
+  %v528 = pyc.alias %v527 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v529 = pyc.not %v526 : i1
+  %v530 = pyc.mux %v529, %v523, %v298 : i128
+  %v531 = pyc.alias %v530 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v532 = pyc.eq %v343, %v473 : i16
+  %v533 = pyc.and %v263, %v532 : i1
+  %v534 = pyc.alias %v533 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v535 = pyc.or %v528, %v534 : i1
+  %v536 = pyc.alias %v535 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v537 = pyc.not %v534 : i1
+  %v538 = pyc.mux %v537, %v531, %v303 : i128
+  %v539 = pyc.alias %v538 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v540 = pyc.constant 0 : i3
+  %v541 = pyc.zext %v540 : i3 -> i5
+  %v542 = pyc.eq %v457, %v541 : i5
+  %v543 = pyc.not %v542 : i1
+  %v544 = pyc.alias %v543 {pyc.name = "has_dep__fastfwd_v3_4__L127"} : i1
+  %v545 = pyc.and %v544, %v536 : i1
+  %v546 = pyc.alias %v545 {pyc.name = "dep_ready__fastfwd_v3_4__L128"} : i1
+  %v547 = pyc.not %v544 : i1
+  %v548 = pyc.or %v547, %v546 : i1
+  %v549 = pyc.and %v470, %v548 : i1
+  %v550 = pyc.alias %v549 {pyc.name = "can_schedule__fastfwd_v3_4__L129"} : i1
+  %v551 = pyc.constant 1 : i3
+  %v552 = pyc.ult %v551, %v168 : i3
+  %v553 = pyc.and %v148, %v552 : i1
+  %v554 = pyc.or %v550, %v553 : i1
+  pyc.assign %v144, %v554 : i1
+  %v555 = pyc.constant 1 : i3
+  %v556 = pyc.zext %v555 : i3 -> i5
+  %v557 = pyc.add %v453, %v556 : i5
+  %v558 = pyc.constant 1 : i3
+  %v559 = pyc.sub %v168, %v558 : i3
+  %v560 = pyc.constant 0 : i3
+  %v561 = pyc.mux %v148, %v559, %v560 : i3
+  %v562 = pyc.zext %v561 : i3 -> i5
+  %v563 = pyc.mux %v550, %v557, %v562 : i5
+  %v564 = pyc.alias %v563 {pyc.name = "new_timer__fastfwd_v3_4__L133"} : i5
+  %v565 = pyc.trunc %v564 : i5 -> i3
+  pyc.assign %v164, %v565 : i3
+  %v566 = pyc.mux %v550, %v463, %v188 : i6
+  pyc.assign %v184, %v566 : i6
+  %v567 = pyc.mux %v550, %v29, %v208 : i16
+  pyc.assign %v204, %v567 : i16
+  pyc.assign %v44, %v550 : i1
+  %v568 = pyc.constant 0 : i128
+  %v569 = pyc.mux %v550, %lane0_pkt_in_data, %v568 : i128
+  pyc.assign %v64, %v569 : i128
+  %v570 = pyc.constant 0 : i2
+  %v571 = pyc.zext %v570 : i2 -> i5
+  %v572 = pyc.mux %v550, %v453, %v571 : i5
+  %v573 = pyc.trunc %v572 : i5 -> i2
+  pyc.assign %v84, %v573 : i2
+  %v574 = pyc.and %v544, %v550 : i1
+  pyc.assign %v104, %v574 : i1
+  %v575 = pyc.and %v544, %v550 : i1
+  %v576 = pyc.constant 0 : i128
+  %v577 = pyc.mux %v575, %v539, %v576 : i128
+  pyc.assign %v124, %v577 : i128
+  %v578 = pyc.constant 3 : i5
+  %v579 = pyc.and %lane1_pkt_in_ctrl, %v578 : i5
+  %v580 = pyc.alias %v579 {pyc.name = "lat__fastfwd_v3_4__L112"} : i5
+  %v581 = pyc.lshri %lane1_pkt_in_ctrl {amount = 2} : i5
+  %v582 = pyc.constant 7 : i5
+  %v583 = pyc.and %v581, %v582 : i5
+  %v584 = pyc.alias %v583 {pyc.name = "dep__fastfwd_v3_4__L113"} : i5
+  %v585 = pyc.extract %v21 {lsb = 0} : i16 -> i6
+  %v586 = pyc.constant 2 : i6
+  %v587 = pyc.add %v585, %v586 : i6
+  %v588 = pyc.zext %v580 : i5 -> i6
+  %v589 = pyc.add %v587, %v588 : i6
+  %v590 = pyc.alias %v589 {pyc.name = "finish_cycle__fastfwd_v3_4__L114"} : i6
+  %v591 = pyc.eq %v590, %v193 : i6
+  %v592 = pyc.not %v591 : i1
+  %v593 = pyc.alias %v592 {pyc.name = "constraint_ok__fastfwd_v3_4__L115"} : i1
+  %v594 = pyc.not %v153 : i1
+  %v595 = pyc.and %v594, %lane1_pkt_in_vld : i1
+  %v596 = pyc.and %v595, %v593 : i1
+  %v597 = pyc.alias %v596 {pyc.name = "can_schedule__fastfwd_v3_4__L116"} : i1
+  %v598 = pyc.zext %v584 : i5 -> i16
+  %v599 = pyc.sub %v31, %v598 : i16
+  %v600 = pyc.alias %v599 {pyc.name = "target_seq__fastfwd_v3_4__L119"} : i16
+  %v601 = pyc.eq %v308, %v600 : i16
+  %v602 = pyc.and %v228, %v601 : i1
+  %v603 = pyc.alias %v602 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v604 = pyc.constant 0 : i1
+  %v605 = pyc.or %v603, %v604 : i1
+  %v606 = pyc.alias %v605 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v607 = pyc.not %v603 : i1
+  %v608 = pyc.constant 0 : i128
+  %v609 = pyc.mux %v607, %v608, %v268 : i128
+  %v610 = pyc.alias %v609 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v611 = pyc.eq %v313, %v600 : i16
+  %v612 = pyc.and %v233, %v611 : i1
+  %v613 = pyc.alias %v612 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v614 = pyc.or %v606, %v613 : i1
+  %v615 = pyc.alias %v614 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v616 = pyc.not %v613 : i1
+  %v617 = pyc.mux %v616, %v610, %v273 : i128
+  %v618 = pyc.alias %v617 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v619 = pyc.eq %v318, %v600 : i16
+  %v620 = pyc.and %v238, %v619 : i1
+  %v621 = pyc.alias %v620 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v622 = pyc.or %v615, %v621 : i1
+  %v623 = pyc.alias %v622 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v624 = pyc.not %v621 : i1
+  %v625 = pyc.mux %v624, %v618, %v278 : i128
+  %v626 = pyc.alias %v625 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v627 = pyc.eq %v323, %v600 : i16
+  %v628 = pyc.and %v243, %v627 : i1
+  %v629 = pyc.alias %v628 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v630 = pyc.or %v623, %v629 : i1
+  %v631 = pyc.alias %v630 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v632 = pyc.not %v629 : i1
+  %v633 = pyc.mux %v632, %v626, %v283 : i128
+  %v634 = pyc.alias %v633 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v635 = pyc.eq %v328, %v600 : i16
+  %v636 = pyc.and %v248, %v635 : i1
+  %v637 = pyc.alias %v636 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v638 = pyc.or %v631, %v637 : i1
+  %v639 = pyc.alias %v638 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v640 = pyc.not %v637 : i1
+  %v641 = pyc.mux %v640, %v634, %v288 : i128
+  %v642 = pyc.alias %v641 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v643 = pyc.eq %v333, %v600 : i16
+  %v644 = pyc.and %v253, %v643 : i1
+  %v645 = pyc.alias %v644 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v646 = pyc.or %v639, %v645 : i1
+  %v647 = pyc.alias %v646 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v648 = pyc.not %v645 : i1
+  %v649 = pyc.mux %v648, %v642, %v293 : i128
+  %v650 = pyc.alias %v649 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v651 = pyc.eq %v338, %v600 : i16
+  %v652 = pyc.and %v258, %v651 : i1
+  %v653 = pyc.alias %v652 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v654 = pyc.or %v647, %v653 : i1
+  %v655 = pyc.alias %v654 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v656 = pyc.not %v653 : i1
+  %v657 = pyc.mux %v656, %v650, %v298 : i128
+  %v658 = pyc.alias %v657 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v659 = pyc.eq %v343, %v600 : i16
+  %v660 = pyc.and %v263, %v659 : i1
+  %v661 = pyc.alias %v660 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v662 = pyc.or %v655, %v661 : i1
+  %v663 = pyc.alias %v662 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v664 = pyc.not %v661 : i1
+  %v665 = pyc.mux %v664, %v658, %v303 : i128
+  %v666 = pyc.alias %v665 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v667 = pyc.constant 0 : i3
+  %v668 = pyc.zext %v667 : i3 -> i5
+  %v669 = pyc.eq %v584, %v668 : i5
+  %v670 = pyc.not %v669 : i1
+  %v671 = pyc.alias %v670 {pyc.name = "has_dep__fastfwd_v3_4__L127"} : i1
+  %v672 = pyc.and %v671, %v663 : i1
+  %v673 = pyc.alias %v672 {pyc.name = "dep_ready__fastfwd_v3_4__L128"} : i1
+  %v674 = pyc.not %v671 : i1
+  %v675 = pyc.or %v674, %v673 : i1
+  %v676 = pyc.and %v597, %v675 : i1
+  %v677 = pyc.alias %v676 {pyc.name = "can_schedule__fastfwd_v3_4__L129"} : i1
+  %v678 = pyc.constant 1 : i3
+  %v679 = pyc.ult %v678, %v173 : i3
+  %v680 = pyc.and %v153, %v679 : i1
+  %v681 = pyc.or %v677, %v680 : i1
+  pyc.assign %v149, %v681 : i1
+  %v682 = pyc.constant 1 : i3
+  %v683 = pyc.zext %v682 : i3 -> i5
+  %v684 = pyc.add %v580, %v683 : i5
+  %v685 = pyc.constant 1 : i3
+  %v686 = pyc.sub %v173, %v685 : i3
+  %v687 = pyc.constant 0 : i3
+  %v688 = pyc.mux %v153, %v686, %v687 : i3
+  %v689 = pyc.zext %v688 : i3 -> i5
+  %v690 = pyc.mux %v677, %v684, %v689 : i5
+  %v691 = pyc.alias %v690 {pyc.name = "new_timer__fastfwd_v3_4__L133"} : i5
+  %v692 = pyc.trunc %v691 : i5 -> i3
+  pyc.assign %v169, %v692 : i3
+  %v693 = pyc.mux %v677, %v590, %v193 : i6
+  pyc.assign %v189, %v693 : i6
+  %v694 = pyc.mux %v677, %v31, %v213 : i16
+  pyc.assign %v209, %v694 : i16
+  pyc.assign %v49, %v677 : i1
+  %v695 = pyc.constant 0 : i128
+  %v696 = pyc.mux %v677, %lane1_pkt_in_data, %v695 : i128
+  pyc.assign %v69, %v696 : i128
+  %v697 = pyc.constant 0 : i2
+  %v698 = pyc.zext %v697 : i2 -> i5
+  %v699 = pyc.mux %v677, %v580, %v698 : i5
+  %v700 = pyc.trunc %v699 : i5 -> i2
+  pyc.assign %v89, %v700 : i2
+  %v701 = pyc.and %v671, %v677 : i1
+  pyc.assign %v109, %v701 : i1
+  %v702 = pyc.and %v671, %v677 : i1
+  %v703 = pyc.constant 0 : i128
+  %v704 = pyc.mux %v702, %v666, %v703 : i128
+  pyc.assign %v129, %v704 : i128
+  %v705 = pyc.constant 3 : i5
+  %v706 = pyc.and %lane2_pkt_in_ctrl, %v705 : i5
+  %v707 = pyc.alias %v706 {pyc.name = "lat__fastfwd_v3_4__L112"} : i5
+  %v708 = pyc.lshri %lane2_pkt_in_ctrl {amount = 2} : i5
+  %v709 = pyc.constant 7 : i5
+  %v710 = pyc.and %v708, %v709 : i5
+  %v711 = pyc.alias %v710 {pyc.name = "dep__fastfwd_v3_4__L113"} : i5
+  %v712 = pyc.extract %v21 {lsb = 0} : i16 -> i6
+  %v713 = pyc.constant 2 : i6
   %v714 = pyc.add %v712, %v713 : i6
-  %v715 = pyc.alias %v714 {pyc.name = "finish_cycle__fastfwd_v3_4__L114"} : i6
-  %v716 = pyc.ult %v198, %v715 : i6
-  %v717 = pyc.alias %v716 {pyc.name = "constraint_ok__fastfwd_v3_4__L115"} : i1
-  %v718 = pyc.not %v158 : i1
-  %v719 = pyc.and %v718, %lane2_pkt_in_vld : i1
-  %v720 = pyc.and %v719, %v717 : i1
-  %v721 = pyc.alias %v720 {pyc.name = "can_schedule__fastfwd_v3_4__L116"} : i1
-  %v722 = pyc.zext %v709 : i5 -> i16
-  %v723 = pyc.sub %v33, %v722 : i16
-  %v724 = pyc.alias %v723 {pyc.name = "target_seq__fastfwd_v3_4__L119"} : i16
-  %v725 = pyc.eq %v308, %v724 : i16
-  %v726 = pyc.and %v228, %v725 : i1
-  %v727 = pyc.alias %v726 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v728 = pyc.constant 0 : i1
-  %v729 = pyc.or %v727, %v728 : i1
-  %v730 = pyc.alias %v729 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v731 = pyc.not %v727 : i1
-  %v732 = pyc.constant 0 : i128
-  %v733 = pyc.mux %v731, %v732, %v268 : i128
-  %v734 = pyc.alias %v733 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v735 = pyc.eq %v313, %v724 : i16
-  %v736 = pyc.and %v233, %v735 : i1
-  %v737 = pyc.alias %v736 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v738 = pyc.or %v730, %v737 : i1
-  %v739 = pyc.alias %v738 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v740 = pyc.not %v737 : i1
-  %v741 = pyc.mux %v740, %v734, %v273 : i128
-  %v742 = pyc.alias %v741 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v743 = pyc.eq %v318, %v724 : i16
-  %v744 = pyc.and %v238, %v743 : i1
-  %v745 = pyc.alias %v744 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v746 = pyc.or %v739, %v745 : i1
-  %v747 = pyc.alias %v746 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v748 = pyc.not %v745 : i1
-  %v749 = pyc.mux %v748, %v742, %v278 : i128
-  %v750 = pyc.alias %v749 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v751 = pyc.eq %v323, %v724 : i16
-  %v752 = pyc.and %v243, %v751 : i1
-  %v753 = pyc.alias %v752 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v754 = pyc.or %v747, %v753 : i1
-  %v755 = pyc.alias %v754 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v756 = pyc.not %v753 : i1
-  %v757 = pyc.mux %v756, %v750, %v283 : i128
-  %v758 = pyc.alias %v757 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v759 = pyc.eq %v328, %v724 : i16
-  %v760 = pyc.and %v248, %v759 : i1
-  %v761 = pyc.alias %v760 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v762 = pyc.or %v755, %v761 : i1
-  %v763 = pyc.alias %v762 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v764 = pyc.not %v761 : i1
-  %v765 = pyc.mux %v764, %v758, %v288 : i128
-  %v766 = pyc.alias %v765 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v767 = pyc.eq %v333, %v724 : i16
-  %v768 = pyc.and %v253, %v767 : i1
-  %v769 = pyc.alias %v768 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v770 = pyc.or %v763, %v769 : i1
-  %v771 = pyc.alias %v770 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v772 = pyc.not %v769 : i1
-  %v773 = pyc.mux %v772, %v766, %v293 : i128
-  %v774 = pyc.alias %v773 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v775 = pyc.eq %v338, %v724 : i16
-  %v776 = pyc.and %v258, %v775 : i1
-  %v777 = pyc.alias %v776 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v778 = pyc.or %v771, %v777 : i1
-  %v779 = pyc.alias %v778 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v780 = pyc.not %v777 : i1
-  %v781 = pyc.mux %v780, %v774, %v298 : i128
-  %v782 = pyc.alias %v781 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v783 = pyc.eq %v343, %v724 : i16
-  %v784 = pyc.and %v263, %v783 : i1
-  %v785 = pyc.alias %v784 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v786 = pyc.or %v779, %v785 : i1
-  %v787 = pyc.alias %v786 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v788 = pyc.not %v785 : i1
-  %v789 = pyc.mux %v788, %v782, %v303 : i128
-  %v790 = pyc.alias %v789 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v791 = pyc.constant 0 : i3
-  %v792 = pyc.zext %v791 : i3 -> i5
-  %v793 = pyc.eq %v709, %v792 : i5
-  %v794 = pyc.not %v793 : i1
-  %v795 = pyc.alias %v794 {pyc.name = "has_dep__fastfwd_v3_4__L127"} : i1
-  %v796 = pyc.and %v795, %v787 : i1
-  %v797 = pyc.alias %v796 {pyc.name = "dep_ready__fastfwd_v3_4__L128"} : i1
-  %v798 = pyc.not %v795 : i1
-  %v799 = pyc.or %v798, %v797 : i1
-  %v800 = pyc.and %v721, %v799 : i1
-  %v801 = pyc.alias %v800 {pyc.name = "can_schedule__fastfwd_v3_4__L129"} : i1
-  %v802 = pyc.constant 1 : i3
-  %v803 = pyc.ult %v802, %v178 : i3
-  %v804 = pyc.and %v158, %v803 : i1
-  %v805 = pyc.or %v801, %v804 : i1
-  pyc.assign %v154, %v805 : i1
-  %v806 = pyc.constant 1 : i3
-  %v807 = pyc.zext %v806 : i3 -> i5
-  %v808 = pyc.add %v705, %v807 : i5
+  %v715 = pyc.zext %v707 : i5 -> i6
+  %v716 = pyc.add %v714, %v715 : i6
+  %v717 = pyc.alias %v716 {pyc.name = "finish_cycle__fastfwd_v3_4__L114"} : i6
+  %v718 = pyc.eq %v717, %v198 : i6
+  %v719 = pyc.not %v718 : i1
+  %v720 = pyc.alias %v719 {pyc.name = "constraint_ok__fastfwd_v3_4__L115"} : i1
+  %v721 = pyc.not %v158 : i1
+  %v722 = pyc.and %v721, %lane2_pkt_in_vld : i1
+  %v723 = pyc.and %v722, %v720 : i1
+  %v724 = pyc.alias %v723 {pyc.name = "can_schedule__fastfwd_v3_4__L116"} : i1
+  %v725 = pyc.zext %v711 : i5 -> i16
+  %v726 = pyc.sub %v33, %v725 : i16
+  %v727 = pyc.alias %v726 {pyc.name = "target_seq__fastfwd_v3_4__L119"} : i16
+  %v728 = pyc.eq %v308, %v727 : i16
+  %v729 = pyc.and %v228, %v728 : i1
+  %v730 = pyc.alias %v729 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v731 = pyc.constant 0 : i1
+  %v732 = pyc.or %v730, %v731 : i1
+  %v733 = pyc.alias %v732 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v734 = pyc.not %v730 : i1
+  %v735 = pyc.constant 0 : i128
+  %v736 = pyc.mux %v734, %v735, %v268 : i128
+  %v737 = pyc.alias %v736 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v738 = pyc.eq %v313, %v727 : i16
+  %v739 = pyc.and %v233, %v738 : i1
+  %v740 = pyc.alias %v739 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v741 = pyc.or %v733, %v740 : i1
+  %v742 = pyc.alias %v741 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v743 = pyc.not %v740 : i1
+  %v744 = pyc.mux %v743, %v737, %v273 : i128
+  %v745 = pyc.alias %v744 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v746 = pyc.eq %v318, %v727 : i16
+  %v747 = pyc.and %v238, %v746 : i1
+  %v748 = pyc.alias %v747 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v749 = pyc.or %v742, %v748 : i1
+  %v750 = pyc.alias %v749 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v751 = pyc.not %v748 : i1
+  %v752 = pyc.mux %v751, %v745, %v278 : i128
+  %v753 = pyc.alias %v752 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v754 = pyc.eq %v323, %v727 : i16
+  %v755 = pyc.and %v243, %v754 : i1
+  %v756 = pyc.alias %v755 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v757 = pyc.or %v750, %v756 : i1
+  %v758 = pyc.alias %v757 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v759 = pyc.not %v756 : i1
+  %v760 = pyc.mux %v759, %v753, %v283 : i128
+  %v761 = pyc.alias %v760 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v762 = pyc.eq %v328, %v727 : i16
+  %v763 = pyc.and %v248, %v762 : i1
+  %v764 = pyc.alias %v763 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v765 = pyc.or %v758, %v764 : i1
+  %v766 = pyc.alias %v765 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v767 = pyc.not %v764 : i1
+  %v768 = pyc.mux %v767, %v761, %v288 : i128
+  %v769 = pyc.alias %v768 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v770 = pyc.eq %v333, %v727 : i16
+  %v771 = pyc.and %v253, %v770 : i1
+  %v772 = pyc.alias %v771 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v773 = pyc.or %v766, %v772 : i1
+  %v774 = pyc.alias %v773 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v775 = pyc.not %v772 : i1
+  %v776 = pyc.mux %v775, %v769, %v293 : i128
+  %v777 = pyc.alias %v776 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v778 = pyc.eq %v338, %v727 : i16
+  %v779 = pyc.and %v258, %v778 : i1
+  %v780 = pyc.alias %v779 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v781 = pyc.or %v774, %v780 : i1
+  %v782 = pyc.alias %v781 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v783 = pyc.not %v780 : i1
+  %v784 = pyc.mux %v783, %v777, %v298 : i128
+  %v785 = pyc.alias %v784 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v786 = pyc.eq %v343, %v727 : i16
+  %v787 = pyc.and %v263, %v786 : i1
+  %v788 = pyc.alias %v787 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v789 = pyc.or %v782, %v788 : i1
+  %v790 = pyc.alias %v789 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v791 = pyc.not %v788 : i1
+  %v792 = pyc.mux %v791, %v785, %v303 : i128
+  %v793 = pyc.alias %v792 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v794 = pyc.constant 0 : i3
+  %v795 = pyc.zext %v794 : i3 -> i5
+  %v796 = pyc.eq %v711, %v795 : i5
+  %v797 = pyc.not %v796 : i1
+  %v798 = pyc.alias %v797 {pyc.name = "has_dep__fastfwd_v3_4__L127"} : i1
+  %v799 = pyc.and %v798, %v790 : i1
+  %v800 = pyc.alias %v799 {pyc.name = "dep_ready__fastfwd_v3_4__L128"} : i1
+  %v801 = pyc.not %v798 : i1
+  %v802 = pyc.or %v801, %v800 : i1
+  %v803 = pyc.and %v724, %v802 : i1
+  %v804 = pyc.alias %v803 {pyc.name = "can_schedule__fastfwd_v3_4__L129"} : i1
+  %v805 = pyc.constant 1 : i3
+  %v806 = pyc.ult %v805, %v178 : i3
+  %v807 = pyc.and %v158, %v806 : i1
+  %v808 = pyc.or %v804, %v807 : i1
+  pyc.assign %v154, %v808 : i1
   %v809 = pyc.constant 1 : i3
-  %v810 = pyc.sub %v178, %v809 : i3
-  %v811 = pyc.constant 0 : i3
-  %v812 = pyc.mux %v158, %v810, %v811 : i3
-  %v813 = pyc.zext %v812 : i3 -> i5
-  %v814 = pyc.mux %v801, %v808, %v813 : i5
-  %v815 = pyc.alias %v814 {pyc.name = "new_timer__fastfwd_v3_4__L133"} : i5
-  %v816 = pyc.trunc %v815 : i5 -> i3
-  pyc.assign %v174, %v816 : i3
-  %v817 = pyc.mux %v801, %v715, %v198 : i6
-  pyc.assign %v194, %v817 : i6
-  %v818 = pyc.mux %v801, %v33, %v218 : i16
-  pyc.assign %v214, %v818 : i16
-  pyc.assign %v54, %v801 : i1
-  %v819 = pyc.constant 0 : i128
-  %v820 = pyc.mux %v801, %lane2_pkt_in_data, %v819 : i128
-  pyc.assign %v74, %v820 : i128
-  %v821 = pyc.constant 0 : i2
-  %v822 = pyc.zext %v821 : i2 -> i5
-  %v823 = pyc.mux %v801, %v705, %v822 : i5
-  %v824 = pyc.trunc %v823 : i5 -> i2
-  pyc.assign %v94, %v824 : i2
-  %v825 = pyc.and %v795, %v801 : i1
-  pyc.assign %v114, %v825 : i1
-  %v826 = pyc.and %v795, %v801 : i1
-  %v827 = pyc.constant 0 : i128
-  %v828 = pyc.mux %v826, %v790, %v827 : i128
-  pyc.assign %v134, %v828 : i128
-  %v829 = pyc.constant 3 : i5
-  %v830 = pyc.and %lane3_pkt_in_ctrl, %v829 : i5
-  %v831 = pyc.alias %v830 {pyc.name = "lat__fastfwd_v3_4__L112"} : i5
-  %v832 = pyc.lshri %lane3_pkt_in_ctrl {amount = 2} : i5
-  %v833 = pyc.constant 7 : i5
-  %v834 = pyc.and %v832, %v833 : i5
-  %v835 = pyc.alias %v834 {pyc.name = "dep__fastfwd_v3_4__L113"} : i5
-  %v836 = pyc.extract %v21 {lsb = 0} : i16 -> i6
-  %v837 = pyc.constant 2 : i6
-  %v838 = pyc.add %v836, %v837 : i6
-  %v839 = pyc.zext %v831 : i5 -> i6
-  %v840 = pyc.add %v838, %v839 : i6
-  %v841 = pyc.alias %v840 {pyc.name = "finish_cycle__fastfwd_v3_4__L114"} : i6
-  %v842 = pyc.ult %v203, %v841 : i6
-  %v843 = pyc.alias %v842 {pyc.name = "constraint_ok__fastfwd_v3_4__L115"} : i1
-  %v844 = pyc.not %v163 : i1
-  %v845 = pyc.and %v844, %lane3_pkt_in_vld : i1
-  %v846 = pyc.and %v845, %v843 : i1
-  %v847 = pyc.alias %v846 {pyc.name = "can_schedule__fastfwd_v3_4__L116"} : i1
-  %v848 = pyc.zext %v835 : i5 -> i16
-  %v849 = pyc.sub %v35, %v848 : i16
-  %v850 = pyc.alias %v849 {pyc.name = "target_seq__fastfwd_v3_4__L119"} : i16
-  %v851 = pyc.eq %v308, %v850 : i16
-  %v852 = pyc.and %v228, %v851 : i1
-  %v853 = pyc.alias %v852 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v854 = pyc.constant 0 : i1
-  %v855 = pyc.or %v853, %v854 : i1
-  %v856 = pyc.alias %v855 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v857 = pyc.not %v853 : i1
-  %v858 = pyc.constant 0 : i128
-  %v859 = pyc.mux %v857, %v858, %v268 : i128
-  %v860 = pyc.alias %v859 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v861 = pyc.eq %v313, %v850 : i16
-  %v862 = pyc.and %v233, %v861 : i1
-  %v863 = pyc.alias %v862 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v864 = pyc.or %v856, %v863 : i1
-  %v865 = pyc.alias %v864 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v866 = pyc.not %v863 : i1
-  %v867 = pyc.mux %v866, %v860, %v273 : i128
-  %v868 = pyc.alias %v867 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v869 = pyc.eq %v318, %v850 : i16
-  %v870 = pyc.and %v238, %v869 : i1
-  %v871 = pyc.alias %v870 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v872 = pyc.or %v865, %v871 : i1
-  %v873 = pyc.alias %v872 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v874 = pyc.not %v871 : i1
-  %v875 = pyc.mux %v874, %v868, %v278 : i128
-  %v876 = pyc.alias %v875 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v877 = pyc.eq %v323, %v850 : i16
-  %v878 = pyc.and %v243, %v877 : i1
-  %v879 = pyc.alias %v878 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v880 = pyc.or %v873, %v879 : i1
-  %v881 = pyc.alias %v880 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v882 = pyc.not %v879 : i1
-  %v883 = pyc.mux %v882, %v876, %v283 : i128
-  %v884 = pyc.alias %v883 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v885 = pyc.eq %v328, %v850 : i16
-  %v886 = pyc.and %v248, %v885 : i1
-  %v887 = pyc.alias %v886 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v888 = pyc.or %v881, %v887 : i1
-  %v889 = pyc.alias %v888 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v890 = pyc.not %v887 : i1
-  %v891 = pyc.mux %v890, %v884, %v288 : i128
-  %v892 = pyc.alias %v891 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v893 = pyc.eq %v333, %v850 : i16
-  %v894 = pyc.and %v253, %v893 : i1
-  %v895 = pyc.alias %v894 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v896 = pyc.or %v889, %v895 : i1
-  %v897 = pyc.alias %v896 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v898 = pyc.not %v895 : i1
-  %v899 = pyc.mux %v898, %v892, %v293 : i128
-  %v900 = pyc.alias %v899 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v901 = pyc.eq %v338, %v850 : i16
-  %v902 = pyc.and %v258, %v901 : i1
-  %v903 = pyc.alias %v902 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v904 = pyc.or %v897, %v903 : i1
-  %v905 = pyc.alias %v904 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v906 = pyc.not %v903 : i1
-  %v907 = pyc.mux %v906, %v900, %v298 : i128
-  %v908 = pyc.alias %v907 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v909 = pyc.eq %v343, %v850 : i16
-  %v910 = pyc.and %v263, %v909 : i1
-  %v911 = pyc.alias %v910 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
-  %v912 = pyc.or %v905, %v911 : i1
-  %v913 = pyc.alias %v912 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
-  %v914 = pyc.not %v911 : i1
-  %v915 = pyc.mux %v914, %v908, %v303 : i128
-  %v916 = pyc.alias %v915 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
-  %v917 = pyc.constant 0 : i3
-  %v918 = pyc.zext %v917 : i3 -> i5
-  %v919 = pyc.eq %v835, %v918 : i5
-  %v920 = pyc.not %v919 : i1
-  %v921 = pyc.alias %v920 {pyc.name = "has_dep__fastfwd_v3_4__L127"} : i1
-  %v922 = pyc.and %v921, %v913 : i1
-  %v923 = pyc.alias %v922 {pyc.name = "dep_ready__fastfwd_v3_4__L128"} : i1
-  %v924 = pyc.not %v921 : i1
-  %v925 = pyc.or %v924, %v923 : i1
-  %v926 = pyc.and %v847, %v925 : i1
-  %v927 = pyc.alias %v926 {pyc.name = "can_schedule__fastfwd_v3_4__L129"} : i1
-  %v928 = pyc.constant 1 : i3
-  %v929 = pyc.ult %v928, %v183 : i3
-  %v930 = pyc.and %v163, %v929 : i1
-  %v931 = pyc.or %v927, %v930 : i1
-  pyc.assign %v159, %v931 : i1
+  %v810 = pyc.zext %v809 : i3 -> i5
+  %v811 = pyc.add %v707, %v810 : i5
+  %v812 = pyc.constant 1 : i3
+  %v813 = pyc.sub %v178, %v812 : i3
+  %v814 = pyc.constant 0 : i3
+  %v815 = pyc.mux %v158, %v813, %v814 : i3
+  %v816 = pyc.zext %v815 : i3 -> i5
+  %v817 = pyc.mux %v804, %v811, %v816 : i5
+  %v818 = pyc.alias %v817 {pyc.name = "new_timer__fastfwd_v3_4__L133"} : i5
+  %v819 = pyc.trunc %v818 : i5 -> i3
+  pyc.assign %v174, %v819 : i3
+  %v820 = pyc.mux %v804, %v717, %v198 : i6
+  pyc.assign %v194, %v820 : i6
+  %v821 = pyc.mux %v804, %v33, %v218 : i16
+  pyc.assign %v214, %v821 : i16
+  pyc.assign %v54, %v804 : i1
+  %v822 = pyc.constant 0 : i128
+  %v823 = pyc.mux %v804, %lane2_pkt_in_data, %v822 : i128
+  pyc.assign %v74, %v823 : i128
+  %v824 = pyc.constant 0 : i2
+  %v825 = pyc.zext %v824 : i2 -> i5
+  %v826 = pyc.mux %v804, %v707, %v825 : i5
+  %v827 = pyc.trunc %v826 : i5 -> i2
+  pyc.assign %v94, %v827 : i2
+  %v828 = pyc.and %v798, %v804 : i1
+  pyc.assign %v114, %v828 : i1
+  %v829 = pyc.and %v798, %v804 : i1
+  %v830 = pyc.constant 0 : i128
+  %v831 = pyc.mux %v829, %v793, %v830 : i128
+  pyc.assign %v134, %v831 : i128
+  %v832 = pyc.constant 3 : i5
+  %v833 = pyc.and %lane3_pkt_in_ctrl, %v832 : i5
+  %v834 = pyc.alias %v833 {pyc.name = "lat__fastfwd_v3_4__L112"} : i5
+  %v835 = pyc.lshri %lane3_pkt_in_ctrl {amount = 2} : i5
+  %v836 = pyc.constant 7 : i5
+  %v837 = pyc.and %v835, %v836 : i5
+  %v838 = pyc.alias %v837 {pyc.name = "dep__fastfwd_v3_4__L113"} : i5
+  %v839 = pyc.extract %v21 {lsb = 0} : i16 -> i6
+  %v840 = pyc.constant 2 : i6
+  %v841 = pyc.add %v839, %v840 : i6
+  %v842 = pyc.zext %v834 : i5 -> i6
+  %v843 = pyc.add %v841, %v842 : i6
+  %v844 = pyc.alias %v843 {pyc.name = "finish_cycle__fastfwd_v3_4__L114"} : i6
+  %v845 = pyc.eq %v844, %v203 : i6
+  %v846 = pyc.not %v845 : i1
+  %v847 = pyc.alias %v846 {pyc.name = "constraint_ok__fastfwd_v3_4__L115"} : i1
+  %v848 = pyc.not %v163 : i1
+  %v849 = pyc.and %v848, %lane3_pkt_in_vld : i1
+  %v850 = pyc.and %v849, %v847 : i1
+  %v851 = pyc.alias %v850 {pyc.name = "can_schedule__fastfwd_v3_4__L116"} : i1
+  %v852 = pyc.zext %v838 : i5 -> i16
+  %v853 = pyc.sub %v35, %v852 : i16
+  %v854 = pyc.alias %v853 {pyc.name = "target_seq__fastfwd_v3_4__L119"} : i16
+  %v855 = pyc.eq %v308, %v854 : i16
+  %v856 = pyc.and %v228, %v855 : i1
+  %v857 = pyc.alias %v856 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v858 = pyc.constant 0 : i1
+  %v859 = pyc.or %v857, %v858 : i1
+  %v860 = pyc.alias %v859 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v861 = pyc.not %v857 : i1
+  %v862 = pyc.constant 0 : i128
+  %v863 = pyc.mux %v861, %v862, %v268 : i128
+  %v864 = pyc.alias %v863 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v865 = pyc.eq %v313, %v854 : i16
+  %v866 = pyc.and %v233, %v865 : i1
+  %v867 = pyc.alias %v866 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v868 = pyc.or %v860, %v867 : i1
+  %v869 = pyc.alias %v868 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v870 = pyc.not %v867 : i1
+  %v871 = pyc.mux %v870, %v864, %v273 : i128
+  %v872 = pyc.alias %v871 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v873 = pyc.eq %v318, %v854 : i16
+  %v874 = pyc.and %v238, %v873 : i1
+  %v875 = pyc.alias %v874 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v876 = pyc.or %v869, %v875 : i1
+  %v877 = pyc.alias %v876 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v878 = pyc.not %v875 : i1
+  %v879 = pyc.mux %v878, %v872, %v278 : i128
+  %v880 = pyc.alias %v879 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v881 = pyc.eq %v323, %v854 : i16
+  %v882 = pyc.and %v243, %v881 : i1
+  %v883 = pyc.alias %v882 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v884 = pyc.or %v877, %v883 : i1
+  %v885 = pyc.alias %v884 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v886 = pyc.not %v883 : i1
+  %v887 = pyc.mux %v886, %v880, %v283 : i128
+  %v888 = pyc.alias %v887 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v889 = pyc.eq %v328, %v854 : i16
+  %v890 = pyc.and %v248, %v889 : i1
+  %v891 = pyc.alias %v890 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v892 = pyc.or %v885, %v891 : i1
+  %v893 = pyc.alias %v892 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v894 = pyc.not %v891 : i1
+  %v895 = pyc.mux %v894, %v888, %v288 : i128
+  %v896 = pyc.alias %v895 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v897 = pyc.eq %v333, %v854 : i16
+  %v898 = pyc.and %v253, %v897 : i1
+  %v899 = pyc.alias %v898 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v900 = pyc.or %v893, %v899 : i1
+  %v901 = pyc.alias %v900 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v902 = pyc.not %v899 : i1
+  %v903 = pyc.mux %v902, %v896, %v293 : i128
+  %v904 = pyc.alias %v903 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v905 = pyc.eq %v338, %v854 : i16
+  %v906 = pyc.and %v258, %v905 : i1
+  %v907 = pyc.alias %v906 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v908 = pyc.or %v901, %v907 : i1
+  %v909 = pyc.alias %v908 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v910 = pyc.not %v907 : i1
+  %v911 = pyc.mux %v910, %v904, %v298 : i128
+  %v912 = pyc.alias %v911 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v913 = pyc.eq %v343, %v854 : i16
+  %v914 = pyc.and %v263, %v913 : i1
+  %v915 = pyc.alias %v914 {pyc.name = "match__fastfwd_v3_4__L123"} : i1
+  %v916 = pyc.or %v909, %v915 : i1
+  %v917 = pyc.alias %v916 {pyc.name = "dep_found__fastfwd_v3_4__L124"} : i1
+  %v918 = pyc.not %v915 : i1
+  %v919 = pyc.mux %v918, %v912, %v303 : i128
+  %v920 = pyc.alias %v919 {pyc.name = "dep_value__fastfwd_v3_4__L125"} : i128
+  %v921 = pyc.constant 0 : i3
+  %v922 = pyc.zext %v921 : i3 -> i5
+  %v923 = pyc.eq %v838, %v922 : i5
+  %v924 = pyc.not %v923 : i1
+  %v925 = pyc.alias %v924 {pyc.name = "has_dep__fastfwd_v3_4__L127"} : i1
+  %v926 = pyc.and %v925, %v917 : i1
+  %v927 = pyc.alias %v926 {pyc.name = "dep_ready__fastfwd_v3_4__L128"} : i1
+  %v928 = pyc.not %v925 : i1
+  %v929 = pyc.or %v928, %v927 : i1
+  %v930 = pyc.and %v851, %v929 : i1
+  %v931 = pyc.alias %v930 {pyc.name = "can_schedule__fastfwd_v3_4__L129"} : i1
   %v932 = pyc.constant 1 : i3
-  %v933 = pyc.zext %v932 : i3 -> i5
-  %v934 = pyc.add %v831, %v933 : i5
-  %v935 = pyc.constant 1 : i3
-  %v936 = pyc.sub %v183, %v935 : i3
-  %v937 = pyc.constant 0 : i3
-  %v938 = pyc.mux %v163, %v936, %v937 : i3
-  %v939 = pyc.zext %v938 : i3 -> i5
-  %v940 = pyc.mux %v927, %v934, %v939 : i5
-  %v941 = pyc.alias %v940 {pyc.name = "new_timer__fastfwd_v3_4__L133"} : i5
-  %v942 = pyc.trunc %v941 : i5 -> i3
-  pyc.assign %v179, %v942 : i3
-  %v943 = pyc.mux %v927, %v841, %v203 : i6
-  pyc.assign %v199, %v943 : i6
-  %v944 = pyc.mux %v927, %v35, %v223 : i16
-  pyc.assign %v219, %v944 : i16
-  pyc.assign %v59, %v927 : i1
-  %v945 = pyc.constant 0 : i128
-  %v946 = pyc.mux %v927, %lane3_pkt_in_data, %v945 : i128
-  pyc.assign %v79, %v946 : i128
-  %v947 = pyc.constant 0 : i2
-  %v948 = pyc.zext %v947 : i2 -> i5
-  %v949 = pyc.mux %v927, %v831, %v948 : i5
-  %v950 = pyc.trunc %v949 : i5 -> i2
-  pyc.assign %v99, %v950 : i2
-  %v951 = pyc.and %v921, %v927 : i1
-  pyc.assign %v119, %v951 : i1
-  %v952 = pyc.and %v921, %v927 : i1
-  %v953 = pyc.constant 0 : i128
-  %v954 = pyc.mux %v952, %v916, %v953 : i128
-  pyc.assign %v139, %v954 : i128
-  %v955 = pyc.wire {pyc.name = "rob0_valid__next"} : i1
-  %v956 = pyc.constant 1 : i1
-  %v957 = pyc.constant 0 : i1
-  %v958 = pyc.reg %clk, %rst, %v956, %v955, %v957 : i1
-  %v959 = pyc.alias %v958 {pyc.name = "rob0_valid"} : i1
-  %v960 = pyc.wire {pyc.name = "rob1_valid__next"} : i1
-  %v961 = pyc.constant 1 : i1
-  %v962 = pyc.constant 0 : i1
-  %v963 = pyc.reg %clk, %rst, %v961, %v960, %v962 : i1
-  %v964 = pyc.alias %v963 {pyc.name = "rob1_valid"} : i1
-  %v965 = pyc.wire {pyc.name = "rob2_valid__next"} : i1
-  %v966 = pyc.constant 1 : i1
-  %v967 = pyc.constant 0 : i1
-  %v968 = pyc.reg %clk, %rst, %v966, %v965, %v967 : i1
-  %v969 = pyc.alias %v968 {pyc.name = "rob2_valid"} : i1
-  %v970 = pyc.wire {pyc.name = "rob3_valid__next"} : i1
-  %v971 = pyc.constant 1 : i1
-  %v972 = pyc.constant 0 : i1
-  %v973 = pyc.reg %clk, %rst, %v971, %v970, %v972 : i1
-  %v974 = pyc.alias %v973 {pyc.name = "rob3_valid"} : i1
-  %v975 = pyc.wire {pyc.name = "rob4_valid__next"} : i1
-  %v976 = pyc.constant 1 : i1
-  %v977 = pyc.constant 0 : i1
-  %v978 = pyc.reg %clk, %rst, %v976, %v975, %v977 : i1
-  %v979 = pyc.alias %v978 {pyc.name = "rob4_valid"} : i1
-  %v980 = pyc.wire {pyc.name = "rob5_valid__next"} : i1
-  %v981 = pyc.constant 1 : i1
-  %v982 = pyc.constant 0 : i1
-  %v983 = pyc.reg %clk, %rst, %v981, %v980, %v982 : i1
-  %v984 = pyc.alias %v983 {pyc.name = "rob5_valid"} : i1
-  %v985 = pyc.wire {pyc.name = "rob6_valid__next"} : i1
-  %v986 = pyc.constant 1 : i1
-  %v987 = pyc.constant 0 : i1
-  %v988 = pyc.reg %clk, %rst, %v986, %v985, %v987 : i1
-  %v989 = pyc.alias %v988 {pyc.name = "rob6_valid"} : i1
-  %v990 = pyc.wire {pyc.name = "rob7_valid__next"} : i1
-  %v991 = pyc.constant 1 : i1
-  %v992 = pyc.constant 0 : i1
-  %v993 = pyc.reg %clk, %rst, %v991, %v990, %v992 : i1
-  %v994 = pyc.alias %v993 {pyc.name = "rob7_valid"} : i1
-  %v995 = pyc.wire {pyc.name = "rob0_data__next"} : i128
-  %v996 = pyc.constant 1 : i1
-  %v997 = pyc.constant 0 : i128
-  %v998 = pyc.reg %clk, %rst, %v996, %v995, %v997 : i128
-  %v999 = pyc.alias %v998 {pyc.name = "rob0_data"} : i128
-  %v1000 = pyc.wire {pyc.name = "rob1_data__next"} : i128
-  %v1001 = pyc.constant 1 : i1
-  %v1002 = pyc.constant 0 : i128
-  %v1003 = pyc.reg %clk, %rst, %v1001, %v1000, %v1002 : i128
-  %v1004 = pyc.alias %v1003 {pyc.name = "rob1_data"} : i128
-  %v1005 = pyc.wire {pyc.name = "rob2_data__next"} : i128
-  %v1006 = pyc.constant 1 : i1
-  %v1007 = pyc.constant 0 : i128
-  %v1008 = pyc.reg %clk, %rst, %v1006, %v1005, %v1007 : i128
-  %v1009 = pyc.alias %v1008 {pyc.name = "rob2_data"} : i128
-  %v1010 = pyc.wire {pyc.name = "rob3_data__next"} : i128
-  %v1011 = pyc.constant 1 : i1
-  %v1012 = pyc.constant 0 : i128
-  %v1013 = pyc.reg %clk, %rst, %v1011, %v1010, %v1012 : i128
-  %v1014 = pyc.alias %v1013 {pyc.name = "rob3_data"} : i128
-  %v1015 = pyc.wire {pyc.name = "rob4_data__next"} : i128
-  %v1016 = pyc.constant 1 : i1
-  %v1017 = pyc.constant 0 : i128
-  %v1018 = pyc.reg %clk, %rst, %v1016, %v1015, %v1017 : i128
-  %v1019 = pyc.alias %v1018 {pyc.name = "rob4_data"} : i128
-  %v1020 = pyc.wire {pyc.name = "rob5_data__next"} : i128
-  %v1021 = pyc.constant 1 : i1
-  %v1022 = pyc.constant 0 : i128
-  %v1023 = pyc.reg %clk, %rst, %v1021, %v1020, %v1022 : i128
-  %v1024 = pyc.alias %v1023 {pyc.name = "rob5_data"} : i128
-  %v1025 = pyc.wire {pyc.name = "rob6_data__next"} : i128
-  %v1026 = pyc.constant 1 : i1
-  %v1027 = pyc.constant 0 : i128
-  %v1028 = pyc.reg %clk, %rst, %v1026, %v1025, %v1027 : i128
-  %v1029 = pyc.alias %v1028 {pyc.name = "rob6_data"} : i128
-  %v1030 = pyc.wire {pyc.name = "rob7_data__next"} : i128
-  %v1031 = pyc.constant 1 : i1
-  %v1032 = pyc.constant 0 : i128
-  %v1033 = pyc.reg %clk, %rst, %v1031, %v1030, %v1032 : i128
-  %v1034 = pyc.alias %v1033 {pyc.name = "rob7_data"} : i128
-  %v1035 = pyc.wire {pyc.name = "rob0_seq__next"} : i16
-  %v1036 = pyc.constant 1 : i1
-  %v1037 = pyc.constant 0 : i16
-  %v1038 = pyc.reg %clk, %rst, %v1036, %v1035, %v1037 : i16
-  %v1039 = pyc.alias %v1038 {pyc.name = "rob0_seq"} : i16
-  %v1040 = pyc.wire {pyc.name = "rob1_seq__next"} : i16
-  %v1041 = pyc.constant 1 : i1
-  %v1042 = pyc.constant 0 : i16
-  %v1043 = pyc.reg %clk, %rst, %v1041, %v1040, %v1042 : i16
-  %v1044 = pyc.alias %v1043 {pyc.name = "rob1_seq"} : i16
-  %v1045 = pyc.wire {pyc.name = "rob2_seq__next"} : i16
-  %v1046 = pyc.constant 1 : i1
-  %v1047 = pyc.constant 0 : i16
-  %v1048 = pyc.reg %clk, %rst, %v1046, %v1045, %v1047 : i16
-  %v1049 = pyc.alias %v1048 {pyc.name = "rob2_seq"} : i16
-  %v1050 = pyc.wire {pyc.name = "rob3_seq__next"} : i16
-  %v1051 = pyc.constant 1 : i1
-  %v1052 = pyc.constant 0 : i16
-  %v1053 = pyc.reg %clk, %rst, %v1051, %v1050, %v1052 : i16
-  %v1054 = pyc.alias %v1053 {pyc.name = "rob3_seq"} : i16
-  %v1055 = pyc.wire {pyc.name = "rob4_seq__next"} : i16
-  %v1056 = pyc.constant 1 : i1
-  %v1057 = pyc.constant 0 : i16
-  %v1058 = pyc.reg %clk, %rst, %v1056, %v1055, %v1057 : i16
-  %v1059 = pyc.alias %v1058 {pyc.name = "rob4_seq"} : i16
-  %v1060 = pyc.wire {pyc.name = "rob5_seq__next"} : i16
-  %v1061 = pyc.constant 1 : i1
-  %v1062 = pyc.constant 0 : i16
-  %v1063 = pyc.reg %clk, %rst, %v1061, %v1060, %v1062 : i16
-  %v1064 = pyc.alias %v1063 {pyc.name = "rob5_seq"} : i16
-  %v1065 = pyc.wire {pyc.name = "rob6_seq__next"} : i16
-  %v1066 = pyc.constant 1 : i1
-  %v1067 = pyc.constant 0 : i16
-  %v1068 = pyc.reg %clk, %rst, %v1066, %v1065, %v1067 : i16
-  %v1069 = pyc.alias %v1068 {pyc.name = "rob6_seq"} : i16
-  %v1070 = pyc.wire {pyc.name = "rob7_seq__next"} : i16
-  %v1071 = pyc.constant 1 : i1
-  %v1072 = pyc.constant 0 : i16
-  %v1073 = pyc.reg %clk, %rst, %v1071, %v1070, %v1072 : i16
-  %v1074 = pyc.alias %v1073 {pyc.name = "rob7_seq"} : i16
-  %v1075 = pyc.wire {pyc.name = "rob_tail__next"} : i3
-  %v1076 = pyc.constant 1 : i1
-  %v1077 = pyc.constant 0 : i3
-  %v1078 = pyc.reg %clk, %rst, %v1076, %v1075, %v1077 : i3
-  %v1079 = pyc.alias %v1078 {pyc.name = "rob_tail"} : i3
-  %v1080 = pyc.alias %v1079 {pyc.name = "rob_tail__fastfwd_v3_4__L150"} : i3
-  %v1081 = pyc.wire {pyc.name = "next_output_seq__next"} : i16
-  %v1082 = pyc.constant 1 : i1
-  %v1083 = pyc.constant 0 : i16
-  %v1084 = pyc.reg %clk, %rst, %v1082, %v1081, %v1083 : i16
-  %v1085 = pyc.alias %v1084 {pyc.name = "next_output_seq"} : i16
-  %v1086 = pyc.alias %v1085 {pyc.name = "next_output_seq__fastfwd_v3_4__L151"} : i16
-  %v1087 = pyc.constant 0 : i3
-  %v1088 = pyc.eq %v1080, %v1087 : i3
-  %v1089 = pyc.and %v382, %v1088 : i1
-  %v1090 = pyc.alias %v1089 {pyc.name = "should_write__fastfwd_v3_4__L154"} : i1
-  %v1091 = pyc.or %v1090, %v959 : i1
-  pyc.assign %v955, %v1091 : i1
-  %v1092 = pyc.mux %v1090, %v385, %v999 : i128
-  pyc.assign %v995, %v1092 : i128
-  %v1093 = pyc.mux %v1090, %v388, %v1039 : i16
-  pyc.assign %v1035, %v1093 : i16
-  %v1094 = pyc.constant 1 : i3
-  %v1095 = pyc.eq %v1080, %v1094 : i3
-  %v1096 = pyc.and %v382, %v1095 : i1
-  %v1097 = pyc.alias %v1096 {pyc.name = "should_write__fastfwd_v3_4__L154"} : i1
-  %v1098 = pyc.or %v1097, %v964 : i1
-  pyc.assign %v960, %v1098 : i1
-  %v1099 = pyc.mux %v1097, %v385, %v1004 : i128
-  pyc.assign %v1000, %v1099 : i128
-  %v1100 = pyc.mux %v1097, %v388, %v1044 : i16
-  pyc.assign %v1040, %v1100 : i16
-  %v1101 = pyc.constant 2 : i3
-  %v1102 = pyc.eq %v1080, %v1101 : i3
-  %v1103 = pyc.and %v382, %v1102 : i1
-  %v1104 = pyc.alias %v1103 {pyc.name = "should_write__fastfwd_v3_4__L154"} : i1
-  %v1105 = pyc.or %v1104, %v969 : i1
-  pyc.assign %v965, %v1105 : i1
-  %v1106 = pyc.mux %v1104, %v385, %v1009 : i128
-  pyc.assign %v1005, %v1106 : i128
-  %v1107 = pyc.mux %v1104, %v388, %v1049 : i16
-  pyc.assign %v1045, %v1107 : i16
-  %v1108 = pyc.constant 3 : i3
-  %v1109 = pyc.eq %v1080, %v1108 : i3
-  %v1110 = pyc.and %v382, %v1109 : i1
-  %v1111 = pyc.alias %v1110 {pyc.name = "should_write__fastfwd_v3_4__L154"} : i1
-  %v1112 = pyc.or %v1111, %v974 : i1
-  pyc.assign %v970, %v1112 : i1
-  %v1113 = pyc.mux %v1111, %v385, %v1014 : i128
-  pyc.assign %v1010, %v1113 : i128
-  %v1114 = pyc.mux %v1111, %v388, %v1054 : i16
-  pyc.assign %v1050, %v1114 : i16
-  %v1115 = pyc.constant 4 : i3
-  %v1116 = pyc.eq %v1080, %v1115 : i3
-  %v1117 = pyc.and %v382, %v1116 : i1
-  %v1118 = pyc.alias %v1117 {pyc.name = "should_write__fastfwd_v3_4__L154"} : i1
-  %v1119 = pyc.or %v1118, %v979 : i1
-  pyc.assign %v975, %v1119 : i1
-  %v1120 = pyc.mux %v1118, %v385, %v1019 : i128
-  pyc.assign %v1015, %v1120 : i128
-  %v1121 = pyc.mux %v1118, %v388, %v1059 : i16
-  pyc.assign %v1055, %v1121 : i16
-  %v1122 = pyc.constant 5 : i3
-  %v1123 = pyc.eq %v1080, %v1122 : i3
-  %v1124 = pyc.and %v382, %v1123 : i1
-  %v1125 = pyc.alias %v1124 {pyc.name = "should_write__fastfwd_v3_4__L154"} : i1
-  %v1126 = pyc.or %v1125, %v984 : i1
-  pyc.assign %v980, %v1126 : i1
-  %v1127 = pyc.mux %v1125, %v385, %v1024 : i128
-  pyc.assign %v1020, %v1127 : i128
-  %v1128 = pyc.mux %v1125, %v388, %v1064 : i16
-  pyc.assign %v1060, %v1128 : i16
-  %v1129 = pyc.constant 6 : i3
-  %v1130 = pyc.eq %v1080, %v1129 : i3
-  %v1131 = pyc.and %v382, %v1130 : i1
-  %v1132 = pyc.alias %v1131 {pyc.name = "should_write__fastfwd_v3_4__L154"} : i1
-  %v1133 = pyc.or %v1132, %v989 : i1
-  pyc.assign %v985, %v1133 : i1
-  %v1134 = pyc.mux %v1132, %v385, %v1029 : i128
-  pyc.assign %v1025, %v1134 : i128
-  %v1135 = pyc.mux %v1132, %v388, %v1069 : i16
-  pyc.assign %v1065, %v1135 : i16
-  %v1136 = pyc.constant 7 : i3
-  %v1137 = pyc.eq %v1080, %v1136 : i3
-  %v1138 = pyc.and %v382, %v1137 : i1
-  %v1139 = pyc.alias %v1138 {pyc.name = "should_write__fastfwd_v3_4__L154"} : i1
-  %v1140 = pyc.or %v1139, %v994 : i1
-  pyc.assign %v990, %v1140 : i1
-  %v1141 = pyc.mux %v1139, %v385, %v1034 : i128
-  pyc.assign %v1030, %v1141 : i128
-  %v1142 = pyc.mux %v1139, %v388, %v1074 : i16
-  pyc.assign %v1070, %v1142 : i16
-  %v1143 = pyc.constant 1 : i3
-  %v1144 = pyc.add %v1080, %v1143 : i3
-  %v1145 = pyc.constant 7 : i3
-  %v1146 = pyc.and %v1144, %v1145 : i3
-  %v1147 = pyc.mux %v382, %v1146, %v1080 : i3
-  pyc.assign %v1075, %v1147 : i3
-  %v1148 = pyc.alias %v12 {pyc.name = "ptr__fastfwd_v3_4__L164"} : i2
-  %v1149 = pyc.alias %v1086 {pyc.name = "next_seq__fastfwd_v3_4__L165"} : i16
-  %v1150 = pyc.eq %v1039, %v1149 : i16
-  %v1151 = pyc.and %v959, %v1150 : i1
-  %v1152 = pyc.alias %v1151 {pyc.name = "match__fastfwd_v3_4__L170"} : i1
-  %v1153 = pyc.constant 0 : i1
-  %v1154 = pyc.or %v1152, %v1153 : i1
-  %v1155 = pyc.alias %v1154 {pyc.name = "has_next_seq__fastfwd_v3_4__L171"} : i1
-  %v1156 = pyc.not %v1152 : i1
-  %v1157 = pyc.constant 0 : i128
-  %v1158 = pyc.mux %v1156, %v1157, %v999 : i128
-  %v1159 = pyc.alias %v1158 {pyc.name = "next_seq_data__fastfwd_v3_4__L172"} : i128
-  %v1160 = pyc.eq %v1044, %v1149 : i16
-  %v1161 = pyc.and %v964, %v1160 : i1
-  %v1162 = pyc.alias %v1161 {pyc.name = "match__fastfwd_v3_4__L170"} : i1
-  %v1163 = pyc.or %v1155, %v1162 : i1
-  %v1164 = pyc.alias %v1163 {pyc.name = "has_next_seq__fastfwd_v3_4__L171"} : i1
-  %v1165 = pyc.not %v1162 : i1
-  %v1166 = pyc.mux %v1165, %v1159, %v1004 : i128
-  %v1167 = pyc.alias %v1166 {pyc.name = "next_seq_data__fastfwd_v3_4__L172"} : i128
-  %v1168 = pyc.eq %v1049, %v1149 : i16
-  %v1169 = pyc.and %v969, %v1168 : i1
-  %v1170 = pyc.alias %v1169 {pyc.name = "match__fastfwd_v3_4__L170"} : i1
-  %v1171 = pyc.or %v1164, %v1170 : i1
-  %v1172 = pyc.alias %v1171 {pyc.name = "has_next_seq__fastfwd_v3_4__L171"} : i1
-  %v1173 = pyc.not %v1170 : i1
-  %v1174 = pyc.mux %v1173, %v1167, %v1009 : i128
-  %v1175 = pyc.alias %v1174 {pyc.name = "next_seq_data__fastfwd_v3_4__L172"} : i128
-  %v1176 = pyc.eq %v1054, %v1149 : i16
-  %v1177 = pyc.and %v974, %v1176 : i1
-  %v1178 = pyc.alias %v1177 {pyc.name = "match__fastfwd_v3_4__L170"} : i1
-  %v1179 = pyc.or %v1172, %v1178 : i1
-  %v1180 = pyc.alias %v1179 {pyc.name = "has_next_seq__fastfwd_v3_4__L171"} : i1
-  %v1181 = pyc.not %v1178 : i1
-  %v1182 = pyc.mux %v1181, %v1175, %v1014 : i128
-  %v1183 = pyc.alias %v1182 {pyc.name = "next_seq_data__fastfwd_v3_4__L172"} : i128
-  %v1184 = pyc.eq %v1059, %v1149 : i16
-  %v1185 = pyc.and %v979, %v1184 : i1
-  %v1186 = pyc.alias %v1185 {pyc.name = "match__fastfwd_v3_4__L170"} : i1
-  %v1187 = pyc.or %v1180, %v1186 : i1
-  %v1188 = pyc.alias %v1187 {pyc.name = "has_next_seq__fastfwd_v3_4__L171"} : i1
-  %v1189 = pyc.not %v1186 : i1
-  %v1190 = pyc.mux %v1189, %v1183, %v1019 : i128
-  %v1191 = pyc.alias %v1190 {pyc.name = "next_seq_data__fastfwd_v3_4__L172"} : i128
-  %v1192 = pyc.eq %v1064, %v1149 : i16
-  %v1193 = pyc.and %v984, %v1192 : i1
-  %v1194 = pyc.alias %v1193 {pyc.name = "match__fastfwd_v3_4__L170"} : i1
-  %v1195 = pyc.or %v1188, %v1194 : i1
-  %v1196 = pyc.alias %v1195 {pyc.name = "has_next_seq__fastfwd_v3_4__L171"} : i1
-  %v1197 = pyc.not %v1194 : i1
-  %v1198 = pyc.mux %v1197, %v1191, %v1024 : i128
-  %v1199 = pyc.alias %v1198 {pyc.name = "next_seq_data__fastfwd_v3_4__L172"} : i128
-  %v1200 = pyc.eq %v1069, %v1149 : i16
-  %v1201 = pyc.and %v989, %v1200 : i1
-  %v1202 = pyc.alias %v1201 {pyc.name = "match__fastfwd_v3_4__L170"} : i1
-  %v1203 = pyc.or %v1196, %v1202 : i1
-  %v1204 = pyc.alias %v1203 {pyc.name = "has_next_seq__fastfwd_v3_4__L171"} : i1
-  %v1205 = pyc.not %v1202 : i1
-  %v1206 = pyc.mux %v1205, %v1199, %v1029 : i128
-  %v1207 = pyc.alias %v1206 {pyc.name = "next_seq_data__fastfwd_v3_4__L172"} : i128
-  %v1208 = pyc.eq %v1074, %v1149 : i16
-  %v1209 = pyc.and %v994, %v1208 : i1
-  %v1210 = pyc.alias %v1209 {pyc.name = "match__fastfwd_v3_4__L170"} : i1
-  %v1211 = pyc.or %v1204, %v1210 : i1
-  %v1212 = pyc.alias %v1211 {pyc.name = "has_next_seq__fastfwd_v3_4__L171"} : i1
-  %v1213 = pyc.not %v1210 : i1
-  %v1214 = pyc.mux %v1213, %v1207, %v1034 : i128
-  %v1215 = pyc.alias %v1214 {pyc.name = "next_seq_data__fastfwd_v3_4__L172"} : i128
-  %v1216 = pyc.wire {pyc.name = "lane0_out_vld__next"} : i1
-  %v1217 = pyc.constant 1 : i1
-  %v1218 = pyc.constant 0 : i1
-  %v1219 = pyc.reg %clk, %rst, %v1217, %v1216, %v1218 : i1
-  %v1220 = pyc.alias %v1219 {pyc.name = "lane0_out_vld"} : i1
-  %v1221 = pyc.wire {pyc.name = "lane1_out_vld__next"} : i1
-  %v1222 = pyc.constant 1 : i1
-  %v1223 = pyc.constant 0 : i1
-  %v1224 = pyc.reg %clk, %rst, %v1222, %v1221, %v1223 : i1
-  %v1225 = pyc.alias %v1224 {pyc.name = "lane1_out_vld"} : i1
-  %v1226 = pyc.wire {pyc.name = "lane2_out_vld__next"} : i1
-  %v1227 = pyc.constant 1 : i1
-  %v1228 = pyc.constant 0 : i1
-  %v1229 = pyc.reg %clk, %rst, %v1227, %v1226, %v1228 : i1
-  %v1230 = pyc.alias %v1229 {pyc.name = "lane2_out_vld"} : i1
-  %v1231 = pyc.wire {pyc.name = "lane3_out_vld__next"} : i1
-  %v1232 = pyc.constant 1 : i1
-  %v1233 = pyc.constant 0 : i1
-  %v1234 = pyc.reg %clk, %rst, %v1232, %v1231, %v1233 : i1
-  %v1235 = pyc.alias %v1234 {pyc.name = "lane3_out_vld"} : i1
-  %v1236 = pyc.wire {pyc.name = "lane0_out_data__next"} : i128
-  %v1237 = pyc.constant 1 : i1
-  %v1238 = pyc.constant 0 : i128
-  %v1239 = pyc.reg %clk, %rst, %v1237, %v1236, %v1238 : i128
-  %v1240 = pyc.alias %v1239 {pyc.name = "lane0_out_data"} : i128
-  %v1241 = pyc.wire {pyc.name = "lane1_out_data__next"} : i128
-  %v1242 = pyc.constant 1 : i1
-  %v1243 = pyc.constant 0 : i128
-  %v1244 = pyc.reg %clk, %rst, %v1242, %v1241, %v1243 : i128
-  %v1245 = pyc.alias %v1244 {pyc.name = "lane1_out_data"} : i128
-  %v1246 = pyc.wire {pyc.name = "lane2_out_data__next"} : i128
-  %v1247 = pyc.constant 1 : i1
-  %v1248 = pyc.constant 0 : i128
-  %v1249 = pyc.reg %clk, %rst, %v1247, %v1246, %v1248 : i128
-  %v1250 = pyc.alias %v1249 {pyc.name = "lane2_out_data"} : i128
-  %v1251 = pyc.wire {pyc.name = "lane3_out_data__next"} : i128
-  %v1252 = pyc.constant 1 : i1
-  %v1253 = pyc.constant 0 : i128
-  %v1254 = pyc.reg %clk, %rst, %v1252, %v1251, %v1253 : i128
-  %v1255 = pyc.alias %v1254 {pyc.name = "lane3_out_data"} : i128
-  %v1256 = pyc.constant 0 : i2
-  %v1257 = pyc.eq %v1148, %v1256 : i2
-  %v1258 = pyc.alias %v1257 {pyc.name = "this_lane__fastfwd_v3_4__L178"} : i1
-  %v1259 = pyc.and %v1258, %v1212 : i1
-  %v1260 = pyc.alias %v1259 {pyc.name = "should_output__fastfwd_v3_4__L179"} : i1
-  pyc.assign %v1216, %v1260 : i1
-  %v1261 = pyc.constant 0 : i128
-  %v1262 = pyc.mux %v1260, %v1215, %v1261 : i128
-  pyc.assign %v1236, %v1262 : i128
-  %v1263 = pyc.constant 1 : i2
-  %v1264 = pyc.eq %v1148, %v1263 : i2
-  %v1265 = pyc.alias %v1264 {pyc.name = "this_lane__fastfwd_v3_4__L178"} : i1
-  %v1266 = pyc.and %v1265, %v1212 : i1
-  %v1267 = pyc.alias %v1266 {pyc.name = "should_output__fastfwd_v3_4__L179"} : i1
-  pyc.assign %v1221, %v1267 : i1
-  %v1268 = pyc.constant 0 : i128
-  %v1269 = pyc.mux %v1267, %v1215, %v1268 : i128
-  pyc.assign %v1241, %v1269 : i128
-  %v1270 = pyc.constant 2 : i2
-  %v1271 = pyc.eq %v1148, %v1270 : i2
-  %v1272 = pyc.alias %v1271 {pyc.name = "this_lane__fastfwd_v3_4__L178"} : i1
-  %v1273 = pyc.and %v1272, %v1212 : i1
-  %v1274 = pyc.alias %v1273 {pyc.name = "should_output__fastfwd_v3_4__L179"} : i1
-  pyc.assign %v1226, %v1274 : i1
-  %v1275 = pyc.constant 0 : i128
-  %v1276 = pyc.mux %v1274, %v1215, %v1275 : i128
-  pyc.assign %v1246, %v1276 : i128
-  %v1277 = pyc.constant 3 : i2
-  %v1278 = pyc.eq %v1148, %v1277 : i2
-  %v1279 = pyc.alias %v1278 {pyc.name = "this_lane__fastfwd_v3_4__L178"} : i1
-  %v1280 = pyc.and %v1279, %v1212 : i1
-  %v1281 = pyc.alias %v1280 {pyc.name = "should_output__fastfwd_v3_4__L179"} : i1
-  pyc.assign %v1231, %v1281 : i1
-  %v1282 = pyc.constant 0 : i128
-  %v1283 = pyc.mux %v1281, %v1215, %v1282 : i128
-  pyc.assign %v1251, %v1283 : i128
-  %v1284 = pyc.or %v1220, %v1225 : i1
-  %v1285 = pyc.or %v1284, %v1230 : i1
-  %v1286 = pyc.or %v1285, %v1235 : i1
-  %v1287 = pyc.alias %v1286 {pyc.name = "any_output__fastfwd_v3_4__L183"} : i1
-  %v1288 = pyc.constant 1 : i2
-  %v1289 = pyc.add %v1148, %v1288 : i2
-  %v1290 = pyc.constant 3 : i2
-  %v1291 = pyc.and %v1289, %v1290 : i2
-  %v1292 = pyc.mux %v1287, %v1291, %v1148 : i2
-  pyc.assign %v7, %v1292 : i2
-  %v1293 = pyc.constant 1 : i16
-  %v1294 = pyc.add %v1149, %v1293 : i16
-  %v1295 = pyc.mux %v1287, %v1294, %v1149 : i16
-  pyc.assign %v1081, %v1295 : i16
-  %v1296 = pyc.eq %v1039, %v1149 : i16
-  %v1297 = pyc.and %v1287, %v1296 : i1
-  %v1298 = pyc.alias %v1297 {pyc.name = "should_clear__fastfwd_v3_4__L188"} : i1
-  %v1299 = pyc.constant 0 : i1
-  %v1300 = pyc.mux %v1298, %v1299, %v959 : i1
-  pyc.assign %v955, %v1300 : i1
-  %v1301 = pyc.eq %v1044, %v1149 : i16
-  %v1302 = pyc.and %v1287, %v1301 : i1
-  %v1303 = pyc.alias %v1302 {pyc.name = "should_clear__fastfwd_v3_4__L188"} : i1
-  %v1304 = pyc.constant 0 : i1
-  %v1305 = pyc.mux %v1303, %v1304, %v964 : i1
-  pyc.assign %v960, %v1305 : i1
-  %v1306 = pyc.eq %v1049, %v1149 : i16
-  %v1307 = pyc.and %v1287, %v1306 : i1
-  %v1308 = pyc.alias %v1307 {pyc.name = "should_clear__fastfwd_v3_4__L188"} : i1
-  %v1309 = pyc.constant 0 : i1
-  %v1310 = pyc.mux %v1308, %v1309, %v969 : i1
-  pyc.assign %v965, %v1310 : i1
-  %v1311 = pyc.eq %v1054, %v1149 : i16
-  %v1312 = pyc.and %v1287, %v1311 : i1
-  %v1313 = pyc.alias %v1312 {pyc.name = "should_clear__fastfwd_v3_4__L188"} : i1
-  %v1314 = pyc.constant 0 : i1
-  %v1315 = pyc.mux %v1313, %v1314, %v974 : i1
-  pyc.assign %v970, %v1315 : i1
-  %v1316 = pyc.eq %v1059, %v1149 : i16
-  %v1317 = pyc.and %v1287, %v1316 : i1
-  %v1318 = pyc.alias %v1317 {pyc.name = "should_clear__fastfwd_v3_4__L188"} : i1
-  %v1319 = pyc.constant 0 : i1
-  %v1320 = pyc.mux %v1318, %v1319, %v979 : i1
-  pyc.assign %v975, %v1320 : i1
-  %v1321 = pyc.eq %v1064, %v1149 : i16
-  %v1322 = pyc.and %v1287, %v1321 : i1
-  %v1323 = pyc.alias %v1322 {pyc.name = "should_clear__fastfwd_v3_4__L188"} : i1
-  %v1324 = pyc.constant 0 : i1
-  %v1325 = pyc.mux %v1323, %v1324, %v984 : i1
-  pyc.assign %v980, %v1325 : i1
-  %v1326 = pyc.eq %v1069, %v1149 : i16
-  %v1327 = pyc.and %v1287, %v1326 : i1
-  %v1328 = pyc.alias %v1327 {pyc.name = "should_clear__fastfwd_v3_4__L188"} : i1
-  %v1329 = pyc.constant 0 : i1
-  %v1330 = pyc.mux %v1328, %v1329, %v989 : i1
-  pyc.assign %v985, %v1330 : i1
-  %v1331 = pyc.eq %v1074, %v1149 : i16
-  %v1332 = pyc.and %v1287, %v1331 : i1
-  %v1333 = pyc.alias %v1332 {pyc.name = "should_clear__fastfwd_v3_4__L188"} : i1
-  %v1334 = pyc.constant 0 : i1
-  %v1335 = pyc.mux %v1333, %v1334, %v994 : i1
-  pyc.assign %v990, %v1335 : i1
-  %v1336 = pyc.constant 0 : i1
-  %v1337 = pyc.add %lane0_pkt_in_vld, %v1336 : i1
-  %v1338 = pyc.add %v1337, %lane1_pkt_in_vld : i1
-  %v1339 = pyc.add %v1338, %lane2_pkt_in_vld : i1
-  %v1340 = pyc.add %v1339, %lane3_pkt_in_vld : i1
-  %v1341 = pyc.alias %v1340 {pyc.name = "pending_cnt__fastfwd_v3_4__L194"} : i1
-  %v1342 = pyc.wire {pyc.name = "bkpr_reg__next"} : i1
-  %v1343 = pyc.constant 1 : i1
-  %v1344 = pyc.constant 0 : i1
-  %v1345 = pyc.reg %clk, %rst, %v1343, %v1342, %v1344 : i1
-  %v1346 = pyc.alias %v1345 {pyc.name = "bkpr_reg"} : i1
-  %v1347 = pyc.alias %v1346 {pyc.name = "bkpr__fastfwd_v3_4__L195"} : i1
-  %v1348 = pyc.constant 10 : i4
-  %v1349 = pyc.zext %v1341 : i1 -> i4
-  %v1350 = pyc.ult %v1349, %v1348 : i4
-  %v1351 = pyc.not %v1350 : i1
-  pyc.assign %v1342, %v1351 : i1
-  func.return %v1220, %v1240, %v1225, %v1245, %v1230, %v1250, %v1235, %v1255, %v1347, %v48, %v68, %v88, %v108, %v128, %v53, %v73, %v93, %v113, %v133, %v58, %v78, %v98, %v118, %v138, %v63, %v83, %v103, %v123, %v143 : i1, i128, i1, i128, i1, i128, i1, i128, i1, i1, i128, i2, i1, i128, i1, i128, i2, i1, i128, i1, i128, i2, i1, i128, i1, i128, i2, i1, i128
+  %v933 = pyc.ult %v932, %v183 : i3
+  %v934 = pyc.and %v163, %v933 : i1
+  %v935 = pyc.or %v931, %v934 : i1
+  pyc.assign %v159, %v935 : i1
+  %v936 = pyc.constant 1 : i3
+  %v937 = pyc.zext %v936 : i3 -> i5
+  %v938 = pyc.add %v834, %v937 : i5
+  %v939 = pyc.constant 1 : i3
+  %v940 = pyc.sub %v183, %v939 : i3
+  %v941 = pyc.constant 0 : i3
+  %v942 = pyc.mux %v163, %v940, %v941 : i3
+  %v943 = pyc.zext %v942 : i3 -> i5
+  %v944 = pyc.mux %v931, %v938, %v943 : i5
+  %v945 = pyc.alias %v944 {pyc.name = "new_timer__fastfwd_v3_4__L133"} : i5
+  %v946 = pyc.trunc %v945 : i5 -> i3
+  pyc.assign %v179, %v946 : i3
+  %v947 = pyc.mux %v931, %v844, %v203 : i6
+  pyc.assign %v199, %v947 : i6
+  %v948 = pyc.mux %v931, %v35, %v223 : i16
+  pyc.assign %v219, %v948 : i16
+  pyc.assign %v59, %v931 : i1
+  %v949 = pyc.constant 0 : i128
+  %v950 = pyc.mux %v931, %lane3_pkt_in_data, %v949 : i128
+  pyc.assign %v79, %v950 : i128
+  %v951 = pyc.constant 0 : i2
+  %v952 = pyc.zext %v951 : i2 -> i5
+  %v953 = pyc.mux %v931, %v834, %v952 : i5
+  %v954 = pyc.trunc %v953 : i5 -> i2
+  pyc.assign %v99, %v954 : i2
+  %v955 = pyc.and %v925, %v931 : i1
+  pyc.assign %v119, %v955 : i1
+  %v956 = pyc.and %v925, %v931 : i1
+  %v957 = pyc.constant 0 : i128
+  %v958 = pyc.mux %v956, %v920, %v957 : i128
+  pyc.assign %v139, %v958 : i128
+  %v959 = pyc.wire {pyc.name = "rob0_valid__next"} : i1
+  %v960 = pyc.constant 1 : i1
+  %v961 = pyc.constant 0 : i1
+  %v962 = pyc.reg %clk, %rst, %v960, %v959, %v961 : i1
+  %v963 = pyc.alias %v962 {pyc.name = "rob0_valid"} : i1
+  %v964 = pyc.wire {pyc.name = "rob1_valid__next"} : i1
+  %v965 = pyc.constant 1 : i1
+  %v966 = pyc.constant 0 : i1
+  %v967 = pyc.reg %clk, %rst, %v965, %v964, %v966 : i1
+  %v968 = pyc.alias %v967 {pyc.name = "rob1_valid"} : i1
+  %v969 = pyc.wire {pyc.name = "rob2_valid__next"} : i1
+  %v970 = pyc.constant 1 : i1
+  %v971 = pyc.constant 0 : i1
+  %v972 = pyc.reg %clk, %rst, %v970, %v969, %v971 : i1
+  %v973 = pyc.alias %v972 {pyc.name = "rob2_valid"} : i1
+  %v974 = pyc.wire {pyc.name = "rob3_valid__next"} : i1
+  %v975 = pyc.constant 1 : i1
+  %v976 = pyc.constant 0 : i1
+  %v977 = pyc.reg %clk, %rst, %v975, %v974, %v976 : i1
+  %v978 = pyc.alias %v977 {pyc.name = "rob3_valid"} : i1
+  %v979 = pyc.wire {pyc.name = "rob4_valid__next"} : i1
+  %v980 = pyc.constant 1 : i1
+  %v981 = pyc.constant 0 : i1
+  %v982 = pyc.reg %clk, %rst, %v980, %v979, %v981 : i1
+  %v983 = pyc.alias %v982 {pyc.name = "rob4_valid"} : i1
+  %v984 = pyc.wire {pyc.name = "rob5_valid__next"} : i1
+  %v985 = pyc.constant 1 : i1
+  %v986 = pyc.constant 0 : i1
+  %v987 = pyc.reg %clk, %rst, %v985, %v984, %v986 : i1
+  %v988 = pyc.alias %v987 {pyc.name = "rob5_valid"} : i1
+  %v989 = pyc.wire {pyc.name = "rob6_valid__next"} : i1
+  %v990 = pyc.constant 1 : i1
+  %v991 = pyc.constant 0 : i1
+  %v992 = pyc.reg %clk, %rst, %v990, %v989, %v991 : i1
+  %v993 = pyc.alias %v992 {pyc.name = "rob6_valid"} : i1
+  %v994 = pyc.wire {pyc.name = "rob7_valid__next"} : i1
+  %v995 = pyc.constant 1 : i1
+  %v996 = pyc.constant 0 : i1
+  %v997 = pyc.reg %clk, %rst, %v995, %v994, %v996 : i1
+  %v998 = pyc.alias %v997 {pyc.name = "rob7_valid"} : i1
+  %v999 = pyc.wire {pyc.name = "rob0_data__next"} : i128
+  %v1000 = pyc.constant 1 : i1
+  %v1001 = pyc.constant 0 : i128
+  %v1002 = pyc.reg %clk, %rst, %v1000, %v999, %v1001 : i128
+  %v1003 = pyc.alias %v1002 {pyc.name = "rob0_data"} : i128
+  %v1004 = pyc.wire {pyc.name = "rob1_data__next"} : i128
+  %v1005 = pyc.constant 1 : i1
+  %v1006 = pyc.constant 0 : i128
+  %v1007 = pyc.reg %clk, %rst, %v1005, %v1004, %v1006 : i128
+  %v1008 = pyc.alias %v1007 {pyc.name = "rob1_data"} : i128
+  %v1009 = pyc.wire {pyc.name = "rob2_data__next"} : i128
+  %v1010 = pyc.constant 1 : i1
+  %v1011 = pyc.constant 0 : i128
+  %v1012 = pyc.reg %clk, %rst, %v1010, %v1009, %v1011 : i128
+  %v1013 = pyc.alias %v1012 {pyc.name = "rob2_data"} : i128
+  %v1014 = pyc.wire {pyc.name = "rob3_data__next"} : i128
+  %v1015 = pyc.constant 1 : i1
+  %v1016 = pyc.constant 0 : i128
+  %v1017 = pyc.reg %clk, %rst, %v1015, %v1014, %v1016 : i128
+  %v1018 = pyc.alias %v1017 {pyc.name = "rob3_data"} : i128
+  %v1019 = pyc.wire {pyc.name = "rob4_data__next"} : i128
+  %v1020 = pyc.constant 1 : i1
+  %v1021 = pyc.constant 0 : i128
+  %v1022 = pyc.reg %clk, %rst, %v1020, %v1019, %v1021 : i128
+  %v1023 = pyc.alias %v1022 {pyc.name = "rob4_data"} : i128
+  %v1024 = pyc.wire {pyc.name = "rob5_data__next"} : i128
+  %v1025 = pyc.constant 1 : i1
+  %v1026 = pyc.constant 0 : i128
+  %v1027 = pyc.reg %clk, %rst, %v1025, %v1024, %v1026 : i128
+  %v1028 = pyc.alias %v1027 {pyc.name = "rob5_data"} : i128
+  %v1029 = pyc.wire {pyc.name = "rob6_data__next"} : i128
+  %v1030 = pyc.constant 1 : i1
+  %v1031 = pyc.constant 0 : i128
+  %v1032 = pyc.reg %clk, %rst, %v1030, %v1029, %v1031 : i128
+  %v1033 = pyc.alias %v1032 {pyc.name = "rob6_data"} : i128
+  %v1034 = pyc.wire {pyc.name = "rob7_data__next"} : i128
+  %v1035 = pyc.constant 1 : i1
+  %v1036 = pyc.constant 0 : i128
+  %v1037 = pyc.reg %clk, %rst, %v1035, %v1034, %v1036 : i128
+  %v1038 = pyc.alias %v1037 {pyc.name = "rob7_data"} : i128
+  %v1039 = pyc.wire {pyc.name = "rob0_seq__next"} : i16
+  %v1040 = pyc.constant 1 : i1
+  %v1041 = pyc.constant 0 : i16
+  %v1042 = pyc.reg %clk, %rst, %v1040, %v1039, %v1041 : i16
+  %v1043 = pyc.alias %v1042 {pyc.name = "rob0_seq"} : i16
+  %v1044 = pyc.wire {pyc.name = "rob1_seq__next"} : i16
+  %v1045 = pyc.constant 1 : i1
+  %v1046 = pyc.constant 0 : i16
+  %v1047 = pyc.reg %clk, %rst, %v1045, %v1044, %v1046 : i16
+  %v1048 = pyc.alias %v1047 {pyc.name = "rob1_seq"} : i16
+  %v1049 = pyc.wire {pyc.name = "rob2_seq__next"} : i16
+  %v1050 = pyc.constant 1 : i1
+  %v1051 = pyc.constant 0 : i16
+  %v1052 = pyc.reg %clk, %rst, %v1050, %v1049, %v1051 : i16
+  %v1053 = pyc.alias %v1052 {pyc.name = "rob2_seq"} : i16
+  %v1054 = pyc.wire {pyc.name = "rob3_seq__next"} : i16
+  %v1055 = pyc.constant 1 : i1
+  %v1056 = pyc.constant 0 : i16
+  %v1057 = pyc.reg %clk, %rst, %v1055, %v1054, %v1056 : i16
+  %v1058 = pyc.alias %v1057 {pyc.name = "rob3_seq"} : i16
+  %v1059 = pyc.wire {pyc.name = "rob4_seq__next"} : i16
+  %v1060 = pyc.constant 1 : i1
+  %v1061 = pyc.constant 0 : i16
+  %v1062 = pyc.reg %clk, %rst, %v1060, %v1059, %v1061 : i16
+  %v1063 = pyc.alias %v1062 {pyc.name = "rob4_seq"} : i16
+  %v1064 = pyc.wire {pyc.name = "rob5_seq__next"} : i16
+  %v1065 = pyc.constant 1 : i1
+  %v1066 = pyc.constant 0 : i16
+  %v1067 = pyc.reg %clk, %rst, %v1065, %v1064, %v1066 : i16
+  %v1068 = pyc.alias %v1067 {pyc.name = "rob5_seq"} : i16
+  %v1069 = pyc.wire {pyc.name = "rob6_seq__next"} : i16
+  %v1070 = pyc.constant 1 : i1
+  %v1071 = pyc.constant 0 : i16
+  %v1072 = pyc.reg %clk, %rst, %v1070, %v1069, %v1071 : i16
+  %v1073 = pyc.alias %v1072 {pyc.name = "rob6_seq"} : i16
+  %v1074 = pyc.wire {pyc.name = "rob7_seq__next"} : i16
+  %v1075 = pyc.constant 1 : i1
+  %v1076 = pyc.constant 0 : i16
+  %v1077 = pyc.reg %clk, %rst, %v1075, %v1074, %v1076 : i16
+  %v1078 = pyc.alias %v1077 {pyc.name = "rob7_seq"} : i16
+  %v1079 = pyc.wire {pyc.name = "rob_tail__next"} : i3
+  %v1080 = pyc.constant 1 : i1
+  %v1081 = pyc.constant 0 : i3
+  %v1082 = pyc.reg %clk, %rst, %v1080, %v1079, %v1081 : i3
+  %v1083 = pyc.alias %v1082 {pyc.name = "rob_tail"} : i3
+  %v1084 = pyc.alias %v1083 {pyc.name = "rob_tail__fastfwd_v3_4__L150"} : i3
+  %v1085 = pyc.wire {pyc.name = "next_output_seq__next"} : i16
+  %v1086 = pyc.constant 1 : i1
+  %v1087 = pyc.constant 0 : i16
+  %v1088 = pyc.reg %clk, %rst, %v1086, %v1085, %v1087 : i16
+  %v1089 = pyc.alias %v1088 {pyc.name = "next_output_seq"} : i16
+  %v1090 = pyc.alias %v1089 {pyc.name = "next_output_seq__fastfwd_v3_4__L151"} : i16
+  %v1091 = pyc.constant 0 : i3
+  %v1092 = pyc.eq %v1084, %v1091 : i3
+  %v1093 = pyc.and %v382, %v1092 : i1
+  %v1094 = pyc.alias %v1093 {pyc.name = "should_write__fastfwd_v3_4__L154"} : i1
+  %v1095 = pyc.or %v1094, %v963 : i1
+  pyc.assign %v959, %v1095 : i1
+  %v1096 = pyc.mux %v1094, %v385, %v1003 : i128
+  pyc.assign %v999, %v1096 : i128
+  %v1097 = pyc.mux %v1094, %v388, %v1043 : i16
+  pyc.assign %v1039, %v1097 : i16
+  %v1098 = pyc.constant 1 : i3
+  %v1099 = pyc.eq %v1084, %v1098 : i3
+  %v1100 = pyc.and %v382, %v1099 : i1
+  %v1101 = pyc.alias %v1100 {pyc.name = "should_write__fastfwd_v3_4__L154"} : i1
+  %v1102 = pyc.or %v1101, %v968 : i1
+  pyc.assign %v964, %v1102 : i1
+  %v1103 = pyc.mux %v1101, %v385, %v1008 : i128
+  pyc.assign %v1004, %v1103 : i128
+  %v1104 = pyc.mux %v1101, %v388, %v1048 : i16
+  pyc.assign %v1044, %v1104 : i16
+  %v1105 = pyc.constant 2 : i3
+  %v1106 = pyc.eq %v1084, %v1105 : i3
+  %v1107 = pyc.and %v382, %v1106 : i1
+  %v1108 = pyc.alias %v1107 {pyc.name = "should_write__fastfwd_v3_4__L154"} : i1
+  %v1109 = pyc.or %v1108, %v973 : i1
+  pyc.assign %v969, %v1109 : i1
+  %v1110 = pyc.mux %v1108, %v385, %v1013 : i128
+  pyc.assign %v1009, %v1110 : i128
+  %v1111 = pyc.mux %v1108, %v388, %v1053 : i16
+  pyc.assign %v1049, %v1111 : i16
+  %v1112 = pyc.constant 3 : i3
+  %v1113 = pyc.eq %v1084, %v1112 : i3
+  %v1114 = pyc.and %v382, %v1113 : i1
+  %v1115 = pyc.alias %v1114 {pyc.name = "should_write__fastfwd_v3_4__L154"} : i1
+  %v1116 = pyc.or %v1115, %v978 : i1
+  pyc.assign %v974, %v1116 : i1
+  %v1117 = pyc.mux %v1115, %v385, %v1018 : i128
+  pyc.assign %v1014, %v1117 : i128
+  %v1118 = pyc.mux %v1115, %v388, %v1058 : i16
+  pyc.assign %v1054, %v1118 : i16
+  %v1119 = pyc.constant 4 : i3
+  %v1120 = pyc.eq %v1084, %v1119 : i3
+  %v1121 = pyc.and %v382, %v1120 : i1
+  %v1122 = pyc.alias %v1121 {pyc.name = "should_write__fastfwd_v3_4__L154"} : i1
+  %v1123 = pyc.or %v1122, %v983 : i1
+  pyc.assign %v979, %v1123 : i1
+  %v1124 = pyc.mux %v1122, %v385, %v1023 : i128
+  pyc.assign %v1019, %v1124 : i128
+  %v1125 = pyc.mux %v1122, %v388, %v1063 : i16
+  pyc.assign %v1059, %v1125 : i16
+  %v1126 = pyc.constant 5 : i3
+  %v1127 = pyc.eq %v1084, %v1126 : i3
+  %v1128 = pyc.and %v382, %v1127 : i1
+  %v1129 = pyc.alias %v1128 {pyc.name = "should_write__fastfwd_v3_4__L154"} : i1
+  %v1130 = pyc.or %v1129, %v988 : i1
+  pyc.assign %v984, %v1130 : i1
+  %v1131 = pyc.mux %v1129, %v385, %v1028 : i128
+  pyc.assign %v1024, %v1131 : i128
+  %v1132 = pyc.mux %v1129, %v388, %v1068 : i16
+  pyc.assign %v1064, %v1132 : i16
+  %v1133 = pyc.constant 6 : i3
+  %v1134 = pyc.eq %v1084, %v1133 : i3
+  %v1135 = pyc.and %v382, %v1134 : i1
+  %v1136 = pyc.alias %v1135 {pyc.name = "should_write__fastfwd_v3_4__L154"} : i1
+  %v1137 = pyc.or %v1136, %v993 : i1
+  pyc.assign %v989, %v1137 : i1
+  %v1138 = pyc.mux %v1136, %v385, %v1033 : i128
+  pyc.assign %v1029, %v1138 : i128
+  %v1139 = pyc.mux %v1136, %v388, %v1073 : i16
+  pyc.assign %v1069, %v1139 : i16
+  %v1140 = pyc.constant 7 : i3
+  %v1141 = pyc.eq %v1084, %v1140 : i3
+  %v1142 = pyc.and %v382, %v1141 : i1
+  %v1143 = pyc.alias %v1142 {pyc.name = "should_write__fastfwd_v3_4__L154"} : i1
+  %v1144 = pyc.or %v1143, %v998 : i1
+  pyc.assign %v994, %v1144 : i1
+  %v1145 = pyc.mux %v1143, %v385, %v1038 : i128
+  pyc.assign %v1034, %v1145 : i128
+  %v1146 = pyc.mux %v1143, %v388, %v1078 : i16
+  pyc.assign %v1074, %v1146 : i16
+  %v1147 = pyc.constant 1 : i3
+  %v1148 = pyc.add %v1084, %v1147 : i3
+  %v1149 = pyc.constant 7 : i3
+  %v1150 = pyc.and %v1148, %v1149 : i3
+  %v1151 = pyc.mux %v382, %v1150, %v1084 : i3
+  pyc.assign %v1079, %v1151 : i3
+  %v1152 = pyc.alias %v12 {pyc.name = "ptr__fastfwd_v3_4__L164"} : i2
+  %v1153 = pyc.alias %v1090 {pyc.name = "next_seq__fastfwd_v3_4__L165"} : i16
+  %v1154 = pyc.eq %v1043, %v1153 : i16
+  %v1155 = pyc.and %v963, %v1154 : i1
+  %v1156 = pyc.alias %v1155 {pyc.name = "match__fastfwd_v3_4__L170"} : i1
+  %v1157 = pyc.constant 0 : i1
+  %v1158 = pyc.or %v1156, %v1157 : i1
+  %v1159 = pyc.alias %v1158 {pyc.name = "has_next_seq__fastfwd_v3_4__L171"} : i1
+  %v1160 = pyc.not %v1156 : i1
+  %v1161 = pyc.constant 0 : i128
+  %v1162 = pyc.mux %v1160, %v1161, %v1003 : i128
+  %v1163 = pyc.alias %v1162 {pyc.name = "next_seq_data__fastfwd_v3_4__L172"} : i128
+  %v1164 = pyc.eq %v1048, %v1153 : i16
+  %v1165 = pyc.and %v968, %v1164 : i1
+  %v1166 = pyc.alias %v1165 {pyc.name = "match__fastfwd_v3_4__L170"} : i1
+  %v1167 = pyc.or %v1159, %v1166 : i1
+  %v1168 = pyc.alias %v1167 {pyc.name = "has_next_seq__fastfwd_v3_4__L171"} : i1
+  %v1169 = pyc.not %v1166 : i1
+  %v1170 = pyc.mux %v1169, %v1163, %v1008 : i128
+  %v1171 = pyc.alias %v1170 {pyc.name = "next_seq_data__fastfwd_v3_4__L172"} : i128
+  %v1172 = pyc.eq %v1053, %v1153 : i16
+  %v1173 = pyc.and %v973, %v1172 : i1
+  %v1174 = pyc.alias %v1173 {pyc.name = "match__fastfwd_v3_4__L170"} : i1
+  %v1175 = pyc.or %v1168, %v1174 : i1
+  %v1176 = pyc.alias %v1175 {pyc.name = "has_next_seq__fastfwd_v3_4__L171"} : i1
+  %v1177 = pyc.not %v1174 : i1
+  %v1178 = pyc.mux %v1177, %v1171, %v1013 : i128
+  %v1179 = pyc.alias %v1178 {pyc.name = "next_seq_data__fastfwd_v3_4__L172"} : i128
+  %v1180 = pyc.eq %v1058, %v1153 : i16
+  %v1181 = pyc.and %v978, %v1180 : i1
+  %v1182 = pyc.alias %v1181 {pyc.name = "match__fastfwd_v3_4__L170"} : i1
+  %v1183 = pyc.or %v1176, %v1182 : i1
+  %v1184 = pyc.alias %v1183 {pyc.name = "has_next_seq__fastfwd_v3_4__L171"} : i1
+  %v1185 = pyc.not %v1182 : i1
+  %v1186 = pyc.mux %v1185, %v1179, %v1018 : i128
+  %v1187 = pyc.alias %v1186 {pyc.name = "next_seq_data__fastfwd_v3_4__L172"} : i128
+  %v1188 = pyc.eq %v1063, %v1153 : i16
+  %v1189 = pyc.and %v983, %v1188 : i1
+  %v1190 = pyc.alias %v1189 {pyc.name = "match__fastfwd_v3_4__L170"} : i1
+  %v1191 = pyc.or %v1184, %v1190 : i1
+  %v1192 = pyc.alias %v1191 {pyc.name = "has_next_seq__fastfwd_v3_4__L171"} : i1
+  %v1193 = pyc.not %v1190 : i1
+  %v1194 = pyc.mux %v1193, %v1187, %v1023 : i128
+  %v1195 = pyc.alias %v1194 {pyc.name = "next_seq_data__fastfwd_v3_4__L172"} : i128
+  %v1196 = pyc.eq %v1068, %v1153 : i16
+  %v1197 = pyc.and %v988, %v1196 : i1
+  %v1198 = pyc.alias %v1197 {pyc.name = "match__fastfwd_v3_4__L170"} : i1
+  %v1199 = pyc.or %v1192, %v1198 : i1
+  %v1200 = pyc.alias %v1199 {pyc.name = "has_next_seq__fastfwd_v3_4__L171"} : i1
+  %v1201 = pyc.not %v1198 : i1
+  %v1202 = pyc.mux %v1201, %v1195, %v1028 : i128
+  %v1203 = pyc.alias %v1202 {pyc.name = "next_seq_data__fastfwd_v3_4__L172"} : i128
+  %v1204 = pyc.eq %v1073, %v1153 : i16
+  %v1205 = pyc.and %v993, %v1204 : i1
+  %v1206 = pyc.alias %v1205 {pyc.name = "match__fastfwd_v3_4__L170"} : i1
+  %v1207 = pyc.or %v1200, %v1206 : i1
+  %v1208 = pyc.alias %v1207 {pyc.name = "has_next_seq__fastfwd_v3_4__L171"} : i1
+  %v1209 = pyc.not %v1206 : i1
+  %v1210 = pyc.mux %v1209, %v1203, %v1033 : i128
+  %v1211 = pyc.alias %v1210 {pyc.name = "next_seq_data__fastfwd_v3_4__L172"} : i128
+  %v1212 = pyc.eq %v1078, %v1153 : i16
+  %v1213 = pyc.and %v998, %v1212 : i1
+  %v1214 = pyc.alias %v1213 {pyc.name = "match__fastfwd_v3_4__L170"} : i1
+  %v1215 = pyc.or %v1208, %v1214 : i1
+  %v1216 = pyc.alias %v1215 {pyc.name = "has_next_seq__fastfwd_v3_4__L171"} : i1
+  %v1217 = pyc.not %v1214 : i1
+  %v1218 = pyc.mux %v1217, %v1211, %v1038 : i128
+  %v1219 = pyc.alias %v1218 {pyc.name = "next_seq_data__fastfwd_v3_4__L172"} : i128
+  %v1220 = pyc.wire {pyc.name = "lane0_out_vld__next"} : i1
+  %v1221 = pyc.constant 1 : i1
+  %v1222 = pyc.constant 0 : i1
+  %v1223 = pyc.reg %clk, %rst, %v1221, %v1220, %v1222 : i1
+  %v1224 = pyc.alias %v1223 {pyc.name = "lane0_out_vld"} : i1
+  %v1225 = pyc.wire {pyc.name = "lane1_out_vld__next"} : i1
+  %v1226 = pyc.constant 1 : i1
+  %v1227 = pyc.constant 0 : i1
+  %v1228 = pyc.reg %clk, %rst, %v1226, %v1225, %v1227 : i1
+  %v1229 = pyc.alias %v1228 {pyc.name = "lane1_out_vld"} : i1
+  %v1230 = pyc.wire {pyc.name = "lane2_out_vld__next"} : i1
+  %v1231 = pyc.constant 1 : i1
+  %v1232 = pyc.constant 0 : i1
+  %v1233 = pyc.reg %clk, %rst, %v1231, %v1230, %v1232 : i1
+  %v1234 = pyc.alias %v1233 {pyc.name = "lane2_out_vld"} : i1
+  %v1235 = pyc.wire {pyc.name = "lane3_out_vld__next"} : i1
+  %v1236 = pyc.constant 1 : i1
+  %v1237 = pyc.constant 0 : i1
+  %v1238 = pyc.reg %clk, %rst, %v1236, %v1235, %v1237 : i1
+  %v1239 = pyc.alias %v1238 {pyc.name = "lane3_out_vld"} : i1
+  %v1240 = pyc.wire {pyc.name = "lane0_out_data__next"} : i128
+  %v1241 = pyc.constant 1 : i1
+  %v1242 = pyc.constant 0 : i128
+  %v1243 = pyc.reg %clk, %rst, %v1241, %v1240, %v1242 : i128
+  %v1244 = pyc.alias %v1243 {pyc.name = "lane0_out_data"} : i128
+  %v1245 = pyc.wire {pyc.name = "lane1_out_data__next"} : i128
+  %v1246 = pyc.constant 1 : i1
+  %v1247 = pyc.constant 0 : i128
+  %v1248 = pyc.reg %clk, %rst, %v1246, %v1245, %v1247 : i128
+  %v1249 = pyc.alias %v1248 {pyc.name = "lane1_out_data"} : i128
+  %v1250 = pyc.wire {pyc.name = "lane2_out_data__next"} : i128
+  %v1251 = pyc.constant 1 : i1
+  %v1252 = pyc.constant 0 : i128
+  %v1253 = pyc.reg %clk, %rst, %v1251, %v1250, %v1252 : i128
+  %v1254 = pyc.alias %v1253 {pyc.name = "lane2_out_data"} : i128
+  %v1255 = pyc.wire {pyc.name = "lane3_out_data__next"} : i128
+  %v1256 = pyc.constant 1 : i1
+  %v1257 = pyc.constant 0 : i128
+  %v1258 = pyc.reg %clk, %rst, %v1256, %v1255, %v1257 : i128
+  %v1259 = pyc.alias %v1258 {pyc.name = "lane3_out_data"} : i128
+  %v1260 = pyc.constant 0 : i2
+  %v1261 = pyc.eq %v1152, %v1260 : i2
+  %v1262 = pyc.alias %v1261 {pyc.name = "this_lane__fastfwd_v3_4__L178"} : i1
+  %v1263 = pyc.and %v1262, %v1216 : i1
+  %v1264 = pyc.alias %v1263 {pyc.name = "should_output__fastfwd_v3_4__L179"} : i1
+  pyc.assign %v1220, %v1264 : i1
+  %v1265 = pyc.constant 0 : i128
+  %v1266 = pyc.mux %v1264, %v1219, %v1265 : i128
+  pyc.assign %v1240, %v1266 : i128
+  %v1267 = pyc.constant 1 : i2
+  %v1268 = pyc.eq %v1152, %v1267 : i2
+  %v1269 = pyc.alias %v1268 {pyc.name = "this_lane__fastfwd_v3_4__L178"} : i1
+  %v1270 = pyc.and %v1269, %v1216 : i1
+  %v1271 = pyc.alias %v1270 {pyc.name = "should_output__fastfwd_v3_4__L179"} : i1
+  pyc.assign %v1225, %v1271 : i1
+  %v1272 = pyc.constant 0 : i128
+  %v1273 = pyc.mux %v1271, %v1219, %v1272 : i128
+  pyc.assign %v1245, %v1273 : i128
+  %v1274 = pyc.constant 2 : i2
+  %v1275 = pyc.eq %v1152, %v1274 : i2
+  %v1276 = pyc.alias %v1275 {pyc.name = "this_lane__fastfwd_v3_4__L178"} : i1
+  %v1277 = pyc.and %v1276, %v1216 : i1
+  %v1278 = pyc.alias %v1277 {pyc.name = "should_output__fastfwd_v3_4__L179"} : i1
+  pyc.assign %v1230, %v1278 : i1
+  %v1279 = pyc.constant 0 : i128
+  %v1280 = pyc.mux %v1278, %v1219, %v1279 : i128
+  pyc.assign %v1250, %v1280 : i128
+  %v1281 = pyc.constant 3 : i2
+  %v1282 = pyc.eq %v1152, %v1281 : i2
+  %v1283 = pyc.alias %v1282 {pyc.name = "this_lane__fastfwd_v3_4__L178"} : i1
+  %v1284 = pyc.and %v1283, %v1216 : i1
+  %v1285 = pyc.alias %v1284 {pyc.name = "should_output__fastfwd_v3_4__L179"} : i1
+  pyc.assign %v1235, %v1285 : i1
+  %v1286 = pyc.constant 0 : i128
+  %v1287 = pyc.mux %v1285, %v1219, %v1286 : i128
+  pyc.assign %v1255, %v1287 : i128
+  %v1288 = pyc.or %v1224, %v1229 : i1
+  %v1289 = pyc.or %v1288, %v1234 : i1
+  %v1290 = pyc.or %v1289, %v1239 : i1
+  %v1291 = pyc.alias %v1290 {pyc.name = "any_output__fastfwd_v3_4__L183"} : i1
+  %v1292 = pyc.constant 1 : i2
+  %v1293 = pyc.add %v1152, %v1292 : i2
+  %v1294 = pyc.constant 3 : i2
+  %v1295 = pyc.and %v1293, %v1294 : i2
+  %v1296 = pyc.mux %v1291, %v1295, %v1152 : i2
+  pyc.assign %v7, %v1296 : i2
+  %v1297 = pyc.constant 1 : i16
+  %v1298 = pyc.add %v1153, %v1297 : i16
+  %v1299 = pyc.mux %v1291, %v1298, %v1153 : i16
+  pyc.assign %v1085, %v1299 : i16
+  %v1300 = pyc.eq %v1043, %v1153 : i16
+  %v1301 = pyc.and %v1291, %v1300 : i1
+  %v1302 = pyc.alias %v1301 {pyc.name = "should_clear__fastfwd_v3_4__L188"} : i1
+  %v1303 = pyc.constant 0 : i1
+  %v1304 = pyc.mux %v1302, %v1303, %v963 : i1
+  pyc.assign %v959, %v1304 : i1
+  %v1305 = pyc.eq %v1048, %v1153 : i16
+  %v1306 = pyc.and %v1291, %v1305 : i1
+  %v1307 = pyc.alias %v1306 {pyc.name = "should_clear__fastfwd_v3_4__L188"} : i1
+  %v1308 = pyc.constant 0 : i1
+  %v1309 = pyc.mux %v1307, %v1308, %v968 : i1
+  pyc.assign %v964, %v1309 : i1
+  %v1310 = pyc.eq %v1053, %v1153 : i16
+  %v1311 = pyc.and %v1291, %v1310 : i1
+  %v1312 = pyc.alias %v1311 {pyc.name = "should_clear__fastfwd_v3_4__L188"} : i1
+  %v1313 = pyc.constant 0 : i1
+  %v1314 = pyc.mux %v1312, %v1313, %v973 : i1
+  pyc.assign %v969, %v1314 : i1
+  %v1315 = pyc.eq %v1058, %v1153 : i16
+  %v1316 = pyc.and %v1291, %v1315 : i1
+  %v1317 = pyc.alias %v1316 {pyc.name = "should_clear__fastfwd_v3_4__L188"} : i1
+  %v1318 = pyc.constant 0 : i1
+  %v1319 = pyc.mux %v1317, %v1318, %v978 : i1
+  pyc.assign %v974, %v1319 : i1
+  %v1320 = pyc.eq %v1063, %v1153 : i16
+  %v1321 = pyc.and %v1291, %v1320 : i1
+  %v1322 = pyc.alias %v1321 {pyc.name = "should_clear__fastfwd_v3_4__L188"} : i1
+  %v1323 = pyc.constant 0 : i1
+  %v1324 = pyc.mux %v1322, %v1323, %v983 : i1
+  pyc.assign %v979, %v1324 : i1
+  %v1325 = pyc.eq %v1068, %v1153 : i16
+  %v1326 = pyc.and %v1291, %v1325 : i1
+  %v1327 = pyc.alias %v1326 {pyc.name = "should_clear__fastfwd_v3_4__L188"} : i1
+  %v1328 = pyc.constant 0 : i1
+  %v1329 = pyc.mux %v1327, %v1328, %v988 : i1
+  pyc.assign %v984, %v1329 : i1
+  %v1330 = pyc.eq %v1073, %v1153 : i16
+  %v1331 = pyc.and %v1291, %v1330 : i1
+  %v1332 = pyc.alias %v1331 {pyc.name = "should_clear__fastfwd_v3_4__L188"} : i1
+  %v1333 = pyc.constant 0 : i1
+  %v1334 = pyc.mux %v1332, %v1333, %v993 : i1
+  pyc.assign %v989, %v1334 : i1
+  %v1335 = pyc.eq %v1078, %v1153 : i16
+  %v1336 = pyc.and %v1291, %v1335 : i1
+  %v1337 = pyc.alias %v1336 {pyc.name = "should_clear__fastfwd_v3_4__L188"} : i1
+  %v1338 = pyc.constant 0 : i1
+  %v1339 = pyc.mux %v1337, %v1338, %v998 : i1
+  pyc.assign %v994, %v1339 : i1
+  %v1340 = pyc.constant 0 : i1
+  %v1341 = pyc.add %lane0_pkt_in_vld, %v1340 : i1
+  %v1342 = pyc.add %v1341, %lane1_pkt_in_vld : i1
+  %v1343 = pyc.add %v1342, %lane2_pkt_in_vld : i1
+  %v1344 = pyc.add %v1343, %lane3_pkt_in_vld : i1
+  %v1345 = pyc.alias %v1344 {pyc.name = "pending_cnt__fastfwd_v3_4__L194"} : i1
+  %v1346 = pyc.wire {pyc.name = "bkpr_reg__next"} : i1
+  %v1347 = pyc.constant 1 : i1
+  %v1348 = pyc.constant 0 : i1
+  %v1349 = pyc.reg %clk, %rst, %v1347, %v1346, %v1348 : i1
+  %v1350 = pyc.alias %v1349 {pyc.name = "bkpr_reg"} : i1
+  %v1351 = pyc.alias %v1350 {pyc.name = "bkpr__fastfwd_v3_4__L195"} : i1
+  %v1352 = pyc.constant 10 : i4
+  %v1353 = pyc.zext %v1345 : i1 -> i4
+  %v1354 = pyc.ult %v1353, %v1352 : i4
+  %v1355 = pyc.not %v1354 : i1
+  pyc.assign %v1346, %v1355 : i1
+  func.return %v1224, %v1244, %v1229, %v1249, %v1234, %v1254, %v1239, %v1259, %v1351, %v48, %v68, %v88, %v108, %v128, %v53, %v73, %v93, %v113, %v133, %v58, %v78, %v98, %v118, %v138, %v63, %v83, %v103, %v123, %v143 : i1, i128, i1, i128, i1, i128, i1, i128, i1, i1, i128, i2, i1, i128, i1, i128, i2, i1, i128, i1, i128, i2, i1, i128, i1, i128, i2, i1, i128
 }
 
 }
