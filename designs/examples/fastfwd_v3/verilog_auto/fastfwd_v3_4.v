@@ -1,13 +1,8 @@
 // FastFWD V3.4 Top Level with Internal FE Modules
 // FE is instantiated inside, not exposed at top level
-
-`include "pyc_reg.v"
-`include "pyc_fifo.v"
-`include "pyc_byte_mem.v"
-`include "pyc_sync_mem.v"
-`include "pyc_sync_mem_dp.v"
-`include "pyc_async_fifo.v"
-`include "pyc_cdc_sync.v"
+//
+// NOTE: Runtime files (pyc_*.v) should be included during compilation:
+//   iverilog -I../../../runtime/verilog ...
 
 module fastfwd_v3_4 (
   input clk,
