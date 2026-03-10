@@ -129,19 +129,14 @@ target_include_directories(pycc PRIVATE
   "${PYC_SOURCE_DIR}/include"
   "${PYC_BINARY_DIR}/include"
 )
+
+# Link using MLIR and LLVM shared libraries only
 target_link_libraries(pycc PRIVATE
   pyc_dialect
   pyc_transforms
-  MLIRArithDialect
-  MLIRIR
-  MLIRSupport
-  MLIRFuncDialect
-  MLIRFuncInlinerExtension
-  MLIRParser
-  MLIRPass
-  MLIRSCFDialect
-  MLIRTransforms
-  LLVMSupport
+  -L/usr/lib/llvm-18/lib
+  -lMLIR
+  -lLLVM-18
 )
 
 # Install binaries for packaging / reuse.
